@@ -21,7 +21,7 @@ const Content = styled.div`
   margin: 0 auto;
   max-width: 960px;
   padding-top: 90px;
-`
+`;
 
 const Layout: React.FC<Props> = ({ children }: Props) => {
   const data = useStaticQuery(graphql`

@@ -33,9 +33,10 @@ const Header: React.FC<Props> = ({ siteTitle }: Props) => (
         >
           {siteTitle}
         </Link>
-      </h1>
-    </div>
-  </header>
+      </h2>
+      <Link to="/faq">FAQ</Link>
+    </HeaderContent>
+  </StyledHeader>
 );
 
 Header.defaultProps = {
