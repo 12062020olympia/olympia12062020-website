@@ -1,10 +1,5 @@
 module.exports = {
-  extends: [
-    'prettier',
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
+  extends: ['prettier', 'react-app'],
   settings: {
     'import/resolver': {
       node: {
@@ -13,15 +8,8 @@ module.exports = {
       },
     },
   },
-  plugins: ['prettier', '@typescript-eslint/eslint-plugin', 'react'],
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-  },
+  plugins: ['prettier'],
   rules: {
     'prettier/prettier': ['error'],
-    'react/jsx-one-expression-per-line': 0,
-    'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }],
   },
 };
