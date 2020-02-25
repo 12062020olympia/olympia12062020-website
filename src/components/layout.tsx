@@ -5,38 +5,23 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useStaticQuery, graphql } from 'gatsby';
 
 import Header from './header';
 import './layout.css';
 
-type Props = {
-  children: React.ReactNode;
-};
-
 const Content = styled.div`
   margin: 0 auto;
+  margin-top: 56px;
   max-width: 960px;
-  padding-top: 90px;
 `;
 
-const Layout: React.FC<Props> = ({ children }: Props) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `);
-
+const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header />
       <Content>
         <main>{children}</main>
         <footer>©{new Date().getFullYear()}</footer>

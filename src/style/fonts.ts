@@ -33,12 +33,19 @@ export const fontStyles = {
     font-weight: bold;
     line-height: 125%;
   `,
-  headline: css`
+  smallHeadline: css`
     color: ${colors.Grey900};
     font-family: ${families.default}, ${families.fallback};
     font-size: 22px;
     font-style: normal;
     font-weight: bold;
     line-height: 140%;
+  `,
+  small: css`
+    font-family: ${families.default}, ${families.fallback};
+    font-style: normal;
+    font-weight: thin;
+    font-size: 12px;
+    line-height: 120%;
   `,
 };
