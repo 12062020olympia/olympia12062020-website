@@ -39,10 +39,7 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
       <Header siteTitle={data.site.siteMetadata.title} />
       <Content>
         <main>{children}</main>
-        <footer>
-          ©{new Date().getFullYear()}, Built with
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+        <footer>©{new Date().getFullYear()}</footer>
       </Content>
     </>
   );

@@ -1,15 +1,20 @@
+import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'gatsby';
 
-type Props = {
-  siteTitle: string;
-};
+import * as colors from '../style/colors';
+import { fontStyles } from '../style/fonts';
+
+type Props = {};
 
 const StyledHeader = styled.header`
-  background-color: #f3b7d4;
+  background-color: ${colors.Secondary};
   position: fixed;
   width: 100%;
+`;
+
+const PageTitle = styled.h1`
+  ${fontStyles.pageTitle};
 `;
 
 const HeaderContent = styled.div`
@@ -20,27 +25,15 @@ const HeaderContent = styled.div`
   justify-content: space-between;
 `;
 
-const Header: React.FC<Props> = ({ siteTitle }: Props) => (
+const Header: React.FC<Props> = () => (
   <StyledHeader>
     <HeaderContent>
-      <h2 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h2>
+      <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+        <PageTitle style={{ margin: 0 }}>12062020</PageTitle>
+      </Link>
       <Link to="/faq">FAQ</Link>
     </HeaderContent>
   </StyledHeader>
 );
-
-Header.defaultProps = {
-  siteTitle: ``,
-};
 
 export default Header;
