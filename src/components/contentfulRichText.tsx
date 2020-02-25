@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   BLOCKS,
-  //, MARKS, Document, Block
+  // , MARKS, Document, Block
 } from '@contentful/rich-text-types';
 import {
   documentToReactComponents,
@@ -17,12 +17,7 @@ type Props = {
 };
 
 function getObjectKeyArray(obj: any): string[] {
-  if (typeof obj !== 'object') return [];
-  const arr: string[] = [];
-  for (const key in obj) {
-    arr.push(key);
-  }
-  return arr;
+  return Object.keys(obj);
 }
 
 const ContentfulRichText: React.FC<Props> = ({ document }: Props) => {
