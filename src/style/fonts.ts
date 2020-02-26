@@ -1,6 +1,35 @@
 import { css } from 'styled-components';
 
 import * as colors from './colors';
+import HansonBoldTtf from './fonts/Hanson-Bold.ttf';
+import RobotoRegularTtf from './fonts/Roboto-Regular.ttf';
+import RobotoCondensedBoldTtf from './fonts/RobotoCondensed-Bold.ttf';
+
+export const fontFaces = css`
+  @font-face {
+    font-display: swap;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    src: url(${RobotoRegularTtf}) format('truetype');
+  }
+
+  @font-face {
+    font-display: swap;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    src: url(${RobotoCondensedBoldTtf}) format('truetype');
+  }
+
+  @font-face {
+    font-display: swap;
+    font-family: Hanson;
+    font-style: normal;
+    font-weight: bold;
+    src: url(${HansonBoldTtf}) format('truetype');
+  }
+`;
 
 export const families = {
   default: 'Roboto',

@@ -1,16 +1,20 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React, { PropsWithChildren } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
+import { fontFaces, fontStyles } from '../../style/fonts';
 import Header from './header';
-import './layout.css';
+
+const GlobalStyle = createGlobalStyle`
+  ${fontFaces}
+
+  body {
+    margin: 0;
+  }
+
+  html {
+    ${fontStyles.normal}
+  }
+`;
 
 const Content = styled.div`
   margin: 0 auto;
@@ -21,6 +25,7 @@ const Content = styled.div`
 const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   return (
     <>
+      <GlobalStyle />
       <Header />
       <Content>
         <main>{children}</main>
@@ -28,10 +33,6 @@ const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
       </Content>
     </>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default Layout;
