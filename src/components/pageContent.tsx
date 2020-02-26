@@ -3,18 +3,18 @@ import React, { FC } from 'react';
 import PageTitle from './pageTitle';
 
 import { PageInformationFragment } from '../../types/graphql-types';
-import ContentModule from './contentModule';
+import ContentModule from './content';
 
 interface Props {
   data: PageInformationFragment;
 }
 
 const PageContent: FC<Props> = ({
-  data: { title, headline, subheader, contentModules },
+  data: { title, header, subheader, contentModules },
 }) => {
   return (
     <>
-      <PageTitle title={title} header={headline} subheader={subheader} />
+      <PageTitle title={title} header={header} subheader={subheader} />
       {contentModules &&
         contentModules.map(contentModule => (
           <ContentModule data={contentModule!} />
@@ -26,10 +26,10 @@ const PageContent: FC<Props> = ({
 export const query = graphql`
   fragment pageInformation on ContentfulPage {
     title
-    headline
+    header
     subheader
     slug
-    ...ContentModuleInformation
+    ...ContentInformation
   }
 `;
 

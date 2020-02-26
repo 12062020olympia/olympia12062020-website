@@ -3,7 +3,7 @@
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  src: url(../style/fonts/Roboto-Regular.ttf) format('truetype');
+  src: url(../../style/fonts/Roboto-Regular.ttf) format('truetype');
 }
 
 @font-face {
@@ -11,7 +11,7 @@
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
-  src: url(../style/fonts/RobotoCondensed-Bold.ttf) format('truetype');
+  src: url(../../style/fonts/RobotoCondensed-Bold.ttf) format('truetype');
 }
 
 @font-face {
@@ -19,7 +19,7 @@
   font-family: Hanson;
   font-style: normal;
   font-weight: bold;
-  src: url(../style/fonts/Hanson-Bold.ttf) format('truetype');
+  src: url(../../style/fonts/Hanson-Bold.ttf) format('truetype');
 }
 
 html {

@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 import React, { FC } from 'react';
 
 import { FaqPageQuery } from '../../types/graphql-types';
-import Layout from '../components/layout';
+import Layout from '../components/layout/layout';
 import SEO from '../components/seo';
 import PageContent from '../components/pageContent';
 

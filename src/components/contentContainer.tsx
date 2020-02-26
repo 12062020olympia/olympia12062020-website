@@ -1,13 +1,13 @@
+import { graphql } from 'gatsby';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
+import { ContentContainerInformationFragment } from '../../types/graphql-types';
 import { fontStyles } from '../style/fonts';
-import { FaqCategoryInformationFragment } from '../../types/graphql-types';
-import FaqQuestion from './faqQuestion';
-import { graphql } from 'gatsby';
+import ContentBlock from './contentBlocks/contentBlock';
 
 interface Props {
-  data: FaqCategoryInformationFragment;
+  data: ContentContainerInformationFragment;
 }
 
 const Container = styled.div`
@@ -25,20 +25,20 @@ const FaqCategory: FC<Props> = ({ data }) => {
       <Container>
         <CategoryHeadline>{data.title}</CategoryHeadline>
       </Container>
-      {data.questions && data.questions.map(faq => <FaqQuestion data={faq!} />)}
+      {data.contentModules &&
+        data.contentModules.map(c => <ContentBlock data={c!} />)}
     </>
   );
 };
 
 export const query = graphql`
-  fragment FaqCategoryInformation on ContentfulContentFaqCategory {
-    id
+  fragment ContentContainerInformation on ContentfulContentContainer {
+    title
     internal {
       type
     }
-    title
-    questions {
-      ...FAQInformation
+    contentModules {
+      ...ContentBlockInformation
     }
   }
 `;

@@ -2,8 +2,8 @@ import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 
-import * as colors from '../style/colors';
-import { fontStyles } from '../style/fonts';
+import * as colors from '../../style/colors';
+import { fontStyles } from '../../style/fonts';
 
 type Props = {};
 
