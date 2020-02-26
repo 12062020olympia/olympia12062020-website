@@ -1,17 +1,29 @@
 import React, { FC } from 'react';
 import { graphql } from 'gatsby';
-import { FaqCategoryInformationFragment } from '../../types/graphql-types';
+
+import {
+  ContentCopyInformationFragment,
+  FaqCategoryInformationFragment,
+} from '../../types/graphql-types';
+import ContentCopy from './contentCopy';
 import FaqCategory from './faqCategory';
 
 interface Props {
-  data: FaqCategoryInformationFragment;
+  data: FaqCategoryInformationFragment | ContentCopyInformationFragment;
 }
 
 const ContentModule: FC<Props> = ({ data }) => {
+  console.log(data);
+  if (!data.internal) {
+    return null;
+  }
   return (
     <>
       {data.internal.type === 'ContentfulContentFaqCategory' && (
-        <FaqCategory data={data} />
+        <FaqCategory data={data as FaqCategoryInformationFragment} />
+      )}
+      {data.internal.type === 'ContentfulContentCopy' && (
+        <ContentCopy data={data as ContentCopyInformationFragment} />
       )}
     </>
   );
@@ -19,8 +31,9 @@ const ContentModule: FC<Props> = ({ data }) => {
 
 export const query = graphql`
   fragment ContentModuleInformation on ContentfulPage {
-    contentModules: contentModule {
+    contentModules {
       ...FaqCategoryInformation
+      ...ContentCopyInformation
     }
   }
 `;
