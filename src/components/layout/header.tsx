@@ -4,8 +4,12 @@ import styled from 'styled-components';
 
 import * as colors from '../../style/colors';
 import { fontStyles } from '../../style/fonts';
+import Burger from './burger';
 
-type Props = {};
+interface Props {
+  isMenuOpen: boolean;
+  setIsMenuOpen: (isOpen: boolean) => void;
+}
 
 const StyledHeader = styled.header`
   background-color: ${colors.White};
@@ -27,18 +31,17 @@ const PageTitle = styled.h1`
 const HeaderContent = styled.div`
   display: flex;
   margin: 0 auto;
-  justify-content: space-between;
   padding: 0 20px;
   width: 90%;
 `;
 
-const Header: React.FC<Props> = () => (
+const Header: React.FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => (
   <StyledHeader>
     <HeaderContent>
       <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
         <PageTitle style={{ margin: 0 }}>12062020</PageTitle>
       </Link>
-      <Link to="/faq">FAQ</Link>
+      <Burger isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
     </HeaderContent>
   </StyledHeader>
 );

@@ -1,9 +1,10 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 
 import { fontFaces, fontStyles } from '../../style/fonts';
 import Footer from './footer';
 import Header from './header';
+import Menu from './menu';
 
 const GlobalStyle = createGlobalStyle`
   ${fontFaces}
@@ -26,10 +27,12 @@ const Content = styled.main`
 `;
 
 const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <>
       <GlobalStyle />
-      <Header />
+      <Header isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       <Content>{children}</Content>
       <Footer />
     </>
