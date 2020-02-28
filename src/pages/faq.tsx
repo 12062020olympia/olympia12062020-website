@@ -20,8 +20,8 @@ const FAQPage: FC<Props> = ({ data }) => {
 };
 
 export const query = graphql`
-  query FaqPage {
-    contentfulPage(slug: { eq: "faq" }) {
+  query FaqPage($locale: String) {
+    contentfulPage(slug: { eq: "faq" }, node_locale: { eq: $locale }) {
       ...pageInformation
     }
   }

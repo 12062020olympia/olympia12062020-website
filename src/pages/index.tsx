@@ -18,8 +18,8 @@ const IndexPage: React.FC<Props> = ({ data }) => (
 );
 
 export const query = graphql`
-  query HomePage {
-    contentfulPage(slug: { eq: "home" }) {
+  query HomePage($locale: String) {
+    contentfulPage(slug: { eq: "home" }, node_locale: { eq: $locale }) {
       ...pageInformation
     }
   }
