@@ -1,4 +1,3 @@
-import { useIntl } from 'gatsby-plugin-intl';
 import React from 'react';
 import {
   BLOCKS,
@@ -22,7 +21,6 @@ function getObjectKeyArray(obj: any): string[] {
 }
 
 const ContentfulRichText: React.FC<Props> = ({ document }: Props) => {
-  const intl = useIntl();
   const options: Options = {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: node => {
@@ -44,7 +42,7 @@ const ContentfulRichText: React.FC<Props> = ({ document }: Props) => {
           return (
             <div
               style={{ display: 'flex' }}
-              dangerouslySetInnerHTML={{ __html: code[intl.locale] }}
+              dangerouslySetInnerHTML={{ __html: code.de }}
             />
           );
         }
