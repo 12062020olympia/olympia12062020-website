@@ -1,9 +1,12 @@
 import { css } from 'styled-components';
 
 import * as colors from './colors';
-import HansonBoldTtf from './fonts/Hanson-Bold.ttf';
-import RobotoRegularTtf from './fonts/Roboto-Regular.ttf';
-import RobotoCondensedBoldTtf from './fonts/RobotoCondensed-Bold.ttf';
+import HansonBoldWoff from './fonts/Hanson-Bold.woff';
+import HansonBoldWoff2 from './fonts/Hanson-Bold.woff2';
+import RobotoRegularWoff from './fonts/Roboto-Regular.woff';
+import RobotoRegularWoff2 from './fonts/Roboto-Regular.woff2';
+import RobotoBoldWoff from './fonts/Roboto-Bold.woff';
+import RobotoBoldWoff2 from './fonts/Roboto-Bold.woff2';
 
 export const fontFaces = css`
   @font-face {
@@ -11,7 +14,8 @@ export const fontFaces = css`
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
-    src: url(${RobotoRegularTtf}) format('truetype');
+    src: url(${RobotoBoldWoff2}) format('woff2'),
+      url(${RobotoBoldWoff}) format('woff');
   }
 
   @font-face {
@@ -19,7 +23,8 @@ export const fontFaces = css`
     font-family: Roboto;
     font-style: normal;
     font-weight: bold;
-    src: url(${RobotoCondensedBoldTtf}) format('truetype');
+    src: url(${RobotoRegularWoff2}) format('woff2'),
+      url(${RobotoRegularWoff}) format('woff');
   }
 
   @font-face {
@@ -27,7 +32,8 @@ export const fontFaces = css`
     font-family: Hanson;
     font-style: normal;
     font-weight: bold;
-    src: url(${HansonBoldTtf}) format('truetype');
+    src: url(${HansonBoldWoff2}) format('woff2'),
+      url(${HansonBoldWoff}) format('woff');
   }
 `;
 
