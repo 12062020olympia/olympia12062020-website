@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import BurgerIcon from '../../icons/icon-burger.svg';
+import IconButton from '../elements/IconButton';
 
 type Props = {
   isMenuOpen: boolean;
@@ -9,9 +10,7 @@ type Props = {
 
 const Burger: FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => {
   return (
-    <button type="button" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-      <BurgerIcon color="#000" />
-    </button>
+    <IconButton Icon={BurgerIcon} onClick={() => setIsMenuOpen(!isMenuOpen)} />
   );
 };
 
