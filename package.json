@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-typescript",
+  "name": "olympia-12062020-fe",
   "private": true,
-  "description": "A TypeScript version starter to get up and developing quickly with Gatsby",
+  "description": "Website for the event on 12.06.2020 in the Olympia Stadium Berlin",
   "version": "1.0.0",
-  "author": "Wataru Oguchi <wataru.oguchi.0to1@gmail.com>",
+  "author": "Judith Hartmann <judith.hartmann@futurice.com>",
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^13.4.0",
     "@contentful/rich-text-types": "^13.4.0",
@@ -21,7 +21,7 @@
     "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-sharp": "^2.2.29",
     "gatsby-plugin-styled-components": "^3.1.19",
-    "gatsby-plugin-typescript": "^2.1.12",
+    "gatsby-plugin-typescript": "2.2.0",
     "gatsby-source-contentful": "^2.1.85",
     "gatsby-source-filesystem": "^2.1.31",
     "gatsby-transformer-sharp": "^2.2.21",
@@ -30,7 +30,7 @@
     "react-dom": "^16.10.2",
     "react-helmet": "^5.2.1",
     "styled-components": "^5.0.1",
-    "typescript": "^3.6.4"
+    "typescript": "3.8.3"
   },
   "devDependencies": {
     "@types/styled-components": "4.1.8",
