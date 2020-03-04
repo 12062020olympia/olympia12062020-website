@@ -22,6 +22,8 @@ function getObjectKeyArray(obj: any): string[] {
 
 const ContentfulRichText: React.FC<Props> = ({ document }: Props) => {
   const options: Options = {
+    renderText: text =>
+      text.split('\n').map((text, i) => [i > 0 && <br />, text]),
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: node => {
         if (!node.data.target.fields) return;
