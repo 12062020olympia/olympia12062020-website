@@ -19,14 +19,15 @@ const CategoryHeadline = styled.h4`
   ${fontStyles.smallHeadline}
 `;
 
-const FaqCategory: FC<Props> = ({ data }) => {
+const ContentContainer: FC<Props> = ({ data }) => {
   return (
     <>
       <Container>
         <CategoryHeadline>{data.title}</CategoryHeadline>
       </Container>
-      {data.contentModules &&
-        data.contentModules.map(c => <ContentBlock data={c!} />)}
+      {data.contentModules?.map(c => (
+        <ContentBlock data={c!} />
+      ))}
     </>
   );
 };
@@ -43,4 +44,4 @@ export const query = graphql`
   }
 `;
 
-export default FaqCategory;
+export default ContentContainer;

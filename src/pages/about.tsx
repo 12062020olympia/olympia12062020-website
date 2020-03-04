@@ -1,17 +1,17 @@
-import React from 'react';
-
-import { HomePageQuery } from '../../types/graphql-types';
-import Layout from '../components/layout/layout';
-import PageContent from '../components/pageContent';
-import SEO from '../components/seo';
 import { graphql } from 'gatsby';
 import { useIntl } from 'gatsby-plugin-intl';
+import React, { FC } from 'react';
+
+import { AboutPageQuery } from '../../types/graphql-types';
+import Layout from '../components/layout/layout';
+import SEO from '../components/seo';
+import PageContent from '../components/pageContent';
 
 interface Props {
-  data: HomePageQuery;
+  data: AboutPageQuery;
 }
 
-const FAQPage: React.FC<Props> = ({ data }) => {
+const AboutPage: FC<Props> = ({ data }) => {
   const intl = useIntl();
   return (
     <Layout>
@@ -26,8 +26,8 @@ const FAQPage: React.FC<Props> = ({ data }) => {
 };
 
 export const query = graphql`
-  query FaqPage($locale: String) {
-    contentfulPage(slug: { eq: "faq" }, node_locale: { eq: $locale }) {
+  query AboutPage($locale: String) {
+    contentfulPage(slug: { eq: "about" }, node_locale: { eq: $locale }) {
       ...pageInformation
       title
       seoDescription
@@ -35,4 +35,4 @@ export const query = graphql`
   }
 `;
 
-export default FAQPage;
+export default AboutPage;
