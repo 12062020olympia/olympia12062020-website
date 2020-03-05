@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import React, { FC } from 'react';
 
 import * as colors from '../../style/colors';
-import { mobileWidth } from '../../style/devices';
+import { maxMobileWidth } from '../../style/dimensions';
 
 interface Props {
   isMenuOpen: boolean;
@@ -35,7 +35,7 @@ const Container = styled.nav<{ open: boolean }>`
   transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(100%)')};
   width: 100%;
 
-  @media (min-width: ${mobileWidth}) {
+  @media (min-width: ${maxMobileWidth}) {
     width: 400px;
   }
 `;

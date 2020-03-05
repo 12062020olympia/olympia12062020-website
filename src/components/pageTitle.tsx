@@ -19,7 +19,7 @@ const Container = styled.div`
 const Title = styled.h2`
   ${fontStyles.small}
   color: ${colors.Grey900};
-  letter-spacing: 0.05em; 
+  letter-spacing: 0.05em;
   margin-block-start: auto;
   margin-block-end: auto;
   text-transform: uppercase;

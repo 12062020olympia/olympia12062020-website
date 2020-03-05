@@ -5,6 +5,13 @@ import { fontFaces, fontStyles } from '../../style/fonts';
 import Footer from './footer';
 import Header from './header';
 import Menu from './menu';
+import {
+  contentMaxWidth,
+  footerHeight,
+  footerHeightWeb,
+  headerHeight,
+  maxMobileWidth,
+} from '../../style/dimensions';
 
 const GlobalStyle = createGlobalStyle`
   ${fontFaces}
@@ -21,10 +28,13 @@ const GlobalStyle = createGlobalStyle`
 
 const Content = styled.main`
   margin: 0 auto;
-  // 100% - header height - footer height
-  min-height: calc(100vh - 56px - 100px);
-  margin-top: 56px;
-  max-width: 960px;
+  min-height: calc(100vh - ${headerHeight} - ${footerHeight});
+  margin-top: ${headerHeight};
+  max-width: ${contentMaxWidth};
+
+  @media (min-width: ${maxMobileWidth}) {
+    min-height: calc(100vh - ${headerHeight} - ${footerHeightWeb});
+  }
 `;
 
 const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {

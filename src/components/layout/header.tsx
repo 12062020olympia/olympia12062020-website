@@ -3,6 +3,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 import * as colors from '../../style/colors';
+import {
+  headerHeight,
+  contentMaxWidth,
+  contentPadding,
+} from '../../style/dimensions';
 import { fontStyles } from '../../style/fonts';
 import Burger from './burger';
 
@@ -13,13 +18,10 @@ interface Props {
 
 const StyledHeader = styled.header`
   background-color: ${colors.White};
-  display: flex;
-  height: 56px;
-  flex-direction: column;
-  justify-content: center;
+  height: ${headerHeight};
   left: 0;
   position: fixed;
-  scroll-margin-top: 56px;
+  scroll-margin-top: ${headerHeight};
   top: 0;
   width: 100%;
 `;
@@ -29,10 +31,16 @@ const PageTitle = styled.h1`
 `;
 
 const HeaderContent = styled.div`
+  align-items: center;
   display: flex;
+  height: 100%;
+  justify-content: space-between;
   margin: 0 auto;
-  padding: 0 20px;
-  width: 90%;
+  max-width: ${contentMaxWidth};
+
+  > * {
+    margin: 0 ${contentPadding};
+  }
 `;
 
 const Header: React.FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => (
