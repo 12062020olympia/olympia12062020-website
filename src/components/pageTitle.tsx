@@ -1,48 +1,71 @@
 import React, { FC } from 'react';
+import BackgroundImage from 'gatsby-background-image';
 import styled from 'styled-components';
+
+import {
+  GatsbyContentfulFluidFragment,
+  Maybe,
+} from '../../types/graphql-types';
 import * as colors from '../style/colors';
-import { fontStyles } from '../style/fonts';
+import { contentPadding, maxMobileWidth } from '../style/dimensions';
+import Title from './elements/title';
 
 interface Props {
   title?: string | null;
   header?: string | null;
-  subheader?: string | null;
+  backgroundPicture?: { fluid: Maybe<GatsbyContentfulFluidFragment> };
 }
 
-const Container = styled.div`
+const bottomPadding = '60px';
+const topPadding = '200px';
+const pageTitleHeight = '500px';
+
+const bottomPaddingWeb = '60px';
+const topPaddingWeb = '120px';
+const pageTitleHeightWeb = '760px';
+
+const Container = styled(BackgroundImage)`
+  min-height: ${pageTitleHeight};
+  overflow: hidden;
+  width: 100%;
+
+  @media (min-width: ${maxMobileWidth}) {
+    min-height: ${pageTitleHeightWeb};
+  }
+`;
+
+const TitleContainer = styled.div`
   background-color: ${colors.Secondary};
+  bottom: ${bottomPadding};
   display: flex;
   flex-direction: column;
-  padding: 75px 0 65px 30px;
+  justify-content: flex-end;
+  left: ${contentPadding};
+  min-height: calc(${pageTitleHeight} - ${bottomPadding} - ${topPadding});
+  position: relative;
+  top: ${topPadding};
+  width: calc(100% - 2 * ${contentPadding});
+
+  > * {
+    padding: 0 10px;
+  }
+
+  @media (min-width: ${maxMobileWidth}) {
+    bottom: ${bottomPaddingWeb};
+    min-height: calc(
+      ${pageTitleHeightWeb} - ${bottomPaddingWeb} - ${topPaddingWeb}
+    );
+    top: ${topPaddingWeb};
+  }
 `;
 
-const Title = styled.h2`
-  ${fontStyles.small}
-  color: ${colors.Grey900};
-  letter-spacing: 0.05em;
-  margin-block-start: auto;
-  margin-block-end: auto;
-  text-transform: uppercase;
-`;
-
-const Header = styled.h3`
-  ${fontStyles.headline}
-  margin-block-start: auto;
-  margin-block-end: auto;
-`;
-
-const Subheader = styled.h3`
-  ${fontStyles.headline}
-  color: ${colors.Grey500};
-  margin-block-start: auto;
-  margin-block-end: auto;
-`;
-
-const PageTitle: FC<Props> = ({ title, header, subheader }) => (
-  <Container>
-    <Title>{title}</Title>
-    <Header>{header}</Header>
-    <Subheader>{subheader}</Subheader>
+const PageTitle: FC<Props> = ({ backgroundPicture, title, header }) => (
+  // @ts-ignore
+  <Container fluid={backgroundPicture?.fluid ?? undefined}>
+    <TitleContainer>
+      <Title type="pageTitle" title={title!} />
+      <Title type="pageHeader" title={header!} />
+    </TitleContainer>
   </Container>
 );
 

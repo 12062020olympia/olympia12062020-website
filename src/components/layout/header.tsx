@@ -8,8 +8,8 @@ import {
   contentMaxWidth,
   contentPadding,
 } from '../../style/dimensions';
-import { fontStyles } from '../../style/fonts';
 import Burger from './burger';
+import Title from '../elements/title';
 
 interface Props {
   isMenuOpen: boolean;
@@ -24,10 +24,7 @@ const StyledHeader = styled.header`
   scroll-margin-top: ${headerHeight};
   top: 0;
   width: 100%;
-`;
-
-const PageTitle = styled.h1`
-  ${fontStyles.pageTitle}
+  z-index: 2;
 `;
 
 const HeaderContent = styled.div`
@@ -47,7 +44,7 @@ const Header: React.FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => (
   <StyledHeader>
     <HeaderContent>
       <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
-        <PageTitle style={{ margin: 0 }}>12062020</PageTitle>
+        <Title type="navTitle" title="12062020" />
       </Link>
       <Burger isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
     </HeaderContent>

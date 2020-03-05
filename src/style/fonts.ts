@@ -7,6 +7,7 @@ import RobotoRegularWoff from './fonts/Roboto-Regular.woff';
 import RobotoRegularWoff2 from './fonts/Roboto-Regular.woff2';
 import RobotoBoldWoff from './fonts/Roboto-Bold.woff';
 import RobotoBoldWoff2 from './fonts/Roboto-Bold.woff2';
+import { maxMobileWidth } from './dimensions';
 
 export const fontFaces = css`
   @font-face {
@@ -43,16 +44,72 @@ export const families = {
   brand: 'Hanson',
 };
 
-export const fontStyles = {
-  pageTitle: css`
-    color: ${colors.Grey900};
+export type TitleType =
+  | 'pageHeader'
+  | 'pageTitle'
+  | 'navTitle'
+  | 'headline'
+  | 'smallHeadline';
+export type ParagraphType = 'normal';
+
+export type FontType = TitleType | ParagraphType;
+
+const fontSizes: Record<FontType, number> = {
+  headline: 28,
+  navTitle: 32,
+  normal: 16,
+  pageTitle: 12,
+  pageHeader: 48,
+  smallHeadline: 22,
+};
+
+const fontSizesWeb: Record<FontType, number> = {
+  headline: 34,
+  navTitle: 58,
+  normal: 21,
+  pageTitle: 48,
+  pageHeader: 130,
+  smallHeadline: 34,
+};
+
+function applyFontSize(type: FontType) {
+  return css`
+    font-size: ${fontSizes[type]}px;
+
+    @media (min-width: ${maxMobileWidth}) {
+      font-size: ${fontSizesWeb[type]}px;
+    }
+  `;
+}
+
+export const fontStyles: Record<FontType | string, any> = {
+  navTitle: css`
+    ${applyFontSize('navTitle')}
     font-family: ${families.brand}, ${families.fallback};
-    font-size: 32px;
     font-style: normal;
     font-weight: bold;
-    line-height: 33px;
+    line-height: 120%;
+    text-transform: uppercase;
+  `,
+  pageTitle: css`
+    ${applyFontSize('pageTitle')}
+    font-family: ${families.default}, ${families.fallback};
+    font-style: normal;
+    font-weight: normal;
+    line-height: 150%;
+    text-transform: uppercase;
+  `,
+  pageHeader: css`
+    ${applyFontSize('pageHeader')}
+    font-family: ${families.brand}, ${families.fallback};
+    font-size: ${fontSizes.pageHeader}px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 130%;
+    text-transform: uppercase;
   `,
   normal: css`
+    ${applyFontSize('normal')}
     color: ${colors.Grey900};
     font-family: ${families.default}, ${families.fallback};
     font-size: 16px;
@@ -61,7 +118,7 @@ export const fontStyles = {
     font-weight: normal;
   `,
   headline: css`
-    color: ${colors.Grey900};
+    ${applyFontSize('headline')}
     font-family: ${families.default}, ${families.fallback};
     font-size: 28px;
     font-style: normal;
@@ -69,18 +126,12 @@ export const fontStyles = {
     line-height: 125%;
   `,
   smallHeadline: css`
+    ${applyFontSize('smallHeadline')}
     color: ${colors.Grey900};
     font-family: ${families.default}, ${families.fallback};
     font-size: 22px;
     font-style: normal;
     font-weight: bold;
     line-height: 140%;
-  `,
-  small: css`
-    font-family: ${families.default}, ${families.fallback};
-    font-style: normal;
-    font-weight: thin;
-    font-size: 12px;
-    line-height: 120%;
   `,
 };

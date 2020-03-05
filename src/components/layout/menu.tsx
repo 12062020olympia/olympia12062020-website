@@ -28,12 +28,13 @@ const Container = styled.nav<{ open: boolean }>`
   height: 100vh;
   justify-content: flex-start;
   padding-top: 100px;
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   transition: transform 0.3s ease-in-out;
   transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(100%)')};
   width: 100%;
+  z-index: 100;
 
   @media (min-width: ${maxMobileWidth}) {
     width: 400px;

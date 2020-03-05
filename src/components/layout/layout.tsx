@@ -6,7 +6,6 @@ import Footer from './footer';
 import Header from './header';
 import Menu from './menu';
 import {
-  contentMaxWidth,
   footerHeight,
   footerHeightWeb,
   headerHeight,
@@ -30,7 +29,6 @@ const Content = styled.main`
   margin: 0 auto;
   min-height: calc(100vh - ${headerHeight} - ${footerHeight});
   margin-top: ${headerHeight};
-  max-width: ${contentMaxWidth};
 
   @media (min-width: ${maxMobileWidth}) {
     min-height: calc(100vh - ${headerHeight} - ${footerHeightWeb});

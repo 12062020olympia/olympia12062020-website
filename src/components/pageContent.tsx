@@ -18,11 +18,15 @@ const ContentContainer = styled.div`
 `;
 
 const PageContent: FC<Props> = ({
-  data: { title, header, subheader, contentModules },
+  data: { title, header, contentModules, backgroundPicture },
 }) => {
   return (
     <>
-      <PageTitle title={title} header={header} subheader={subheader} />
+      <PageTitle
+        title={title}
+        header={header}
+        backgroundPicture={backgroundPicture!}
+      />
       <ContentContainer>
         {contentModules &&
           contentModules.map(contentModule => (
@@ -37,9 +41,20 @@ export const query = graphql`
   fragment pageInformation on ContentfulPage {
     title
     header
-    subheader
     slug
+    backgroundPicture {
+      fluid(maxHeight: 760) {
+        ...GatsbyContentfulFluid
+      }
+    }
     ...ContentInformation
+  }
+  fragment GatsbyContentfulFluid on ContentfulFluid {
+    base64
+    aspectRatio
+    src
+    srcSet
+    sizes
   }
 `;
 
