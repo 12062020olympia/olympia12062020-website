@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import BurgerIcon from '../../icons/icon-burger.svg';
-import IconButton from '../elements/IconButton';
+import IconButton from '../elements/iconButton';
 
 type Props = {
   isMenuOpen: boolean;

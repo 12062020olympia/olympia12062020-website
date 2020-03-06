@@ -4,12 +4,17 @@ import { graphql } from 'gatsby';
 import {
   ContentBlockInformationFragment,
   ContentContainerInformationFragment,
+  SpecialContentInformationFragment,
 } from '../../types/graphql-types';
 import ContentBlock from './contentBlocks/contentBlock';
 import ContentContainer from './contentContainer';
+import SpecialContent from './contentBlocks/specialContent';
 
 interface Props {
-  data: ContentBlockInformationFragment | ContentContainerInformationFragment;
+  data:
+    | ContentBlockInformationFragment
+    | ContentContainerInformationFragment
+    | SpecialContentInformationFragment;
 }
 
 const Content: FC<Props> = ({ data }) => {
@@ -24,6 +29,9 @@ const Content: FC<Props> = ({ data }) => {
       {data.internal.type === 'ContentfulContentBlock' && (
         <ContentBlock data={data as ContentBlockInformationFragment} />
       )}
+      {data.internal.type === 'ContentfulSpecialContent' && (
+        <SpecialContent data={data as SpecialContentInformationFragment} />
+      )}
     </>
   );
 };
@@ -36,6 +44,9 @@ export const query = graphql`
       }
       ... on ContentfulContentContainer {
         ...ContentContainerInformation
+      }
+      ... on ContentfulSpecialContent {
+        ...SpecialContentInformation
       }
     }
   }
