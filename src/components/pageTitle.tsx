@@ -7,7 +7,11 @@ import {
   Maybe,
 } from '../../types/graphql-types';
 import * as colors from '../style/colors';
-import { contentPadding, maxMobileWidth } from '../style/dimensions';
+import {
+  contentPadding,
+  contentPaddingWeb,
+  maxMobileWidth,
+} from '../style/dimensions';
 import Title from './elements/title';
 
 interface Props {
@@ -52,10 +56,12 @@ const TitleContainer = styled.div`
 
   @media (min-width: ${maxMobileWidth}) {
     bottom: ${bottomPaddingWeb};
+    left: ${contentPaddingWeb};
     min-height: calc(
       ${pageTitleHeightWeb} - ${bottomPaddingWeb} - ${topPaddingWeb}
     );
     top: ${topPaddingWeb};
+    width: calc(100% - 2 * ${contentPaddingWeb});
   }
 `;
 

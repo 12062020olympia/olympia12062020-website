@@ -4,9 +4,11 @@ import styled from 'styled-components';
 
 import * as colors from '../../style/colors';
 import {
-  headerHeight,
-  contentMaxWidth,
   contentPadding,
+  contentPaddingWeb,
+  headerHeight,
+  headerHeightWeb,
+  maxMobileWidth,
 } from '../../style/dimensions';
 import Burger from './burger';
 import Title from '../elements/title';
@@ -25,6 +27,11 @@ const StyledHeader = styled.header`
   top: 0;
   width: 100%;
   z-index: 2;
+
+  @media (min-width: ${maxMobileWidth}) {
+    height: ${headerHeightWeb};
+    scroll-margin-top: ${headerHeightWeb};
+  }
 `;
 
 const HeaderContent = styled.div`
@@ -33,10 +40,15 @@ const HeaderContent = styled.div`
   height: 100%;
   justify-content: space-between;
   margin: 0 auto;
-  max-width: ${contentMaxWidth};
 
   > * {
     margin: 0 ${contentPadding};
+  }
+
+  @media (min-width: ${maxMobileWidth}) {
+    > * {
+      margin: 0 ${contentPaddingWeb};
+    }
   }
 `;
 

@@ -9,6 +9,7 @@ import {
   footerHeight,
   footerHeightWeb,
   headerHeight,
+  headerHeightWeb,
   maxMobileWidth,
 } from '../../style/dimensions';
 
@@ -31,7 +32,8 @@ const Content = styled.main`
   margin-top: ${headerHeight};
 
   @media (min-width: ${maxMobileWidth}) {
-    min-height: calc(100vh - ${headerHeight} - ${footerHeightWeb});
+    min-height: calc(100vh - ${headerHeightWeb} - ${footerHeightWeb});
+    margin-top: ${headerHeightWeb};
   }
 `;
 
