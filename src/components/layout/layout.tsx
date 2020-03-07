@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useState } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import { fontFaces, fontStyles } from '../../style/fonts';
 import Footer from './footer';
@@ -37,16 +37,28 @@ const Content = styled.main`
   }
 `;
 
+const awesomegridConf = {
+  columns: {
+    xs: 12,
+    sm: 12,
+    md: 12,
+    lg: 12,
+    xl: 12,
+  },
+};
+
 const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <>
-      <GlobalStyle />
-      <Header isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      <Content>{children}</Content>
-      <Footer />
-    </>
+    <ThemeProvider theme={{ awesomegrid: awesomegridConf }}>
+      <>
+        <GlobalStyle />
+        <Header isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+        <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+        <Content>{children}</Content>
+        <Footer />
+      </>
+    </ThemeProvider>
   );
 };
 
