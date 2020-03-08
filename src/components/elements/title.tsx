@@ -13,6 +13,7 @@ const tag: Record<TitleType, keyof JSX.IntrinsicElements> = {
   pageHeader: 'h3',
   headline: 'h4',
   smallHeadline: 'h5',
+  footerTitle: 'span',
 };
 
 const StyledTitle = styled.h1<{ type: TitleType }>`

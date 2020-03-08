@@ -9,7 +9,6 @@ import styled from 'styled-components';
 import React, { FC } from 'react';
 import { Container, Row, Col } from 'react-awesome-styled-grid';
 
-import { contentMaxWidth } from '../../style/dimensions';
 import Title from '../elements/title';
 import Flex from '../elements/flex';
 
@@ -60,16 +59,20 @@ const Footer: FC<Props> = () => {
       <Container>
         <Row>
           <Col xs={12} sm={5} md={5}>
-            <Title type="smallHeadline" title="12062020"></Title>
+            <Title type="footerTitle" title="12062020"></Title>
           </Col>
           <Col xs={12} sm={3} md={2}>
             {leftSiteMapPages.map(page => (
-              <Link to={`/${page.slug}`}>{page.title}</Link>
+              <Link key={page.slug} to={`/${page.slug}`}>
+                {page.title}
+              </Link>
             ))}
           </Col>
           <Col xs={12} sm={4} md={5}>
             {rightSiteMapPages.map(page => (
-              <Link to={`/${page.slug}`}>{page.title}</Link>
+              <Link key={page.slug} to={`/${page.slug}`}>
+                {page.title}
+              </Link>
             ))}
           </Col>
         </Row>
@@ -99,7 +102,9 @@ const Footer: FC<Props> = () => {
           <Col>
             <Flex flexDirection="row">
               {footerMenu.pages.map(page => (
-                <Link to={`/${page.slug}`}>{page.title}</Link>
+                <Link key={page.slug} to={`/${page.slug}`}>
+                  {page.title}
+                </Link>
               ))}
             </Flex>
           </Col>

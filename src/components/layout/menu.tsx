@@ -46,7 +46,9 @@ const Menu: FC<Props> = ({ isMenuOpen }) => {
   return (
     <Container open={isMenuOpen}>
       {menu.pages.map(page => (
-        <Link to={`/${page.slug}`}>{page.title}</Link>
+        <Link key={page.slug} to={`/${page.slug}`}>
+          {page.title}
+        </Link>
       ))}
     </Container>
   );

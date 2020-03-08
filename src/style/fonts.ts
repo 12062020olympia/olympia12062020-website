@@ -48,8 +48,10 @@ export type TitleType =
   | 'pageHeader'
   | 'pageTitle'
   | 'navTitle'
+  | 'footerTitle'
   | 'headline'
   | 'smallHeadline';
+
 export type ParagraphType = 'normal';
 
 export type FontType = TitleType | ParagraphType;
@@ -57,6 +59,7 @@ export type FontType = TitleType | ParagraphType;
 const fontSizes: Record<FontType, number> = {
   headline: 28,
   navTitle: 32,
+  footerTitle: 22,
   normal: 16,
   pageTitle: 12,
   pageHeader: 48,
@@ -66,6 +69,7 @@ const fontSizes: Record<FontType, number> = {
 const fontSizesWeb: Record<FontType, number> = {
   headline: 34,
   navTitle: 58,
+  footerTitle: 28,
   normal: 21,
   pageTitle: 48,
   pageHeader: 130,
@@ -85,6 +89,14 @@ function applyFontSize(type: FontType) {
 export const fontStyles: Record<FontType | string, any> = {
   navTitle: css`
     ${applyFontSize('navTitle')}
+    font-family: ${families.brand}, ${families.fallback};
+    font-style: normal;
+    font-weight: bold;
+    line-height: 120%;
+    text-transform: uppercase;
+  `,
+  footerTitle: css`
+    ${applyFontSize('footerTitle')}
     font-family: ${families.brand}, ${families.fallback};
     font-style: normal;
     font-weight: bold;
