@@ -40,8 +40,12 @@ const bottom: Record<ScreenSize, string> = {
 };
 
 const Container = styled(BackgroundImage)`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   min-height: ${titleHeigh.sm};
-  overflow: hidden;
+  overflow-x: visible;
+  overflow-y: hidden;
   width: 100%;
 
   ${applyMediaQueryMd(css`
@@ -55,42 +59,30 @@ const Container = styled(BackgroundImage)`
 
 const TitleContainer = styled.div`
   background-color: ${colors.Secondary};
-  display: inline-block;
-  display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  left: ${contentMargin.sm};
-  margin-bottom: ${bottom.sm};
-  min-height: 165px;
+  margin: ${top.sm} ${contentMargin.sm} ${bottom.sm} ${contentMargin.sm};
   padding-top: 20px;
-  position: relative;
+  padding-bottom: 15px;
   width: calc(100% - 2 * ${contentMargin.sm});
-  top: ${top.sm};
 
   > * {
     padding: 0 10px;
   }
 
   ${applyMediaQueryMd(css`
-    left: ${contentMargin.md};
-    margin-bottom: ${bottom.md}
-    min-height: 283px;
-    min-width: 545px;
-    top: ${top.md};
-    width: min-content;
+    margin: ${top.md} ${contentMargin.md} ${bottom.md} ${contentMargin.md};
     padding-top: 25px;
+    padding-bottom: 25px;
+    width: min-content;
 
     > * {
-      padding: 0 20px;
+      padding: 0 30px;
     }
   `)}
 
   ${applyMediaQueryLg(css`
-    left: ${contentMargin.lg};
-    margin-bottom: ${bottom.lg}
-    min-height: 283px;
-    min-width: 545px;
-    top: ${top.lg};
+    margin: ${top.lg} ${contentMargin.lg} ${bottom.lg} ${contentMargin.lg};
     width: min-content;
   `)}
 `;

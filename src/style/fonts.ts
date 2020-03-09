@@ -118,7 +118,6 @@ export const fontStyles: Record<FontType | string, any> = {
     font-style: normal;
     font-weight: bold;
     line-height: 130%;
-    text-transform: uppercase;
   `,
   normal: css`
     ${applyFontSize('normal')}
