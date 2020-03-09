@@ -3,10 +3,12 @@ import { Link } from 'gatsby-plugin-intl';
 import styled from 'styled-components';
 import React, { FC } from 'react';
 
+import CloseIcon from '../../icons/icon-close.svg';
 import * as colors from '../../style/colors';
 import { maxMobileWidth } from '../../style/dimensions';
 import Flex from '../elements/flex';
 import SocialMediaIcon from '../elements/socialMediaIcon';
+import IconButton from '../elements/iconButton';
 
 interface Props {
   isMenuOpen: boolean;
@@ -23,39 +25,76 @@ interface MenuQuery {
 }
 
 const Container = styled.nav<{ open: boolean }>`
-  align-items: center;
+  align-items: start;
   background-color: ${colors.Pink};
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  justify-content: flex-start;
+  height: calc(100vh - 100px);
+  justify-content: space-between;
+  padding-left: 30px;
   padding-top: 100px;
   position: fixed;
   right: 0;
   top: 0;
   transition: transform 0.3s ease-in-out;
   transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(100%)')};
-  width: 100%;
+  width: calc(100vw - 30px);
   z-index: 100;
 
   @media (min-width: ${maxMobileWidth}) {
+    height: calc(100vh);
+    justify-content: flex-start;
     width: 400px;
   }
 `;
 
-const SocialMediaIconContainer = styled(Flex)`
-  margin-top: 60px;
+const MenuLink = styled(Link)`
+  color: ${colors.Grey900};
+  font-size: 28px;
+  text-decoration: none;
+
+  :not(:last-child) {
+    padding-bottom: 20px;
+  }
+
+  :hover {
+    color: ${colors.Grey800};
+  }
 `;
 
-const Menu: FC<Props> = ({ isMenuOpen }) => {
+const CloseButton = styled(IconButton)`
+  position: absolute;
+  top: 30px;
+  right: 30px;
+`;
+
+const SocialMediaIconContainer = styled(Flex)`
+  margin-bottom: 20px;
+  margin-top: 20px;
+
+  @media (min-width: ${maxMobileWidth}) {
+    margin-top: 60px;
+  }
+`;
+
+const Menu: FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => {
   const { contentfulMenu: menu } = useStaticQuery<MenuQuery>(query);
   return (
     <Container open={isMenuOpen}>
-      {menu.pages.map(page => (
-        <Link key={page.slug} to={`/${page.slug}`}>
-          {page.title}
-        </Link>
-      ))}
+      <CloseButton
+        Icon={CloseIcon}
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      />
+      <Flex flexDirection="column">
+        {menu.pages.map(page => (
+          <MenuLink
+            key={page.slug}
+            to={`/${page.slug !== 'home' ? page.slug : ''}`}
+          >
+            {page.title}
+          </MenuLink>
+        ))}
+      </Flex>
       <SocialMediaIconContainer dir="row">
         <SocialMediaIcon network="facebook" type="menu" />
         <SocialMediaIcon network="instagram" type="menu" />
