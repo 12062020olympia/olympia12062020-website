@@ -8,6 +8,7 @@ import ContentfulRichText from '../contentfulRichText';
 import Title from '../elements/title';
 import {
   contentMargin,
+  contentMaxWidth,
   applyMediaQueryMd,
   applyMediaQueryLg,
 } from '../../style/dimensions';
@@ -20,7 +21,8 @@ const Container = styled.div<{ backgroundColor: string | null | undefined }>`
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? colors.contentColors[backgroundColor] : colors.White};
   padding: 20px ${contentMargin.sm};
-  margin-top: 40px;
+  margin: 40px auto 0 auto;
+  max-width: ${contentMaxWidth};
 
   ${applyMediaQueryMd(css`
     padding: 20px ${contentMargin.md};

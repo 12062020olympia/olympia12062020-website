@@ -42,11 +42,12 @@ const ArrowButton = styled(IconButton)<{ isOpen: boolean }>`
 `;
 
 const ContentWrapper = styled.div`
-  margin: 0 ${contentMargin.sm} 40px ${contentMargin.sm};
+  padding: 0 ${contentMargin.sm} 40px ${contentMargin.sm};
+  margin: 0 auto;
   max-width: ${contentMaxWidth};
 
   ${applyMediaQueryMd(css`
-    margin: 0 ${contentMargin.md} 40px ${contentMargin.md};
+    padding: 0 ${contentMargin.md} 40px ${contentMargin.md};
   `)}
 
   ${applyMediaQueryLg(css`
