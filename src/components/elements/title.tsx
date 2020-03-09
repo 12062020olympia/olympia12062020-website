@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { fontStyles, TitleType } from '../../style/fonts';
 
 interface Props {
+  className?: string;
   title: string;
   type?: TitleType;
 }
@@ -22,9 +23,9 @@ const StyledTitle = styled.h1<{ type: TitleType }>`
   margin-block-end: 0;
 `;
 
-const Title: FC<Props> = ({ type = 'headline', title }) => {
+const Title: FC<Props> = ({ className, type = 'headline', title }) => {
   return (
-    <StyledTitle as={tag[type]} type={type}>
+    <StyledTitle as={tag[type]} type={type} className={className}>
       {title}
     </StyledTitle>
   );

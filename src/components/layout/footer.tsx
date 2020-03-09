@@ -5,13 +5,19 @@ import {
   useIntl,
   Link,
 } from 'gatsby-plugin-intl';
-import styled from 'styled-components';
 import React, { FC } from 'react';
 import { Container, Row, Col } from 'react-awesome-styled-grid';
+import styled, { css } from 'styled-components';
 
+import * as colors from '../../style/colors';
 import Title from '../elements/title';
 import Flex from '../elements/flex';
 import SocialMediaIcon from '../elements/socialMediaIcon';
+import {
+  contentMargin,
+  applyMediaQueryMd,
+  applyMediaQueryLg,
+} from '../../style/dimensions';
 
 interface Props {}
 
@@ -23,13 +29,50 @@ interface MenuQuery {
 }
 
 const FooterContainer = styled.div`
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
   margin: 0 auto;
   max-width: 1300px;
+  padding: 20px ${contentMargin.md};
+
+  ${applyMediaQueryMd(css`
+    padding: 0 ${contentMargin.md};
+  `)}
+
+  ${applyMediaQueryLg(css`
+    padding: 0 ${contentMargin.lg};
+  `)}
+`;
+
+const Divider = styled.hr`
+  border-style: solid;
+  color: ${colors.Grey300};
+  margin: 60px 0;
+`;
+
+const FooterTitle = styled(Title)`
+  margin-bottom: 40px;
+`;
+
+const SiteMapLink = styled(Link)`
+  color: ${colors.DefaultFontColor};
+  font-size: 21px;
+  padding-bottom: 20px;
+  text-decoration: none;
+
+  :hover {
+    color: ${colors.Grey700};
+  }
+`;
+
+const LanguageDivider = styled.hr`
+  border-style: solid;
+  color: ${colors.Grey300};
+  margin: 55px 0 40px;
 `;
 
 const LanguageContainer = styled.div`
   display: flex;
+  font-size: 16px;
+  margin-bottom: 25px;
 
   > * {
     margin-left: 16px;
@@ -39,6 +82,21 @@ const LanguageContainer = styled.div`
 const LanguageLink = styled.a`
   cursor: pointer;
   text-transform: uppercase;
+`;
+
+const FooterLink = styled(Link)`
+  color: ${colors.Grey600};
+  font-size: 14px;
+  text-decoration: none;
+
+  ::after {
+    content: ' · ';
+    white-space: pre;
+  }
+
+  :last-child::after {
+    content: '';
+  }
 `;
 
 const Footer: FC<Props> = () => {
@@ -59,26 +117,39 @@ const Footer: FC<Props> = () => {
     <FooterContainer>
       <Container>
         <Row>
-          <Col xs={12} sm={5} md={5}>
-            <Title type="footerTitle" title="12062020"></Title>
+          <Col noGutter xs={12}>
+            <Divider />
           </Col>
-          <Col xs={12} sm={3} md={2}>
+        </Row>
+        <Row>
+          <Col noGutter xs={12} sm={5} md={5}>
+            <FooterTitle type="footerTitle" title="12062020" />
+          </Col>
+          <Col noGutter xs={12} sm={3} md={2}>
             {leftSiteMapPages.map(page => (
-              <Link key={page.slug} to={`/${page.slug}`}>
+              <SiteMapLink
+                key={page.slug}
+                to={`/${page.slug !== 'home' ? page.slug : '/'}`}
+              >
                 {page.title}
-              </Link>
+              </SiteMapLink>
             ))}
           </Col>
-          <Col xs={12} sm={4} md={5}>
+          <Col noGutter xs={12} sm={4} md={5}>
             {rightSiteMapPages.map(page => (
-              <Link key={page.slug} to={`/${page.slug}`}>
+              <SiteMapLink key={page.slug} to={`/${page.slug}`}>
                 {page.title}
-              </Link>
+              </SiteMapLink>
             ))}
           </Col>
         </Row>
         <Row>
-          <Col xs={12} sm={8} md={10}>
+          <Col noGutter xs={12}>
+            <LanguageDivider />
+          </Col>
+        </Row>
+        <Row>
+          <Col noGutter xs={12} sm={8} md={10}>
             <LanguageContainer>
               {intl.formatMessage({ id: 'footer.language' })}
               <IntlContextConsumer>
@@ -95,8 +166,8 @@ const Footer: FC<Props> = () => {
               </IntlContextConsumer>
             </LanguageContainer>
           </Col>
-          <Col xs={12} sm={4} md={2}>
-            <Flex dir="row">
+          <Col noGutter xs={12} sm={4} md={2} align={{ sm: 'flex-end' }}>
+            <Flex flexDirection="row" style={{ marginBottom: '35px' }}>
               <SocialMediaIcon network="facebook" type="footer" />
               <SocialMediaIcon network="instagram" type="footer" />
               <SocialMediaIcon network="youtube" type="footer" />
@@ -104,12 +175,12 @@ const Footer: FC<Props> = () => {
           </Col>
         </Row>
         <Row>
-          <Col>
-            <Flex flexDirection="row">
+          <Col noGutter>
+            <Flex flexDirection="row" style={{ marginBottom: '40px' }}>
               {footerMenu.pages.map(page => (
-                <Link key={page.slug} to={`/${page.slug}`}>
+                <FooterLink key={page.slug} to={`/${page.slug}`}>
                   {page.title}
-                </Link>
+                </FooterLink>
               ))}
             </Flex>
           </Col>
