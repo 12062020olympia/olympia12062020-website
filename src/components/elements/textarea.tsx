@@ -7,20 +7,20 @@ import Flex from './flex';
 interface Props {
   label: string;
   name: string;
-  type?: string;
 }
 
 const Label = styled.label`
   font-weight: bold;
 `;
 
-const InputField = styled.input`
+const TextAreaField = styled.textarea`
   background-color: ${colors.White};
+  border: 1px solid ${colors.InputBorderColor};
   color: ${colors.DefaultFontColor};
   font-size: 16px;
   line-height: 120%;
-  border: 1px solid ${colors.InputBorderColor};
   padding: 15px 11px;
+  min-height: 300px;
 
   ::placeholder {
     color: ${colors.InputPlaceholderColor};
@@ -36,11 +36,11 @@ const InputField = styled.input`
   }
 `;
 
-const Input: FC<Props> = ({ label, name, type = 'text' }) => {
+const Input: FC<Props> = ({ label, name }) => {
   return (
     <Flex flexDirection="column">
       <Label htmlFor={name}>{label}</Label>
-      <InputField id={name} name={name} type={type} />
+      <TextAreaField id={name} name={name} />
     </Flex>
   );
 };
