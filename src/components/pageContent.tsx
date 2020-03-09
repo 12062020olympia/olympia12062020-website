@@ -3,7 +3,6 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import { PageInformationFragment } from '../../types/graphql-types';
-import { contentPadding } from '../style/dimensions';
 import ContentModule from './content';
 import PageTitle from './pageTitle';
 
@@ -11,11 +10,7 @@ interface Props {
   data: PageInformationFragment;
 }
 
-const ContentContainer = styled.div`
-  > * {
-    margin: 0 ${contentPadding};
-  }
-`;
+const ContentContainer = styled.div``;
 
 const PageContent: FC<Props> = ({
   data: { title, header, contentModules, backgroundPicture },

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import * as colors from '../../style/colors';
 
 interface Props {
+  className?: string;
   Icon: ComponentType<{ style?: any }>;
   onClick: () => void;
   type?: 'button' | 'submit' | 'reset';
@@ -12,17 +13,22 @@ interface Props {
 const StyledButton = styled.button`
   background-color: transparent;
   border: none;
-  color: ${colors.Grey900};
+  color: ${colors.IconButtonColor};
   cursor: pointer;
 
   :hover {
-    color: ${colors.Grey500};
+    color: ${colors.IconButtonHoverColor};
+  }
+
+  :focus {
+    border: 1px solid ${colors.IconButtonFocusBorderColor};
+    outline: none;
   }
 `;
 
-const IconButton: FC<Props> = ({ Icon, onClick, type = 'button' }) => {
+const IconButton: FC<Props> = ({ Icon, type = 'button', ...otherProps }) => {
   return (
-    <StyledButton onClick={onClick} type={type}>
+    <StyledButton type={type} {...otherProps}>
       <Icon />
     </StyledButton>
   );

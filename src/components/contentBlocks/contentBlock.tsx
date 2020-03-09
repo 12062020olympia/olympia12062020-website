@@ -4,6 +4,7 @@ import React, { FC } from 'react';
 import { ContentBlockInformationFragment } from '../../../types/graphql-types';
 import DefaultContentBlock from './defaultContentBlock';
 import ExpandableContentBlock from './expandableContentBlock';
+import ExpapandableColorful from './expandableColorfulBlock';
 
 interface Props {
   data: ContentBlockInformationFragment;
@@ -14,6 +15,10 @@ const ContentBlock: FC<Props> = ({ data }) => {
     return <ExpandableContentBlock data={data} />;
   }
 
+  if (data.appearance === 'expandableColorful') {
+    return <ExpapandableColorful data={data} />;
+  }
+
   return <DefaultContentBlock data={data} />;
 };
 
@@ -21,6 +26,7 @@ export const query = graphql`
   fragment ContentBlockInformation on ContentfulContentBlock {
     ...DefaultContentBlockInformation
     ...ExpandableContentBlockInformation
+    ...ExpapandableColorfulInformation
     internal {
       type
     }

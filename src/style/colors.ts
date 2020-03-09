@@ -64,20 +64,12 @@ export interface PageStyle {
   text: string;
 }
 
-export const pageStyle: Record<string, PageStyle> = {
-  blue: {
-    primary: Blue,
-    secondary: Secondary,
-    text: DefaultFontColor,
-  },
-  yellow: {
-    primary: Dandelion,
-    secondary: Yellow,
-    text: DefaultFontColor,
-  },
-  green: {
-    primary: Green,
-    secondary: Foliage,
-    text: DefaultFontColor,
-  },
+export const contentColors: Record<string, string> = {
+  white: White,
+  blue: Blue,
+  yellow: Yellow,
+  red: Red,
+  pink: Pink,
+  lightblue: FishPond,
+  orange: Orange,
 };

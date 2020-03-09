@@ -10,10 +10,7 @@ interface Props {
   data: ContentContainerInformationFragment;
 }
 
-const Container = styled.div`
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.11);
-  padding: 48px 0 15px 0;
-`;
+const Container = styled.div``;
 
 const CategoryHeadline = styled.h4`
   ${fontStyles.smallHeadline}

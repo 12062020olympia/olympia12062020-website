@@ -8,10 +8,7 @@ interface Props {
   data: ExpandableContentBlockInformationFragment;
 }
 
-const Container = styled.div`
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.11);
-  padding: 24px 0;
-`;
+const Container = styled.div``;
 
 export const ExpandableContentBlock: FC<Props> = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
