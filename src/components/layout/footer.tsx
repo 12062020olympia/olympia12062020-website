@@ -11,6 +11,7 @@ import { Container, Row, Col } from 'react-awesome-styled-grid';
 
 import Title from '../elements/title';
 import Flex from '../elements/flex';
+import SocialMediaIcon from '../elements/socialMediaIcon';
 
 interface Props {}
 
@@ -95,7 +96,11 @@ const Footer: FC<Props> = () => {
             </LanguageContainer>
           </Col>
           <Col xs={12} sm={4} md={2}>
-            Social Media
+            <Flex dir="row">
+              <SocialMediaIcon network="facebook" type="footer" />
+              <SocialMediaIcon network="instagram" type="footer" />
+              <SocialMediaIcon network="youtube" type="footer" />
+            </Flex>
           </Col>
         </Row>
         <Row>

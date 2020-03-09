@@ -5,6 +5,8 @@ import React, { FC } from 'react';
 
 import * as colors from '../../style/colors';
 import { maxMobileWidth } from '../../style/dimensions';
+import Flex from '../elements/flex';
+import SocialMediaIcon from '../elements/socialMediaIcon';
 
 interface Props {
   isMenuOpen: boolean;
@@ -41,6 +43,10 @@ const Container = styled.nav<{ open: boolean }>`
   }
 `;
 
+const SocialMediaIconContainer = styled(Flex)`
+  margin-top: 60px;
+`;
+
 const Menu: FC<Props> = ({ isMenuOpen }) => {
   const { contentfulMenu: menu } = useStaticQuery<MenuQuery>(query);
   return (
@@ -50,6 +56,11 @@ const Menu: FC<Props> = ({ isMenuOpen }) => {
           {page.title}
         </Link>
       ))}
+      <SocialMediaIconContainer dir="row">
+        <SocialMediaIcon network="facebook" type="menu" />
+        <SocialMediaIcon network="instagram" type="menu" />
+        <SocialMediaIcon network="youtube" type="menu" />
+      </SocialMediaIconContainer>
     </Container>
   );
 };
