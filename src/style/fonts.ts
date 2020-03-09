@@ -7,7 +7,7 @@ import RobotoRegularWoff from './fonts/Roboto-Regular.woff';
 import RobotoRegularWoff2 from './fonts/Roboto-Regular.woff2';
 import RobotoBoldWoff from './fonts/Roboto-Bold.woff';
 import RobotoBoldWoff2 from './fonts/Roboto-Bold.woff2';
-import { maxMobileWidth } from './dimensions';
+import { applyMediaQueryMd } from './dimensions';
 
 export const fontFaces = css`
   @font-face {
@@ -66,7 +66,7 @@ const fontSizes: Record<FontType, number> = {
   smallHeadline: 22,
 };
 
-const fontSizesWeb: Record<FontType, number> = {
+const fontSizesDesktop: Record<FontType, number> = {
   headline: 34,
   navTitle: 58,
   footerTitle: 28,
@@ -80,9 +80,9 @@ function applyFontSize(type: FontType) {
   return css`
     font-size: ${fontSizes[type]}px;
 
-    @media (min-width: ${maxMobileWidth}) {
-      font-size: ${fontSizesWeb[type]}px;
-    }
+    ${applyMediaQueryMd(css`
+      font-size: ${fontSizesDesktop[type]}px;
+    `)}
   `;
 }
 

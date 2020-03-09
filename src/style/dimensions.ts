@@ -1,9 +1,37 @@
-export const maxMobileWidth = '576px';
+// @ts-ignore
+import { config } from 'react-awesome-styled-grid';
+import { css, FlattenSimpleInterpolation } from 'styled-components';
+
 export const contentMaxWidth = '960px';
 
-export const headerHeight = '56px';
-export const headerHeightWeb = '140px';
-export const footerHeight = '200px';
-export const footerHeightWeb = '100px';
-export const contentPadding = '20px';
-export const contentPaddingWeb = '60px';
+export type ScreenSize = 'sm' | 'md' | 'lg';
+
+export const headerHeight: Record<ScreenSize, string> = {
+  sm: '56px',
+  md: '140px',
+  lg: '140px',
+};
+
+export const footerHeight: Record<ScreenSize, string> = {
+  sm: '100px',
+  md: '200px',
+  lg: '200px',
+};
+
+export const contentMargin: Record<ScreenSize, string> = {
+  sm: '20px',
+  md: '50px',
+  lg: '70px',
+};
+
+export function applyMediaQueryMd(styles: FlattenSimpleInterpolation) {
+  return css`
+    ${props => config(props).media['sm']`${styles}`}
+  `;
+}
+
+export function applyMediaQueryLg(styles: FlattenSimpleInterpolation) {
+  return css`
+    ${props => config(props).media['md']`${styles}`}
+  `;
+}

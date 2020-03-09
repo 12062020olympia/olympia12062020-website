@@ -1,16 +1,19 @@
 import React, { PropsWithChildren, useState } from 'react';
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import styled, {
+  createGlobalStyle,
+  css,
+  ThemeProvider,
+} from 'styled-components';
 
 import { fontFaces, fontStyles } from '../../style/fonts';
 import Footer from './footer';
 import Header from './header';
 import Menu from './menu';
 import {
+  applyMediaQueryLg,
+  applyMediaQueryMd,
   footerHeight,
-  footerHeightWeb,
   headerHeight,
-  headerHeightWeb,
-  maxMobileWidth,
 } from '../../style/dimensions';
 
 const GlobalStyle = createGlobalStyle`
@@ -28,13 +31,18 @@ const GlobalStyle = createGlobalStyle`
 
 const Content = styled.main`
   margin: 0 auto;
-  min-height: calc(100vh - ${headerHeight} - ${footerHeight});
-  margin-top: ${headerHeight};
+  min-height: calc(100vh - ${headerHeight.sm} - ${footerHeight.sm});
+  margin-top: ${headerHeight.sm};
 
-  @media (min-width: ${maxMobileWidth}) {
-    min-height: calc(100vh - ${headerHeightWeb} - ${footerHeightWeb});
-    margin-top: ${headerHeightWeb};
-  }
+  ${applyMediaQueryMd(css`
+    min-height: calc(100vh - ${headerHeight.md} - ${footerHeight.md});
+    margin-top: ${headerHeight.md};
+  `)}
+
+  ${applyMediaQueryLg(css`
+    min-height: calc(100vh - ${headerHeight.lg} - ${footerHeight.lg});
+    margin-top: ${headerHeight.lg};
+  `)}
 `;
 
 const awesomegridConf = {

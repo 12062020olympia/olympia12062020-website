@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Input from '../elements/input';
 import Textarea from '../elements/textarea';
 import {
   contentMaxWidth,
-  contentPadding,
-  contentPaddingWeb,
-  maxMobileWidth,
+  applyMediaQueryMd,
+  contentMargin,
+  applyMediaQueryLg,
 } from '../../style/dimensions';
 
 interface Props {}
@@ -22,14 +22,20 @@ const Form = styled.form`
   }
 
   > * {
-    margin: 0 ${contentPadding};
+    margin: 0 ${contentMargin.sm};
   }
 
-  @media (min-width: ${maxMobileWidth}) {
+  ${applyMediaQueryMd(css`
     > * {
-      margin: 0 ${contentPaddingWeb};
+      margin: 0 ${contentMargin.md};
     }
-  }
+  `)}
+
+  ${applyMediaQueryLg(css`
+    > * {
+      margin: 0 ${contentMargin.lg};
+    }
+  `)}
 `;
 
 const ContactForm: FC<Props> = () => {

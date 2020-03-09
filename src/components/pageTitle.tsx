@@ -1,17 +1,13 @@
 import React, { FC } from 'react';
 import BackgroundImage from 'gatsby-background-image';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import {
   GatsbyContentfulFluidFragment,
   Maybe,
 } from '../../types/graphql-types';
 import * as colors from '../style/colors';
-import {
-  contentPadding,
-  contentPaddingWeb,
-  maxMobileWidth,
-} from '../style/dimensions';
+import { applyMediaQueryMd, contentMargin } from '../style/dimensions';
 import Title from './elements/title';
 
 interface Props {
@@ -33,9 +29,9 @@ const Container = styled(BackgroundImage)`
   overflow: hidden;
   width: 100%;
 
-  @media (min-width: ${maxMobileWidth}) {
+  ${applyMediaQueryMd(css`
     min-height: ${pageTitleHeightWeb};
-  }
+  `)}
 `;
 
 const TitleContainer = styled.div`
@@ -44,25 +40,25 @@ const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  left: ${contentPadding};
+  left: ${contentMargin.sm};
   min-height: calc(${pageTitleHeight} - ${bottomPadding} - ${topPadding});
   position: relative;
   top: ${topPadding};
-  width: calc(100% - 2 * ${contentPadding});
+  width: calc(100% - 2 * ${contentMargin.sm});
 
   > * {
     padding: 0 10px;
   }
 
-  @media (min-width: ${maxMobileWidth}) {
+  ${applyMediaQueryMd(css`
     bottom: ${bottomPaddingWeb};
-    left: ${contentPaddingWeb};
+    left: ${contentMargin.md};
     min-height: calc(
       ${pageTitleHeightWeb} - ${bottomPaddingWeb} - ${topPaddingWeb}
     );
     top: ${topPaddingWeb};
-    width: calc(100% - 2 * ${contentPaddingWeb});
-  }
+    width: calc(100% - 2 * ${contentMargin.md});
+  `)}
 `;
 
 const PageTitle: FC<Props> = ({ backgroundPicture, title, header }) => (

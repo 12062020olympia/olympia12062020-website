@@ -1,11 +1,11 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import { Link } from 'gatsby-plugin-intl';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import React, { FC } from 'react';
 
 import CloseIcon from '../../icons/icon-close.svg';
 import * as colors from '../../style/colors';
-import { maxMobileWidth } from '../../style/dimensions';
+import { applyMediaQueryMd } from '../../style/dimensions';
 import Flex from '../elements/flex';
 import SocialMediaIcon from '../elements/socialMediaIcon';
 import IconButton from '../elements/iconButton';
@@ -41,11 +41,11 @@ const Container = styled.nav<{ open: boolean }>`
   width: calc(100vw - 30px);
   z-index: 100;
 
-  @media (min-width: ${maxMobileWidth}) {
+  ${applyMediaQueryMd(css`
     height: calc(100vh);
     justify-content: flex-start;
     width: 400px;
-  }
+  `)}
 `;
 
 const MenuLink = styled(Link)`
@@ -72,9 +72,9 @@ const SocialMediaIconContainer = styled(Flex)`
   margin-bottom: 20px;
   margin-top: 20px;
 
-  @media (min-width: ${maxMobileWidth}) {
+  ${applyMediaQueryMd(css`
     margin-top: 60px;
-  }
+  `)}
 `;
 
 const Menu: FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => {
