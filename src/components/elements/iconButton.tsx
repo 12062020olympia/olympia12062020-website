@@ -21,8 +21,11 @@ const StyledButton = styled.button`
   }
 
   :focus {
-    border: 1px solid ${colors.IconButtonFocusBorderColor};
     outline: none;
+  }
+
+  :focus:not(:active) {
+    border: 1px solid ${colors.IconButtonFocusBorderColor};
   }
 `;
 

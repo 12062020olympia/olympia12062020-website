@@ -5,7 +5,7 @@ import styled, {
   ThemeProvider,
 } from 'styled-components';
 
-import { fontFaces, fontStyles } from '../../style/fonts';
+import { families, fontFaces, fontStyles } from '../../style/fonts';
 import Footer from './footer';
 import Header from './header';
 import Menu from './menu';
@@ -15,6 +15,8 @@ import {
   footerHeight,
   headerHeight,
 } from '../../style/dimensions';
+import CookieBanner from '../cookies/cookieBanner';
+import { hasSeenCookieNotice } from '../../cookie';
 
 const GlobalStyle = createGlobalStyle`
   ${fontFaces}
@@ -26,6 +28,10 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     ${fontStyles.normal}
+  }
+
+  button {
+    font-family: ${families.default};
   }
 `;
 
@@ -57,6 +63,9 @@ const awesomegridConf = {
 
 const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [displayCookieBanner, setDisplayCookieBanner] = useState(
+    !hasSeenCookieNotice()
+  );
   return (
     <ThemeProvider theme={{ awesomegrid: awesomegridConf }}>
       <>
@@ -64,7 +73,11 @@ const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
         <Header isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
         <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
         <Content>{children}</Content>
-        <Footer />
+        <Footer setDisplayCookieBanner={setDisplayCookieBanner} />
+        <CookieBanner
+          displayCookieBanner={displayCookieBanner}
+          setDisplayCookieBanner={setDisplayCookieBanner}
+        />
       </>
     </ThemeProvider>
   );

@@ -19,7 +19,9 @@ import {
   applyMediaQueryLg,
 } from '../../style/dimensions';
 
-interface Props {}
+interface Props {
+  setDisplayCookieBanner: (display: boolean) => void;
+}
 
 interface MenuQuery {
   pages: Array<{
@@ -87,6 +89,7 @@ const LanguageLink = styled.a`
 const FooterLink = styled(Link)`
   color: ${colors.Grey600};
   font-size: 14px;
+  line-height: 150%;
   text-decoration: none;
 
   ::after {
@@ -99,7 +102,23 @@ const FooterLink = styled(Link)`
   }
 `;
 
-const Footer: FC<Props> = () => {
+const FooterButton = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: ${colors.Grey600};
+  font-size: 14px;
+  line-height: 150%;
+  padding: 0;
+  text-decoration: none;
+
+  ::after {
+    content: ' · ';
+    white-space: pre;
+  }
+`;
+
+const Footer: FC<Props> = ({ setDisplayCookieBanner }) => {
   const intl = useIntl();
   const { footerMenu, siteMap } = useStaticQuery<{
     siteMap: MenuQuery;
@@ -177,6 +196,9 @@ const Footer: FC<Props> = () => {
         <Row>
           <Col noGutter>
             <Flex flexDirection="row" style={{ marginBottom: '40px' }}>
+              <FooterButton onClick={() => setDisplayCookieBanner(true)}>
+                {intl.formatMessage({ id: 'footer.cookieSettings' })}
+              </FooterButton>
               {footerMenu.pages.map(page => (
                 <FooterLink key={page.slug} to={`/${page.slug}`}>
                   {page.title}

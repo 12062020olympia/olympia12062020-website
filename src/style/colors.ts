@@ -44,6 +44,9 @@ export const ButtonColor = Primary;
 export const ButtonHoverColor = BrandPrimary500;
 export const ButtonFocusBorderColor = FocusColor;
 
+export const ButtonSecondaryColor = Grey800;
+export const ButtonSecondaryHoverColor = Grey700;
+
 // Icon Button Colors
 export const IconButtonColor = Black;
 export const IconButtonHoverColor = Grey600;
