@@ -7,7 +7,12 @@ import {
   Maybe,
 } from '../../types/graphql-types';
 import * as colors from '../style/colors';
-import { applyMediaQueryMd, contentMargin } from '../style/dimensions';
+import {
+  applyMediaQueryMd,
+  contentMargin,
+  ScreenSize,
+  applyMediaQueryLg,
+} from '../style/dimensions';
 import Title from './elements/title';
 
 interface Props {
@@ -16,48 +21,77 @@ interface Props {
   backgroundPicture?: { fluid: Maybe<GatsbyContentfulFluidFragment> };
 }
 
-const bottomPadding = '60px';
-const topPadding = '200px';
-const pageTitleHeight = '500px';
+const titleHeigh: Record<ScreenSize, string> = {
+  sm: '500px',
+  md: '393px',
+  lg: '760px',
+};
 
-const bottomPaddingWeb = '60px';
-const topPaddingWeb = '120px';
-const pageTitleHeightWeb = '760px';
+const top: Record<ScreenSize, string> = {
+  sm: '285px',
+  md: '60px',
+  lg: '407px',
+};
+
+const bottom: Record<ScreenSize, string> = {
+  sm: '50px',
+  md: '50px',
+  lg: '70px',
+};
 
 const Container = styled(BackgroundImage)`
-  min-height: ${pageTitleHeight};
+  min-height: ${titleHeigh.sm};
   overflow: hidden;
   width: 100%;
 
   ${applyMediaQueryMd(css`
-    min-height: ${pageTitleHeightWeb};
+    min-height: ${titleHeigh.md};
+  `)}
+
+  ${applyMediaQueryLg(css`
+    min-height: ${titleHeigh.lg};
   `)}
 `;
 
 const TitleContainer = styled.div`
   background-color: ${colors.Secondary};
-  bottom: ${bottomPadding};
+  display: inline-block;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   left: ${contentMargin.sm};
-  min-height: calc(${pageTitleHeight} - ${bottomPadding} - ${topPadding});
+  margin-bottom: ${bottom.sm};
+  min-height: 165px;
+  padding-top: 20px;
   position: relative;
-  top: ${topPadding};
   width: calc(100% - 2 * ${contentMargin.sm});
+  top: ${top.sm};
 
   > * {
     padding: 0 10px;
   }
 
   ${applyMediaQueryMd(css`
-    bottom: ${bottomPaddingWeb};
     left: ${contentMargin.md};
-    min-height: calc(
-      ${pageTitleHeightWeb} - ${bottomPaddingWeb} - ${topPaddingWeb}
-    );
-    top: ${topPaddingWeb};
-    width: calc(100% - 2 * ${contentMargin.md});
+    margin-bottom: ${bottom.md}
+    min-height: 283px;
+    min-width: 545px;
+    top: ${top.md};
+    width: min-content;
+    padding-top: 25px;
+
+    > * {
+      padding: 0 20px;
+    }
+  `)}
+
+  ${applyMediaQueryLg(css`
+    left: ${contentMargin.lg};
+    margin-bottom: ${bottom.lg}
+    min-height: 283px;
+    min-width: 545px;
+    top: ${top.lg};
+    width: min-content;
   `)}
 `;
 

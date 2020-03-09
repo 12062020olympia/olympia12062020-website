@@ -61,8 +61,8 @@ const fontSizes: Record<FontType, number> = {
   navTitle: 32,
   footerTitle: 22,
   normal: 16,
-  pageTitle: 12,
-  pageHeader: 48,
+  pageTitle: 16,
+  pageHeader: 42,
   smallHeadline: 22,
 };
 
@@ -71,8 +71,8 @@ const fontSizesDesktop: Record<FontType, number> = {
   navTitle: 58,
   footerTitle: 28,
   normal: 21,
-  pageTitle: 48,
-  pageHeader: 130,
+  pageTitle: 16,
+  pageHeader: 84,
   smallHeadline: 34,
 };
 
