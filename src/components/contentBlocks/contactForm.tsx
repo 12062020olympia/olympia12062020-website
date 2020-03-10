@@ -40,7 +40,7 @@ const Form = styled.form`
 
 const ContactForm: FC<Props> = () => {
   return (
-    <Form action="https://example.com//" method="POST">
+    <Form action="/.netlify/functions/contact-form" method="POST">
       <div hidden aria-hidden="true">
         <label>
           Don’t fill this out if you're human:

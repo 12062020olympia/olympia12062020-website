@@ -70,3 +70,6 @@ yarn-error.log
 
 # Auto generated file
 types/graphql-types.d.ts
+
+# Generated functions
+functions/*
