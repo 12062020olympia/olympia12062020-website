@@ -6,7 +6,7 @@ import { ContentContainerInformationFragment } from '../../../types/graphql-type
 import { fontStyles } from '../../style/fonts';
 
 export interface PetitionsContentContainerProps {
-  data: ContentContainerInformationFragment,
+  data: ContentContainerInformationFragment;
 }
 
 const ContainerHeadline = styled.h4`
@@ -20,7 +20,7 @@ const ModulesContainer = styled.div`
 `;
 
 const PetitionsContentContainer = ({
-  data
+  data,
 }: PetitionsContentContainerProps) => {
   return (
     <>

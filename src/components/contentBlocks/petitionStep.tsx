@@ -6,8 +6,8 @@ import { applyMediaQueryMd } from '../../style/dimensions';
 import { fontStyles } from '../../style/fonts';
 
 export interface PetitionStepProps {
-  subtitle: string,
-  title: string,
+  subtitle: string;
+  title: string;
 }
 
 const Card = styled.div`
@@ -56,10 +56,7 @@ const Title = styled.h5`
   margin-block-start: 0;
 `;
 
-const PetitionStep = ({
-  subtitle,
-  title,
-}: PetitionStepProps) => {
+const PetitionStep = ({ subtitle, title }: PetitionStepProps) => {
   return (
     <Card>
       <CardHeader>
@@ -71,7 +68,7 @@ const PetitionStep = ({
         </TitleWithActionsContainer>
       </CardHeader>
     </Card>
-  )
-}
+  );
+};
 
 export default PetitionStep;
