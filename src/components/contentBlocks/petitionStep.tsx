@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
+import * as colors from '../../style/colors';
 import { applyMediaQueryMd } from '../../style/dimensions';
 import { fontStyles } from '../../style/fonts';
 
@@ -10,7 +11,7 @@ export interface PetitionStepProps {
 }
 
 const Card = styled.div`
-  border: 1px solid #F5F5F5;
+  border: 1px solid ${colors.Grey200};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
@@ -43,12 +44,16 @@ const TitleContainer = styled.div`
 
 const Subtitle = styled.p`
   ${fontStyles.cardSubtitle}
-  margin: 0;
+  color: ${colors.Grey600};
+  margin-block-end: 0;
+  margin-block-start: 0;
 `;
 
 const Title = styled.h5`
   ${fontStyles.cardTitle}
-  margin: 0;
+  color: ${colors.Grey600};
+  margin-block-end: 0;
+  margin-block-start: 0;
 `;
 
 const PetitionStep = ({
