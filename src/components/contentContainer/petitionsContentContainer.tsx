@@ -13,15 +13,27 @@ const ContainerHeadline = styled.h4`
   ${fontStyles.smallHeadline}
 `;
 
+const ModulesContainer = styled.div`
+  margin: 0 auto;
+  max-width: 1080px;
+  padding: 0 20px;
+
+  & > *:not(:last-child) {
+    margin-bottom: 8px;
+  }
+`;
+
 const PetitionsContentContainer = ({
   data
 }: PetitionsContentContainerProps) => {
   return (
     <>
       <ContainerHeadline>{data.title}</ContainerHeadline>
-      {data.contentModules?.map(() => (
-        <PetitionsContentBlock />
-      ))}
+      <ModulesContainer>
+        {data.contentModules?.map(cm => (
+          <PetitionsContentBlock data={cm!} />
+        ))}
+      </ModulesContainer>
     </>
   );
 };
