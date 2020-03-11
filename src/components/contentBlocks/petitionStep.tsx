@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import ExpandIcon from '../../icons/icon-expand.svg';
@@ -88,6 +88,7 @@ const Title = styled.h5`
 `;
 
 const PetitionStep = ({ subtitle, title, contentComponent }: PetitionStepProps) => {
+  const [isExpanded, setIsExpanded] = useState(false);
   return (
     <Card>
       <CardHeader>
@@ -98,12 +99,14 @@ const PetitionStep = ({ subtitle, title, contentComponent }: PetitionStepProps) 
           </TitleContainer>
         </TitleWithActionsContainer>
         <CardExpandContainer>
-          <IconButton Icon={ExpandIcon} onClick={() => {}}/>
+          <IconButton Icon={ExpandIcon} onClick={() => { setIsExpanded(!isExpanded) }}/>
         </CardExpandContainer>
       </CardHeader>
-      <CardContent>
-        {contentComponent}
-      </CardContent>
+      {isExpanded && (
+        <CardContent>
+          {contentComponent}
+        </CardContent>
+      )}
     </Card>
   );
 };
