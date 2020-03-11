@@ -5,6 +5,11 @@ import styled from 'styled-components';
 import { ContentContainerInformationFragment } from '../../types/graphql-types';
 import { fontStyles } from '../style/fonts';
 import ContentBlock from './contentBlocks/contentBlock';
+import PetitionsContentContainer from './contentContainer/petitionsContentContainer';
+
+export enum ContentContainerAppearance {
+  Petitions = 'petitions',
+}
 
 interface Props {
   data: ContentContainerInformationFragment;
@@ -17,6 +22,10 @@ const CategoryHeadline = styled.h4`
 `;
 
 const ContentContainer: FC<Props> = ({ data }) => {
+  if (data.appearance === ContentContainerAppearance.Petitions) {
+    return <PetitionsContentContainer />;
+  }
+
   return (
     <>
       <Container>
@@ -35,6 +44,7 @@ export const query = graphql`
     internal {
       type
     }
+    appearance
     contentModules {
       ...ContentBlockInformation
     }
