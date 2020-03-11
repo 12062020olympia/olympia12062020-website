@@ -23,7 +23,7 @@ const CategoryHeadline = styled.h4`
 
 const ContentContainer: FC<Props> = ({ data }) => {
   if (data.appearance === ContentContainerAppearance.Petitions) {
-    return <PetitionsContentContainer />;
+    return <PetitionsContentContainer data={data} />;
   }
 
   return (
