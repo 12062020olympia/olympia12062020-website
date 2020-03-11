@@ -28,9 +28,9 @@ const titleHeigh: Record<ScreenSize, string> = {
 };
 
 const top: Record<ScreenSize, string> = {
-  sm: '285px',
+  sm: '50px',
   md: '60px',
-  lg: '407px',
+  lg: '70px',
 };
 
 const bottom: Record<ScreenSize, string> = {
@@ -58,7 +58,7 @@ const Container = styled(BackgroundImage)`
 `;
 
 const TitleContainer = styled.div`
-  background-color: ${colors.Secondary};
+  background-color: ${colors.PageTitleBackground};
   flex-direction: column;
   justify-content: flex-end;
   margin: ${top.sm} ${contentMargin.sm} ${bottom.sm} ${contentMargin.sm};

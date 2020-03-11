@@ -5,6 +5,7 @@ export const Grey600 = '#8C8C8C';
 export const Grey500 = '#BFBFBF';
 export const Grey400 = '#D9D9D9';
 export const Grey300 = '#F0F0F0';
+export const Grey350 = '##E3E3E3';
 export const Grey200 = '#F5F5F5';
 export const Grey100 = '#FAFAFA';
 
@@ -29,6 +30,7 @@ export const CanneryPark = '#BDB09D';
 export const FishPond = '#83C9EC';
 export const MentalFoss = '#DFB0C8';
 export const CapeHope = '#D7D8D8';
+export const FreshDough = '#F3EBE6';
 
 export const BrandPrimary500 = Yellow;
 export const BrandPrimary300 = '#FED35A';
@@ -59,20 +61,16 @@ export const InputHoverBorderColor = Grey600;
 export const InputFocusBorderColor = Grey900;
 export const CheckboxSelectedColor = Black;
 
-// Page Styles
+// Menu
+export const MenuBackground = Apricot;
 
-export interface PageStyle {
-  primary: string;
-  secondary: string;
-  text: string;
-}
+// Page Background
+export const PageTitleBackground = Dandelion;
 
 export const contentColors: Record<string, string> = {
-  white: White,
-  blue: Blue,
-  yellow: Yellow,
-  red: Red,
-  pink: Pink,
-  lightblue: FishPond,
-  orange: Orange,
+  pigSkin: PigSkin,
+  grey: Grey350,
+  capeHope: CapeHope,
+  freshDough: FreshDough,
+  apricot: Apricot,
 };
