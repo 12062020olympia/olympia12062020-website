@@ -89,8 +89,9 @@ const Title = styled.h5`
 
 const ExpandButton = styled(IconButton)<{ isExpanded: boolean }>`
   & svg {
-    transform: rotate(${({ isExpanded }) => (isExpanded ? '-180deg' : '0deg')});
-    transition: transform 0.2s ease-in-out;
+    transform: scale(${({ isExpanded }) => (isExpanded ? '1, -1' : '1, 1')});
+    transition: transform 0.25s ease-out;
+    will-change: transform;
   }
 `;
 
