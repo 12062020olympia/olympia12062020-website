@@ -7,6 +7,8 @@ import {
   documentToReactComponents,
   Options,
 } from '@contentful/rich-text-react-renderer';
+import styled, { css } from 'styled-components';
+import * as colors from '../style/colors';
 
 type Props = {
   document: {
@@ -15,6 +17,13 @@ type Props = {
     data: any;
   };
 };
+
+const RichTextContainer = styled.div`
+  hr {
+    border: 1px solid ${colors.Grey300};
+    margin: 45px 0;
+  }
+`;
 
 function getObjectKeyArray(obj: any): string[] {
   return Object.keys(obj);
@@ -32,9 +41,10 @@ const ContentfulRichText: React.FC<Props> = ({ document }: Props) => {
         return locales.map(locale => (
           <img
             src={file[locale].url}
-            alt={description[locale]}
+            alt={description ? description[locale] : ''}
             data-locale={locale}
             key={locale}
+            style={{ display: 'block', maxWidth: '100%', margin: '0 auto' }}
           />
         ));
       },
@@ -52,6 +62,10 @@ const ContentfulRichText: React.FC<Props> = ({ document }: Props) => {
       },
     },
   };
-  return <div>{documentToReactComponents(document, options)}</div>;
+  return (
+    <RichTextContainer>
+      {documentToReactComponents(document, options)}
+    </RichTextContainer>
+  );
 };
 export default ContentfulRichText;
