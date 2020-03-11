@@ -12,9 +12,12 @@ interface Props {
 
 const StyledButton = styled.button`
   background-color: transparent;
-  border: none;
+  border: 1px solid transparent;
   color: ${colors.IconButtonColor};
   cursor: pointer;
+  height: 32px;
+  width: 32px;
+  padding: 0;
 
   :hover {
     color: ${colors.IconButtonHoverColor};

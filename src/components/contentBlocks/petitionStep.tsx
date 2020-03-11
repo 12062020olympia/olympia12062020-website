@@ -1,9 +1,12 @@
 import React, { ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
+import ExpandIcon from '../../icons/icon-expand.svg';
 import * as colors from '../../style/colors';
 import { applyMediaQueryMd } from '../../style/dimensions';
 import { fontStyles } from '../../style/fonts';
+import IconButton from '../elements/iconButton';
+
 
 export interface PetitionStepProps {
   contentComponent: ReactNode;
@@ -46,6 +49,7 @@ const CardContent = styled.div`
 
 const TitleWithActionsContainer = styled.div`
   display: flex;
+  flex: 1;
 `;
 
 const TitleContainer = styled.div`
@@ -55,6 +59,17 @@ const TitleContainer = styled.div`
 
   ${applyMediaQueryMd(css`
     padding: 15px 0 19px 88px;
+  `)}
+`;
+
+const CardExpandContainer = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 48px;
+
+  ${applyMediaQueryMd(css`
+    width: 88px;
   `)}
 `;
 
@@ -82,6 +97,9 @@ const PetitionStep = ({ subtitle, title, contentComponent }: PetitionStepProps) 
             <Title>{title}</Title>
           </TitleContainer>
         </TitleWithActionsContainer>
+        <CardExpandContainer>
+          <IconButton Icon={ExpandIcon} onClick={() => {}}/>
+        </CardExpandContainer>
       </CardHeader>
       <CardContent>
         {contentComponent}
