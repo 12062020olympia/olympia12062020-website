@@ -26,8 +26,8 @@ const PetitionsContentContainer = ({
     <>
       <ContainerHeadline>{data.title}</ContainerHeadline>
       <ModulesContainer>
-        {data.contentModules?.map(cm => (
-          <PetitionsContentBlock data={cm!} />
+        {data.contentModules?.map((cm, i) => (
+          <PetitionsContentBlock data={cm!} key={i} />
         ))}
       </ModulesContainer>
     </>
