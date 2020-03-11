@@ -87,6 +87,13 @@ const Title = styled.h5`
   margin-block-start: 0;
 `;
 
+const ExpandButton = styled(IconButton)<{ isExpanded: boolean }>`
+  & svg {
+    transform: rotate(${({ isExpanded }) => (isExpanded ? '-180deg' : '0deg')});
+    transition: transform 0.2s ease-in-out;
+  }
+`;
+
 const PetitionStep = ({ subtitle, title, contentComponent }: PetitionStepProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   return (
@@ -99,7 +106,11 @@ const PetitionStep = ({ subtitle, title, contentComponent }: PetitionStepProps) 
           </TitleContainer>
         </TitleWithActionsContainer>
         <CardExpandContainer>
-          <IconButton Icon={ExpandIcon} onClick={() => { setIsExpanded(!isExpanded) }}/>
+          <ExpandButton
+            Icon={ExpandIcon}
+            isExpanded={isExpanded}
+            onClick={() => { setIsExpanded(!isExpanded) }}
+          />
         </CardExpandContainer>
       </CardHeader>
       {isExpanded && (
