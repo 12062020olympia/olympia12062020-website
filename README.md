@@ -18,13 +18,13 @@ Preview Data: [![Netlify Status](https://api.netlify.com/api/v1/badges/6b365c82-
 1. Clone repository
 2. Navigate into site’s directory and install dependencies
    ```shell
-   yarn start
+   yarn install
    ```
 3. Copy `.env.default` to `.env` and set Space Id and access token from Contentful ([Where to get these tokens](https://www.contentful.com/developers/docs/references/authentication/))
 4. Start it up:
 
    ```shell
-   yarn develop
+   yarn start
    ```
 
    Your site is now running at `http://localhost:8000`!
