@@ -17,10 +17,6 @@ const ModulesContainer = styled.div`
   margin: 0 auto;
   max-width: 1080px;
   padding: 0 20px;
-
-  & > *:not(:last-child) {
-    margin-bottom: 8px;
-  }
 `;
 
 const PetitionsContentContainer = ({
