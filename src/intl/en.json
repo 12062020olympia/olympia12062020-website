@@ -1,5 +1,28 @@
 {
+  "cookie": {
+    "text": "Externe Inhalte wie z.B. Youtube-Videos benutzen Cookies. Wenn du unsere Website mit allen Inhalten sehen möchtest musst du Cookies akzeptieren. Falls du nicht akzeptierst, werden diese Inhalte nicht angezeigt.",
+    "privacyPolicy": "Privacy Policy",
+    "accept": "Accept",
+    "reject": "Later (do not accept)"
+  },
   "footer": {
+    "cookieSettings": "Cookie Settings",
     "language": "Language:"
+  },
+  "contact": {
+    "category": {
+      "label": "Category",
+      "general": "General",
+      "tickets": "Tickets",
+      "petitions": "Petitions",
+      "info": "Questions, Feedback & Ideas",
+      "volunteer": "Participate",
+      "press": "Press Inquiries"
+    },
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send"
   }
 }

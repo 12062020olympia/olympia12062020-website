@@ -8,5 +8,21 @@
   "footer": {
     "cookieSettings": "Cookies widerrufen",
     "language": "Sprache:"
+  },
+  "contact": {
+    "category": {
+      "label": "Kategorie",
+      "general": "Allgemeines",
+      "tickets": "Tickets",
+      "petitions": "Petitionen",
+      "info": "Fragen, Kritik & Anregungen",
+      "volunteer": "Mitmachen",
+      "press": "Presseanfragen"
+    },
+    "name": "Name",
+    "email": "E-Mail-Addresse",
+    "subject": "Betreff",
+    "message": "Nachricht",
+    "send": "Senden"
   }
 }

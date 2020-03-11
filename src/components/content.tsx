@@ -40,12 +40,15 @@ export const query = graphql`
   fragment ContentInformation on ContentfulPage {
     contentModules {
       ... on ContentfulContentBlock {
+        id
         ...ContentBlockInformation
       }
       ... on ContentfulContentContainer {
+        id
         ...ContentContainerInformation
       }
       ... on ContentfulSpecialContent {
+        id
         ...SpecialContentInformation
       }
     }

@@ -6,9 +6,10 @@ import Flex from './flex';
 
 interface Props {
   label: string;
-  mandatory?: boolean;
   name: string;
+  options: Array<{ label: string; value: string }>;
   onValueChange: (value: string) => void;
+  type?: string;
   value: string;
 }
 
@@ -16,14 +17,13 @@ const Label = styled.label`
   font-weight: bold;
 `;
 
-const TextAreaField = styled.textarea`
-  background-color: ${colors.White};
+const SelectField = styled.select`
   border: 1px solid ${colors.InputBorderColor};
+  border-radius: 0;
   color: ${colors.DefaultFontColor};
   font-size: 16px;
   line-height: 120%;
   padding: 15px 11px;
-  min-height: 300px;
 
   ::placeholder {
     color: ${colors.InputPlaceholderColor};
@@ -39,27 +39,31 @@ const TextAreaField = styled.textarea`
   }
 `;
 
-const Input: FC<Props> = ({ label, mandatory, name, onValueChange, value }) => {
+const Select: FC<Props> = ({
+  label,
+  name,
+  options = [],
+  onValueChange,
+  type = 'text',
+  value,
+}) => {
   const onChange = useCallback(
-    (event: ChangeEvent<HTMLTextAreaElement>) =>
+    (event: ChangeEvent<HTMLSelectElement>) =>
       onValueChange(event.target.value),
     [onValueChange]
   );
   return (
     <Flex flexDirection="column">
-      <Label htmlFor={name}>
-        {label}
-        {mandatory ? ' *' : ''}
-      </Label>
-      <TextAreaField
-        id={name}
-        name={name}
-        required={mandatory}
-        onChange={onChange}
-        value={value}
-      />
+      <Label htmlFor={name}>{label}</Label>
+      <SelectField id={name} name={name} value={value} onChange={onChange}>
+        {options.map(option => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </SelectField>
     </Flex>
   );
 };
 
-export default Input;
+export default Select;

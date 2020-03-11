@@ -1,13 +1,16 @@
 import styled from 'styled-components';
-import React, { FC } from 'react';
+import React, { FC, useCallback, ChangeEvent } from 'react';
 
 import * as colors from '../../style/colors';
 import Flex from './flex';
 
 interface Props {
   label: string;
+  mandatory?: boolean;
   name: string;
+  onValueChange: (value: string) => void;
   type?: string;
+  value: string;
 }
 
 const Label = styled.label`
@@ -36,11 +39,32 @@ const InputField = styled.input`
   }
 `;
 
-const Input: FC<Props> = ({ label, name, type = 'text' }) => {
+const Input: FC<Props> = ({
+  label,
+  mandatory,
+  name,
+  onValueChange,
+  type = 'text',
+  value,
+}) => {
+  const onChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => onValueChange(event.target.value),
+    [onValueChange]
+  );
   return (
     <Flex flexDirection="column">
-      <Label htmlFor={name}>{label}</Label>
-      <InputField id={name} name={name} type={type} />
+      <Label htmlFor={name}>
+        {label}
+        {mandatory ? ' *' : ''}
+      </Label>
+      <InputField
+        id={name}
+        name={name}
+        required={mandatory}
+        type={type}
+        onChange={onChange}
+        value={value}
+      />
     </Flex>
   );
 };

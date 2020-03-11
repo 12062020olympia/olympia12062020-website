@@ -24,8 +24,11 @@ const PageContent: FC<Props> = ({
       />
       <ContentContainer>
         {contentModules &&
-          contentModules.map(contentModule => (
-            <ContentModule data={contentModule!} />
+          contentModules.map((contentModule, index) => (
+            <ContentModule
+              key={contentModule?.id ?? index}
+              data={contentModule!}
+            />
           ))}
       </ContentContainer>
     </>

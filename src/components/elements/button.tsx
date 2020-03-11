@@ -4,7 +4,7 @@ import * as colors from '../../style/colors';
 
 interface Props {
   buttonType?: 'primary' | 'secondary';
-  onClick: () => void;
+  onClick?: () => void;
   label: string;
   type?: 'submit' | 'button';
 }
