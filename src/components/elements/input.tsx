@@ -60,6 +60,7 @@ const Input: FC<Props> = ({
       <InputField
         id={name}
         name={name}
+        aria-required={mandatory}
         required={mandatory}
         type={type}
         onChange={onChange}

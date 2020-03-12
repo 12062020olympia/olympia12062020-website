@@ -15,6 +15,7 @@ import ContentfulRichText from '../contentfulRichText';
 import Flex from '../elements/flex';
 import Title from '../elements/title';
 import IconButton from '../elements/iconButton';
+import { useIntl } from 'gatsby-plugin-intl';
 
 interface Props {
   data: ExpapandableColorfulInformationFragment;
@@ -57,7 +58,7 @@ const ContentWrapper = styled.div`
 
 export const ExpapandableColorful: FC<Props> = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const intl = useIntl();
   return (
     <Container>
       <TitleRow
@@ -71,6 +72,7 @@ export const ExpapandableColorful: FC<Props> = ({ data }) => {
           Icon={ArrowIcon}
           onClick={() => setIsOpen(!isOpen)}
           isOpen={isOpen}
+          ariaLabel={intl.formatMessage({ id: 'iconButton.expandContent' })}
         />
       </TitleRow>
       {isOpen && (
