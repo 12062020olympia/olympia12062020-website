@@ -10,6 +10,7 @@ import PetitionsContentContainer from './contentContainer/petitionsContentContai
 
 export enum ContentContainerAppearance {
   Petitions = 'petitions',
+  Carousel = 'carousel',
 }
 
 interface Props {
@@ -27,7 +28,7 @@ const ContentContainer: FC<Props> = ({ data }) => {
     return <PetitionsContentContainer data={data} />;
   }
 
-  if (data.appearance === 'carousel') {
+  if (data.appearance === ContentContainerAppearance.Carousel) {
     return <Carousel data={data} />;
   }
 
