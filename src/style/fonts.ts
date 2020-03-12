@@ -15,7 +15,8 @@ export const fontFaces = css`
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
-    src: url(${RobotoRegularWoff2}) format('woff2'),
+    src: local('Roboto Regular') local('Roboto-Regular')
+        url(${RobotoRegularWoff2}) format('woff2'),
       url(${RobotoRegularWoff}) format('woff');
   }
 
@@ -24,7 +25,8 @@ export const fontFaces = css`
     font-family: Roboto;
     font-style: normal;
     font-weight: bold;
-    src: url(${RobotoBoldWoff2}) format('woff2'),
+    src: local('Roboto Bold') local('Roboto-Bold') url(${RobotoBoldWoff2})
+        format('woff2'),
       url(${RobotoBoldWoff}) format('woff');
   }
 
