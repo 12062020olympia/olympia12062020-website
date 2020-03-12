@@ -31,6 +31,9 @@ export const query = graphql`
     internal {
       type
     }
+    appearance
+    cfaButtonLink
+    cfaButtonText
   }
 `;
 

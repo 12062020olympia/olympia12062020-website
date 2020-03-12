@@ -26,7 +26,7 @@ interface MenuQuery {
 
 const Container = styled.nav<{ open: boolean }>`
   align-items: start;
-  background-color: ${colors.Pink};
+  background-color: ${colors.MenuBackground};
   display: flex;
   flex-direction: column;
   height: calc(100vh - 100px);

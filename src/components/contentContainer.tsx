@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { ContentContainerInformationFragment } from '../../types/graphql-types';
 import { fontStyles } from '../style/fonts';
 import ContentBlock from './contentBlocks/contentBlock';
+import Carousel from './contentContainer/carousel';
 import PetitionsContentContainer from './contentContainer/petitionsContentContainer';
 
 export enum ContentContainerAppearance {
@@ -24,6 +25,10 @@ const CategoryHeadline = styled.h4`
 const ContentContainer: FC<Props> = ({ data }) => {
   if (data.appearance === ContentContainerAppearance.Petitions) {
     return <PetitionsContentContainer data={data} />;
+  }
+
+  if (data.appearance === 'carousel') {
+    return <Carousel data={data} />;
   }
 
   return (

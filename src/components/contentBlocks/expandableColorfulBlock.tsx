@@ -51,7 +51,7 @@ const ContentWrapper = styled.div`
   `)}
 
   ${applyMediaQueryLg(css`
-    margin: 0 ${contentMargin.lg} 40px ${contentMargin.lg};
+    padding: 0 ${contentMargin.lg} 40px ${contentMargin.lg};
   `)}
 `;
 
