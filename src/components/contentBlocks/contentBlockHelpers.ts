@@ -11,10 +11,7 @@ export function getOngoingContentBlocks(
 ): Array<ContentBlockInformationFragment> {
   const today = moment();
   const validContentBlocks = _.compact(contentBlocks);
-  const sortedContentBlocks = validContentBlocks.sort(
-    compareContentBlocksByDateRange
-  );
-  const ongoingPetitionsSteps = sortedContentBlocks.filter(cb => {
+  const ongoingPetitionsSteps = validContentBlocks.filter(cb => {
     const startDatetime = getStartDatetime(cb) || moment('1900-01-01');
     const endDatetime = getEndDatetime(cb) || moment('2100-01-01');
     return today.isAfter(startDatetime) && today.isBefore(endDatetime);
@@ -23,27 +20,6 @@ export function getOngoingContentBlocks(
     return ongoingPetitionsSteps;
   }
   return [];
-}
-
-function compareContentBlocksByDateRange(
-  cb1: ContentBlockInformationFragment,
-  cb2: ContentBlockInformationFragment
-) {
-  const startDatetime1 = getStartDatetime(cb1) || moment('1900-01-01');
-  const startDatetime2 = getStartDatetime(cb2) || moment('1900-01-01');
-  if (startDatetime1 < startDatetime2) {
-    return 1;
-  } else if (startDatetime1 > startDatetime2) {
-    return -1;
-  }
-  const endDatetime1 = getEndDatetime(cb1) || moment('2100-01-01');
-  const endDatetime2 = getEndDatetime(cb2) || moment('2100-01-01');
-  if (endDatetime1 < endDatetime2) {
-    return 1;
-  } else if (endDatetime1 > endDatetime2) {
-    return -1;
-  }
-  return 0;
 }
 
 export function getStartDatetime(
