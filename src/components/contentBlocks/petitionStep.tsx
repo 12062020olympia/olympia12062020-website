@@ -8,7 +8,6 @@ import { fontStyles } from '../../style/fonts';
 import ButtonLink, { ButtonType } from '../elements/buttonLink';
 import IconButton from '../elements/iconButton';
 
-
 export interface PetitionStepProps {
   buttonLabel?: string;
   buttonLink?: string;
@@ -32,7 +31,7 @@ const OuterContainer = styled.div<{ isExpanded: boolean }>`
   position: relative;
 
   :not(:last-child) {
-    padding-bottom: ${({ isExpanded }) => isExpanded ? '16px' : '8px'};
+    padding-bottom: ${({ isExpanded }) => (isExpanded ? '16px' : '8px')};
   }
 
   :first-child > ${CardLine} {
@@ -127,14 +126,16 @@ const CardExpandContainer = styled.div`
 
 const Subtitle = styled.p<{ isHighlighted: boolean }>`
   ${fontStyles.cardSubtitle}
-  color: ${({ isHighlighted }) => isHighlighted ? colors.Grey900 : colors.Grey600};
+  color: ${({ isHighlighted }) =>
+    isHighlighted ? colors.Grey900 : colors.Grey600};
   margin-block-end: 0;
   margin-block-start: 0;
 `;
 
 const Title = styled.h5<{ isHighlighted: boolean }>`
   ${fontStyles.cardTitle}
-  color: ${({ isHighlighted }) => isHighlighted ? colors.Grey900 : colors.Grey600};
+  color: ${({ isHighlighted }) =>
+    isHighlighted ? colors.Grey900 : colors.Grey600};
   margin-block-end: 0;
   margin-block-start: 0;
 `;
@@ -155,7 +156,7 @@ const PetitionStep = ({
   isExpanded: initialIsExpanded = false,
   isHighlighted = false,
   subtitle,
-  title
+  title,
 }: PetitionStepProps) => {
   const [isExpanded, setIsExpanded] = useState(initialIsExpanded);
   return (
@@ -171,7 +172,11 @@ const PetitionStep = ({
             </TitleContainer>
             {buttonLabel && buttonLink && (
               <ActionsContainer>
-                <ButtonLink buttonType={buttonType} label={buttonLabel} href={buttonLink}/>
+                <ButtonLink
+                  buttonType={buttonType}
+                  label={buttonLabel}
+                  href={buttonLink}
+                />
               </ActionsContainer>
             )}
           </TitleWithActionsContainer>
@@ -179,15 +184,13 @@ const PetitionStep = ({
             <ExpandButton
               Icon={ExpandIcon}
               isExpanded={isExpanded}
-              onClick={() => { setIsExpanded(!isExpanded) }}
+              onClick={() => {
+                setIsExpanded(!isExpanded);
+              }}
             />
           </CardExpandContainer>
         </CardHeader>
-        {isExpanded && (
-          <CardContent>
-            {contentComponent}
-          </CardContent>
-        )}
+        {isExpanded && <CardContent>{contentComponent}</CardContent>}
       </Card>
     </OuterContainer>
   );

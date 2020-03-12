@@ -24,5 +24,9 @@
     "subject": "Subject",
     "message": "Message",
     "send": "Send"
+  },
+  "date": {
+    "beforeDate": "Before the {date}",
+    "afterDate": "After the {date}"
   }
 }

@@ -12,14 +12,19 @@ export interface PetitionsContentBlockProps {
   isOngoing: boolean;
 }
 
-const PetitionsContentBlock = ({ data, isOngoing }: PetitionsContentBlockProps) => {
+const PetitionsContentBlock = ({
+  data,
+  isOngoing,
+}: PetitionsContentBlockProps) => {
   const intl = useIntl();
   return (
     <PetitionStep
-      buttonLabel={data.cfaButtonText || undefined}
-      buttonLink={data.cfaButtonLink || undefined}
-      buttonType={data.cfaButtonType as ButtonType || undefined}
-      contentComponent={<ContentfulRichText document={data.richText && data.richText.json} />}
+      buttonLabel={data.cfaButtonText || undefined}
+      buttonLink={data.cfaButtonLink || undefined}
+      buttonType={(data.cfaButtonType as ButtonType) || undefined}
+      contentComponent={
+        <ContentfulRichText document={data.richText && data.richText.json} />
+      }
       isHighlighted={isOngoing}
       isExpanded={isOngoing}
       subtitle={formatDateRange(intl, data.startDate, data.endDate)}

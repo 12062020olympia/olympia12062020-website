@@ -26,13 +26,13 @@ const ModulesContainer = styled.div``;
 const PetitionsContentContainer = ({
   data,
 }: PetitionsContentContainerProps) => {
-  const ongoingContentBlocks = getOngoingContentBlocks(data.contentModules || []);
+  const ongoingContentBlocks = getOngoingContentBlocks(
+    data.contentModules || []
+  );
   const ongoingContentBlocksIds = ongoingContentBlocks.map(cb => cb.id);
   return (
     <Container>
-      {data.title && (
-        <Headline>{data.title}</Headline>
-      )}
+      {data.title && <Headline>{data.title}</Headline>}
       <ModulesContainer>
         {data.contentModules?.map(cm => (
           <PetitionsContentBlock
