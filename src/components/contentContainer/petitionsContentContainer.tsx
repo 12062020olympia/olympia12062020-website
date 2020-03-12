@@ -9,28 +9,30 @@ export interface PetitionsContentContainerProps {
   data: ContentContainerInformationFragment;
 }
 
-const ContainerHeadline = styled.h4`
-  ${fontStyles.smallHeadline}
-`;
-
-const ModulesContainer = styled.div`
+const Container = styled.div`
   margin: 0 auto;
   max-width: 1080px;
   padding: 0 20px;
 `;
 
+const Headline = styled.h4`
+  ${fontStyles.smallHeadline}
+`;
+
+const ModulesContainer = styled.div``;
+
 const PetitionsContentContainer = ({
   data,
 }: PetitionsContentContainerProps) => {
   return (
-    <>
-      <ContainerHeadline>{data.title}</ContainerHeadline>
+    <Container>
+      <Headline>{data.title}</Headline>
       <ModulesContainer>
         {data.contentModules?.map(cm => (
           <PetitionsContentBlock data={cm!} key={cm?.id} />
         ))}
       </ModulesContainer>
-    </>
+    </Container>
   );
 };
 
