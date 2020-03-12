@@ -27,6 +27,7 @@ export const query = graphql`
     ...DefaultContentBlockInformation
     ...ExpandableContentBlockInformation
     ...ExpapandableColorfulInformation
+    id
     internal {
       type
     }

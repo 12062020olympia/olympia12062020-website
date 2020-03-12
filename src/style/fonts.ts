@@ -47,6 +47,7 @@ export const families = {
 };
 
 export type TitleType =
+  | 'cardSubtitle'
   | 'pageTitle'
   | 'navTitle'
   | 'footerTitle'
@@ -61,6 +62,7 @@ export type ParagraphType = 'large' | 'normal' | 'small' | 'tiny';
 export type FontType = TitleType | ParagraphType;
 
 const fontSizes: Record<FontType, number> = {
+  cardSubtitle: 16,
   navTitle: 32,
   footerTitle: 22,
   pageTitle: 16,
@@ -77,6 +79,7 @@ const fontSizes: Record<FontType, number> = {
 };
 
 const fontSizesDesktop: Record<FontType, number> = {
+  cardSubtitle: 28,
   navTitle: 58,
   footerTitle: 28,
   pageTitle: 16,
@@ -103,6 +106,13 @@ function applyFontSize(type: FontType) {
 }
 
 export const fontStyles: Record<FontType | string, any> = {
+  cardSubtitle: css`
+    ${applyFontSize('cardSubtitle')}
+    font-family: ${families.default}, ${families.fallback};
+    font-style: normal;
+    font-weight: normal;
+    line-height: 140%;
+  `,
   navTitle: css`
     ${applyFontSize('navTitle')}
     font-family: ${families.brand}, ${families.fallback};

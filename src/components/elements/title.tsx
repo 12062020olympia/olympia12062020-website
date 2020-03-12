@@ -9,6 +9,7 @@ interface Props {
 }
 
 const tag: Record<TitleType, keyof JSX.IntrinsicElements> = {
+  cardSubtitle: 'p',
   navTitle: 'span',
   pageTitle: 'h2',
   footerTitle: 'span',

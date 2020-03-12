@@ -44,13 +44,15 @@ const DefaultContentBlock: FC<Props> = ({ data }) => {
 
 export const query = graphql`
   fragment DefaultContentBlockInformation on ContentfulContentBlock {
-    title
-    slug
     appearance
     backgroundColor
+    endDate
     richText: content {
       json
     }
+    slug
+    startDate
+    title
   }
 `;
 

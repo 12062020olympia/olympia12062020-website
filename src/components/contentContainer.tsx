@@ -3,9 +3,15 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import { ContentContainerInformationFragment } from '../../types/graphql-types';
+import Title from './elements/title';
 import ContentBlock from './contentBlocks/contentBlock';
 import Carousel from './contentContainer/carousel';
-import Title from './elements/title';
+import PetitionsContentContainer from './contentContainer/petitionsContentContainer';
+
+export enum ContentContainerAppearance {
+  Petitions = 'petitions',
+  Carousel = 'carousel',
+}
 
 interface Props {
   data: ContentContainerInformationFragment;
@@ -14,9 +20,14 @@ interface Props {
 const Container = styled.div``;
 
 const ContentContainer: FC<Props> = ({ data }) => {
-  if (data.appearance === 'carousel') {
+  if (data.appearance === ContentContainerAppearance.Petitions) {
+    return <PetitionsContentContainer data={data} />;
+  }
+
+  if (data.appearance === ContentContainerAppearance.Carousel) {
     return <Carousel data={data} />;
   }
+
   return (
     <>
       <Container>
