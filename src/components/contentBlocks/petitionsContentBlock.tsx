@@ -1,13 +1,14 @@
 import { useIntl } from 'gatsby-plugin-intl';
 import React from 'react';
 
-import { DefaultContentBlockInformationFragment } from '../../../types/graphql-types';
+import { ContentBlockInformationFragment } from '../../../types/graphql-types';
 import { formatDateRange } from '../../formatHelpers';
 import ContentfulRichText from '../contentfulRichText';
+import { ButtonType } from '../elements/buttonLink';
 import PetitionStep from './petitionStep';
 
 export interface PetitionsContentBlockProps {
-  data: DefaultContentBlockInformationFragment;
+  data: ContentBlockInformationFragment;
   isOngoing: boolean;
 }
 
@@ -15,6 +16,9 @@ const PetitionsContentBlock = ({ data, isOngoing }: PetitionsContentBlockProps) 
   const intl = useIntl();
   return (
     <PetitionStep
+      buttonLabel={data.cfaButtonText || undefined}
+      buttonLink={data.cfaButtonLink || undefined}
+      buttonType={data.cfaButtonType as ButtonType || undefined}
       contentComponent={<ContentfulRichText document={data.richText && data.richText.json} />}
       isHighlighted={isOngoing}
       isExpanded={isOngoing}

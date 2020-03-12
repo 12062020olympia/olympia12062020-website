@@ -5,10 +5,14 @@ import ExpandIcon from '../../icons/icon-expand.svg';
 import * as colors from '../../style/colors';
 import { applyMediaQueryMd } from '../../style/dimensions';
 import { fontStyles } from '../../style/fonts';
+import ButtonLink, { ButtonType } from '../elements/buttonLink';
 import IconButton from '../elements/iconButton';
 
 
 export interface PetitionStepProps {
+  buttonLabel?: string;
+  buttonLink?: string;
+  buttonType?: ButtonType;
   contentComponent: ReactNode;
   isExpanded?: boolean;
   isHighlighted?: boolean;
@@ -81,17 +85,31 @@ const CardContent = styled.div`
 
 const TitleWithActionsContainer = styled.div`
   display: flex;
+  flex-direction: column;
   flex: 1;
+  padding: 15px 0 16px 28px;
+
+  ${applyMediaQueryMd(css`
+    flex-direction: row;
+    padding: 15px 0 19px 88px;
+  `)}
 `;
 
 const TitleContainer = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 15px 0 18px 28px;
+`;
+
+const ActionsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin: 8px 0 0 0;
 
   ${applyMediaQueryMd(css`
-    padding: 15px 0 19px 88px;
+    flex-direction: column;
+    margin: 0 0 0 16px;
+    padding: 15px 0 0 0;
   `)}
 `;
 
@@ -130,6 +148,9 @@ const ExpandButton = styled(IconButton)<{ isExpanded: boolean }>`
 `;
 
 const PetitionStep = ({
+  buttonLabel,
+  buttonLink,
+  buttonType,
   contentComponent,
   isExpanded: initialIsExpanded = false,
   isHighlighted = false,
@@ -148,6 +169,11 @@ const PetitionStep = ({
               <Subtitle isHighlighted={isHighlighted}>{subtitle}</Subtitle>
               <Title isHighlighted={isHighlighted}>{title}</Title>
             </TitleContainer>
+            {buttonLabel && buttonLink && (
+              <ActionsContainer>
+                <ButtonLink buttonType={buttonType} label={buttonLabel} href={buttonLink}/>
+              </ActionsContainer>
+            )}
           </TitleWithActionsContainer>
           <CardExpandContainer>
             <ExpandButton

@@ -2,8 +2,10 @@ import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 import * as colors from '../../style/colors';
 
+export type ButtonType = 'primary' | 'secondary';
+
 interface Props {
-  buttonType?: 'primary' | 'secondary';
+  buttonType?: ButtonType;
   href: string;
   label: string;
 }
