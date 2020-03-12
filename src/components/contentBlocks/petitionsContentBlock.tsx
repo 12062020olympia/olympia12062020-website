@@ -8,13 +8,16 @@ import PetitionStep from './petitionStep';
 
 export interface PetitionsContentBlockProps {
   data: DefaultContentBlockInformationFragment;
+  isOngoing: boolean;
 }
 
-const PetitionsContentBlock = ({ data }: PetitionsContentBlockProps) => {
+const PetitionsContentBlock = ({ data, isOngoing }: PetitionsContentBlockProps) => {
   const intl = useIntl();
   return (
     <PetitionStep
       contentComponent={<ContentfulRichText document={data.richText && data.richText.json} />}
+      isHighlighted={isOngoing}
+      isExpanded={isOngoing}
       subtitle={formatDateRange(intl, data.startDate, data.endDate)}
       title={data.title || ''}
     />

@@ -1,6 +1,8 @@
+import _ from 'lodash';
 import React from 'react';
 import styled from 'styled-components';
 
+import { getOngoingContentBlocks } from '../contentBlocks/contentBlockHelpers';
 import PetitionsContentBlock from '../contentBlocks/petitionsContentBlock';
 import { ContentContainerInformationFragment } from '../../../types/graphql-types';
 import { fontStyles } from '../../style/fonts';
@@ -24,6 +26,8 @@ const ModulesContainer = styled.div``;
 const PetitionsContentContainer = ({
   data,
 }: PetitionsContentContainerProps) => {
+  const ongoingContentBlocks = getOngoingContentBlocks(data.contentModules || []);
+  const ongoingContentBlocksIds = ongoingContentBlocks.map(cb => cb.id);
   return (
     <Container>
       {data.title && (
@@ -31,7 +35,11 @@ const PetitionsContentContainer = ({
       )}
       <ModulesContainer>
         {data.contentModules?.map(cm => (
-          <PetitionsContentBlock data={cm!} key={cm?.id} />
+          <PetitionsContentBlock
+            data={cm!}
+            key={cm?.id}
+            isOngoing={_.includes(ongoingContentBlocksIds, cm?.id)}
+          />
         ))}
       </ModulesContainer>
     </Container>

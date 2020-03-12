@@ -10,6 +10,7 @@ import IconButton from '../elements/iconButton';
 
 export interface PetitionStepProps {
   contentComponent: ReactNode;
+  isExpanded?: boolean;
   isHighlighted?: boolean;
   subtitle: string;
   title: string;
@@ -128,8 +129,14 @@ const ExpandButton = styled(IconButton)<{ isExpanded: boolean }>`
   }
 `;
 
-const PetitionStep = ({ contentComponent, isHighlighted = false, subtitle, title }: PetitionStepProps) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+const PetitionStep = ({
+  contentComponent,
+  isExpanded: initialIsExpanded = false,
+  isHighlighted = false,
+  subtitle,
+  title
+}: PetitionStepProps) => {
+  const [isExpanded, setIsExpanded] = useState(initialIsExpanded);
   return (
     <OuterContainer isExpanded={isExpanded}>
       <CardLine />
