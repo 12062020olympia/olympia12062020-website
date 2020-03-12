@@ -26,7 +26,9 @@ const PetitionsContentContainer = ({
 }: PetitionsContentContainerProps) => {
   return (
     <Container>
-      <Headline>{data.title}</Headline>
+      {data.title && (
+        <Headline>{data.title}</Headline>
+      )}
       <ModulesContainer>
         {data.contentModules?.map(cm => (
           <PetitionsContentBlock data={cm!} key={cm?.id} />
