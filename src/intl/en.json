@@ -25,6 +25,11 @@
     "message": "Message",
     "send": "Send"
   },
+  "iconButton": {
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "expandContent": "Open content"
+  },
   "date": {
     "beforeDate": "Before the {date}",
     "afterDate": "After the {date}"

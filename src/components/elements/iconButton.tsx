@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import * as colors from '../../style/colors';
 
 interface Props {
+  ariaLabel?: string;
   className?: string;
   Icon: ComponentType<{ style?: any }>;
   onClick: () => void;

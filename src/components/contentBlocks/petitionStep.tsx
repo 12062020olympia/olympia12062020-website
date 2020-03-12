@@ -7,6 +7,7 @@ import { applyMediaQueryMd } from '../../style/dimensions';
 import { fontStyles } from '../../style/fonts';
 import ButtonLink, { ButtonType } from '../elements/buttonLink';
 import IconButton from '../elements/iconButton';
+import Title from '../elements/title';
 
 export interface PetitionStepProps {
   buttonLabel?: string;
@@ -132,12 +133,9 @@ const Subtitle = styled.p<{ isHighlighted: boolean }>`
   margin-block-start: 0;
 `;
 
-const Title = styled.h5<{ isHighlighted: boolean }>`
-  ${fontStyles.cardTitle}
+const CardTitle = styled(Title)<{ isHighlighted: boolean }>`
   color: ${({ isHighlighted }) =>
     isHighlighted ? colors.Grey900 : colors.Grey600};
-  margin-block-end: 0;
-  margin-block-start: 0;
 `;
 
 const ExpandButton = styled(IconButton)<{ isExpanded: boolean }>`
@@ -168,7 +166,11 @@ const PetitionStep = ({
           <TitleWithActionsContainer>
             <TitleContainer>
               <Subtitle isHighlighted={isHighlighted}>{subtitle}</Subtitle>
-              <Title isHighlighted={isHighlighted}>{title}</Title>
+              <CardTitle
+                type="h4"
+                isHighlighted={isHighlighted}
+                title={title}
+              />
             </TitleContainer>
             {buttonLabel && buttonLink && (
               <ActionsContainer>

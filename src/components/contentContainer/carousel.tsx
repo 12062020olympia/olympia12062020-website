@@ -125,7 +125,7 @@ const Carousel: FC<Props> = ({ data }) => {
           backgroundColor={c?.backgroundColor}
         >
           <Title type="pageTitle" title={data.title!} />
-          <Title type="headline" title={c?.title!} />
+          <Title type="h3" title={c?.title!} />
           <ContentfulRichText document={c?.richText && c.richText.json} />
           {c?.cfaButtonText && c.cfaButtonLink && (
             <ButtonLink href={c.cfaButtonLink} label={c.cfaButtonText} />

@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import { ContentContainerInformationFragment } from '../../types/graphql-types';
-import { fontStyles } from '../style/fonts';
+import Title from './elements/title';
 import ContentBlock from './contentBlocks/contentBlock';
 import Carousel from './contentContainer/carousel';
 import PetitionsContentContainer from './contentContainer/petitionsContentContainer';
@@ -19,10 +19,6 @@ interface Props {
 
 const Container = styled.div``;
 
-const CategoryHeadline = styled.h4`
-  ${fontStyles.smallHeadline}
-`;
-
 const ContentContainer: FC<Props> = ({ data }) => {
   if (data.appearance === ContentContainerAppearance.Petitions) {
     return <PetitionsContentContainer data={data} />;
@@ -35,7 +31,7 @@ const ContentContainer: FC<Props> = ({ data }) => {
   return (
     <>
       <Container>
-        <CategoryHeadline>{data.title}</CategoryHeadline>
+        <Title type="h4" title={data.title!} />
       </Container>
       {data.contentModules?.map(c => (
         <ContentBlock data={c!} />

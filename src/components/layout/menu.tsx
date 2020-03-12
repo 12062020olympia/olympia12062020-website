@@ -1,5 +1,5 @@
 import { graphql, useStaticQuery } from 'gatsby';
-import { Link } from 'gatsby-plugin-intl';
+import { Link, useIntl } from 'gatsby-plugin-intl';
 import styled, { css } from 'styled-components';
 import React, { FC } from 'react';
 
@@ -78,10 +78,12 @@ const SocialMediaIconContainer = styled(Flex)`
 `;
 
 const Menu: FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => {
+  const intl = useIntl();
   const { contentfulMenu: menu } = useStaticQuery<MenuQuery>(query);
   return (
-    <Container open={isMenuOpen}>
+    <Container open={isMenuOpen} aria-hidden={!isMenuOpen}>
       <CloseButton
+        ariaLabel={intl.formatMessage({ id: 'iconButton.closeMenu' })}
         Icon={CloseIcon}
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       />

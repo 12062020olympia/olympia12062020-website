@@ -11,6 +11,7 @@ import {
   contentMargin,
 } from '../../style/dimensions';
 import Button from '../elements/button';
+import Paragraph from '../elements/paragraph';
 import Title from '../elements/title';
 
 interface Props {
@@ -29,8 +30,6 @@ const CookieContainer = styled.div`
   right: 0;
 
   ${applyMediaQueryMd(css`
-    font-size: 16px;
-    line-height: 150%;
     padding: 25px ${contentMargin.md};
   `)}
 
@@ -40,6 +39,10 @@ const CookieContainer = styled.div`
 `;
 
 const CookieTitle = styled(Title)`
+  color: ${colors.White};
+`;
+
+const CookieText = styled(Paragraph)`
   color: ${colors.White};
 `;
 
@@ -67,8 +70,10 @@ const CookieBanner: FC<Props> = ({
           <Container>
             <Row>
               <Col xs={12}>
-                <CookieTitle title="Cookies" type="smallHeadline" />
-                {intl.formatMessage({ id: 'cookie.text' })}
+                <CookieTitle title="Cookies" type="h5" />
+                <CookieText type="small">
+                  {intl.formatMessage({ id: 'cookie.text' })}
+                </CookieText>
               </Col>
               <Col xs={12}>
                 <Button

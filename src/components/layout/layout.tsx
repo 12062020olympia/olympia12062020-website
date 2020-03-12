@@ -31,7 +31,31 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button {
-    font-family: ${families.default};
+    font-family: ${families.default}, ${families.fallback};
+  }
+
+  h1 {
+    ${fontStyles.h1}
+  }
+
+  h2 {
+    ${fontStyles.h2}
+  }
+
+  h3 {
+    ${fontStyles.h3}
+  }
+
+  h4 {
+    ${fontStyles.h4}
+  }
+
+  h5 {
+    ${fontStyles.h5}
+  }
+
+  p { 
+    ${fontStyles.normal}
   }
 `;
 
