@@ -17,11 +17,18 @@ const PetitionsContentBlock = ({
   isOngoing,
 }: PetitionsContentBlockProps) => {
   const intl = useIntl();
+  const buttonType = (data.cfaButtonType as ButtonType) || undefined;
+  const buttonLabel = (buttonType === 'primary' && !isOngoing)
+    ? undefined
+    : data.cfaButtonText || undefined;
+  const buttonLink = (buttonType === 'primary' && !isOngoing)
+    ? undefined
+    : data.cfaButtonLink || undefined;
   return (
     <PetitionStep
-      buttonLabel={data.cfaButtonText || undefined}
-      buttonLink={data.cfaButtonLink || undefined}
-      buttonType={(data.cfaButtonType as ButtonType) || undefined}
+      buttonLabel={buttonLabel}
+      buttonLink={buttonLink}
+      buttonType={buttonType}
       contentComponent={
         <ContentfulRichText document={data.richText && data.richText.json} />
       }
