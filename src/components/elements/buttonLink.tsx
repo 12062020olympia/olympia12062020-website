@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 import * as colors from '../../style/colors';
 
-export type ButtonType = 'primary' | 'secondary';
+export type ButtonType = 'primary' | 'secondary' | 'complementary';
 
 interface Props {
   buttonType?: ButtonType;
@@ -10,7 +10,7 @@ interface Props {
   label: string;
 }
 
-const StyledLink = styled.a<{ buttonType: 'primary' | 'secondary' }>`
+const StyledLink = styled.a<{ buttonType: ButtonType }>`
   background-color: ${colors.ButtonColor};
   border: 1px solid ${colors.ButtonColor};
   font-size: 18px;
@@ -28,17 +28,29 @@ const StyledLink = styled.a<{ buttonType: 'primary' | 'secondary' }>`
   }
 
   :focus:not(:active) {
-    border: 2px solid ${colors.ButtonFocusBorderColor};
+    border: 1px solid ${colors.ButtonFocusBorderColor};
   }
 
   ${({ buttonType }) =>
     buttonType === 'secondary' &&
     css`
       background-color: ${colors.ButtonSecondaryColor};
-      color: ${colors.BrandPrimary500};
+      border-color: ${colors.Grey700};
+      color: ${colors.Grey900};
 
       :hover {
         background-color: ${colors.ButtonSecondaryHoverColor};
+      }
+    `}
+
+  ${({ buttonType }) =>
+    buttonType === 'complementary' &&
+    css`
+      background-color: ${colors.ButtonComplementaryColor};
+      color: ${colors.BrandPrimary500};
+
+      :hover {
+        background-color: ${colors.ButtonComplementaryHoverColor};
       }
     `}
 `;
