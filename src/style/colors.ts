@@ -68,9 +68,11 @@ export const MenuBackground = Apricot;
 export const PageTitleBackground = Dandelion;
 
 export const contentColors: Record<string, string> = {
-  pigSkin: PigSkin,
-  grey: Grey350,
-  capeHope: CapeHope,
-  freshDough: FreshDough,
   apricot: Apricot,
+  pastelYellow: Dandelion,
+  mediumBeige: PigSkin,
+  lightBeige: FreshDough,
+  canneryPark: CanneryPark,
+  grey: Grey350,
+  lightGrey: Grey200,
 };

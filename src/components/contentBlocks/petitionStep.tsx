@@ -6,7 +6,7 @@ import * as colors from '../../style/colors';
 import { applyMediaQueryMd } from '../../style/dimensions';
 import { fontStyles } from '../../style/fonts';
 import IconButton from '../elements/iconButton';
-
+import Title from '../elements/title';
 
 export interface PetitionStepProps {
   contentComponent: ReactNode;
@@ -27,7 +27,7 @@ const OuterContainer = styled.div<{ isExpanded: boolean }>`
   position: relative;
 
   :not(:last-child) {
-    padding-bottom: ${({ isExpanded }) => isExpanded ? '16px' : '8px'};
+    padding-bottom: ${({ isExpanded }) => (isExpanded ? '16px' : '8px')};
   }
 
   :first-child > ${CardLine} {
@@ -108,16 +108,15 @@ const CardExpandContainer = styled.div`
 
 const Subtitle = styled.p<{ isHighlighted: boolean }>`
   ${fontStyles.cardSubtitle}
-  color: ${({ isHighlighted }) => isHighlighted ? colors.Grey900 : colors.Grey600};
+  color: ${({ isHighlighted }) =>
+    isHighlighted ? colors.Grey900 : colors.Grey600};
   margin-block-end: 0;
   margin-block-start: 0;
 `;
 
-const Title = styled.h5<{ isHighlighted: boolean }>`
-  ${fontStyles.cardTitle}
-  color: ${({ isHighlighted }) => isHighlighted ? colors.Grey900 : colors.Grey600};
-  margin-block-end: 0;
-  margin-block-start: 0;
+const CardTitle = styled(Title)<{ isHighlighted: boolean }>`
+  color: ${({ isHighlighted }) =>
+    isHighlighted ? colors.Grey900 : colors.Grey600};
 `;
 
 const ExpandButton = styled(IconButton)<{ isExpanded: boolean }>`
@@ -128,7 +127,12 @@ const ExpandButton = styled(IconButton)<{ isExpanded: boolean }>`
   }
 `;
 
-const PetitionStep = ({ contentComponent, isHighlighted = false, subtitle, title }: PetitionStepProps) => {
+const PetitionStep = ({
+  contentComponent,
+  isHighlighted = false,
+  subtitle,
+  title,
+}: PetitionStepProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   return (
     <OuterContainer isExpanded={isExpanded}>
@@ -139,22 +143,24 @@ const PetitionStep = ({ contentComponent, isHighlighted = false, subtitle, title
           <TitleWithActionsContainer>
             <TitleContainer>
               <Subtitle isHighlighted={isHighlighted}>{subtitle}</Subtitle>
-              <Title isHighlighted={isHighlighted}>{title}</Title>
+              <CardTitle
+                type="h4"
+                isHighlighted={isHighlighted}
+                title={title}
+              />
             </TitleContainer>
           </TitleWithActionsContainer>
           <CardExpandContainer>
             <ExpandButton
               Icon={ExpandIcon}
               isExpanded={isExpanded}
-              onClick={() => { setIsExpanded(!isExpanded) }}
+              onClick={() => {
+                setIsExpanded(!isExpanded);
+              }}
             />
           </CardExpandContainer>
         </CardHeader>
-        {isExpanded && (
-          <CardContent>
-            {contentComponent}
-          </CardContent>
-        )}
+        {isExpanded && <CardContent>{contentComponent}</CardContent>}
       </Card>
     </OuterContainer>
   );

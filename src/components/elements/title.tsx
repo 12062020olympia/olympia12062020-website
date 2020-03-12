@@ -10,13 +10,14 @@ interface Props {
 
 const tag: Record<TitleType, keyof JSX.IntrinsicElements> = {
   cardSubtitle: 'p',
-  cardTitle: 'h5',
-  navTitle: 'h1',
+  navTitle: 'span',
   pageTitle: 'h2',
-  pageHeader: 'h3',
-  headline: 'h4',
-  smallHeadline: 'h5',
   footerTitle: 'span',
+  h1: 'h1',
+  h2: 'h2',
+  h3: 'h3',
+  h4: 'h4',
+  h5: 'h5',
 };
 
 const StyledTitle = styled.h1<{ type: TitleType }>`
@@ -25,7 +26,7 @@ const StyledTitle = styled.h1<{ type: TitleType }>`
   margin-block-end: 0;
 `;
 
-const Title: FC<Props> = ({ className, type = 'headline', title }) => {
+const Title: FC<Props> = ({ className, type = 'h3', title }) => {
   return (
     <StyledTitle as={tag[type]} type={type} className={className}>
       {title}

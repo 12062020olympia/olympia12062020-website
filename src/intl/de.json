@@ -24,5 +24,10 @@
     "subject": "Betreff",
     "message": "Nachricht",
     "send": "Senden"
+  },
+  "iconButton": {
+    "openMenu": "Öffne das Menü",
+    "closeMenu": "Schließe das Menü",
+    "expandContent": "Öffne den Inhalt"
   }
 }

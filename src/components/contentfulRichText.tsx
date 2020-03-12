@@ -7,7 +7,7 @@ import {
   documentToReactComponents,
   Options,
 } from '@contentful/rich-text-react-renderer';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import * as colors from '../style/colors';
 
 type Props = {
