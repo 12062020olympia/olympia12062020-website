@@ -92,7 +92,7 @@ const PageTitle: FC<Props> = ({ backgroundPicture, title, header }) => (
   <Container fluid={backgroundPicture?.fluid ?? undefined}>
     <TitleContainer>
       <Title type="pageTitle" title={title!} />
-      <Title type="pageHeader" title={header!} />
+      <Title type="h1" title={header!} />
     </TitleContainer>
   </Container>
 );

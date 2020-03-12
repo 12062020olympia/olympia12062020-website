@@ -47,35 +47,49 @@ export const families = {
 };
 
 export type TitleType =
-  | 'pageHeader'
   | 'pageTitle'
   | 'navTitle'
   | 'footerTitle'
-  | 'headline'
-  | 'smallHeadline';
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5';
 
-export type ParagraphType = 'normal';
+export type ParagraphType = 'large' | 'normal' | 'small' | 'tiny';
 
 export type FontType = TitleType | ParagraphType;
 
 const fontSizes: Record<FontType, number> = {
-  headline: 28,
   navTitle: 32,
   footerTitle: 22,
-  normal: 16,
   pageTitle: 16,
-  pageHeader: 42,
-  smallHeadline: 22,
+  h1: 42,
+  h2: 36,
+  h3: 28,
+  h4: 20,
+  h5: 16,
+
+  large: 20,
+  normal: 16,
+  small: 14,
+  tiny: 12,
 };
 
 const fontSizesDesktop: Record<FontType, number> = {
-  headline: 34,
   navTitle: 58,
   footerTitle: 28,
-  normal: 21,
   pageTitle: 16,
-  pageHeader: 84,
-  smallHeadline: 34,
+  h1: 84,
+  h2: 48,
+  h3: 36,
+  h4: 28,
+  h5: 20,
+
+  large: 28,
+  normal: 20,
+  small: 16,
+  tiny: 12,
 };
 
 function applyFontSize(type: FontType) {
@@ -113,38 +127,79 @@ export const fontStyles: Record<FontType | string, any> = {
     line-height: 150%;
     text-transform: uppercase;
   `,
-  pageHeader: css`
-    ${applyFontSize('pageHeader')}
+  h1: css`
+    ${applyFontSize('h1')}
     font-family: ${families.brand}, ${families.fallback};
-    font-size: ${fontSizes.pageHeader}px;
     font-style: normal;
     font-weight: bold;
-    line-height: 130%;
+    line-height: 120%;
+
+    ${applyMediaQueryMd(css`
+      line-height: 125%;
+    `)}
   `,
-  normal: css`
-    ${applyFontSize('normal')}
-    color: ${colors.Grey900};
+  h2: css`
+    ${applyFontSize('h2')}
     font-family: ${families.default}, ${families.fallback};
-    font-size: 16px;
-    font-style: normal;
-    line-height: 150%;
-    font-weight: normal;
-  `,
-  headline: css`
-    ${applyFontSize('headline')}
-    font-family: ${families.default}, ${families.fallback};
-    font-size: 28px;
     font-style: normal;
     font-weight: bold;
     line-height: 125%;
   `,
-  smallHeadline: css`
-    ${applyFontSize('smallHeadline')}
-    color: ${colors.Grey900};
+
+  h3: css`
+    ${applyFontSize('h3')}
     font-family: ${families.default}, ${families.fallback};
-    font-size: 22px;
     font-style: normal;
     font-weight: bold;
     line-height: 140%;
+    ${applyMediaQueryMd(css`
+      line-height: 130%;
+    `)}
+  `,
+  h4: css`
+    ${applyFontSize('h4')}
+    font-family: ${families.default}, ${families.fallback};
+    font-style: normal;
+    font-weight: bold;
+    line-height: 140%;
+  `,
+  h5: css`
+    ${applyFontSize('h5')}
+    font-family: ${families.default}, ${families.fallback};
+    font-style: normal;
+    font-weight: bold;
+    line-height: 140%;
+  `,
+  large: css`
+    ${applyFontSize('large')}
+    font-family: ${families.default}, ${families.fallback};
+    font-style: normal;
+    line-height: 150%;
+    font-weight: normal;
+
+    ${applyMediaQueryMd(css`
+      line-height: 140%;
+    `)}
+  `,
+  normal: css`
+    ${applyFontSize('normal')}
+    font-family: ${families.default}, ${families.fallback};
+    font-style: normal;
+    line-height: 150%;
+    font-weight: normal;
+  `,
+  small: css`
+    ${applyFontSize('small')}
+    font-family: ${families.default}, ${families.fallback};
+    font-style: normal;
+    line-height: 150%;
+    font-weight: normal;
+  `,
+  tiny: css`
+    ${applyFontSize('normal')}
+    font-family: ${families.default}, ${families.fallback};
+    font-style: normal;
+    line-height: 150%;
+    font-weight: normal;
   `,
 };

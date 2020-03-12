@@ -36,7 +36,7 @@ const Container = styled.div<{ backgroundColor: string | null | undefined }>`
 const DefaultContentBlock: FC<Props> = ({ data }) => {
   return (
     <Container backgroundColor={data.backgroundColor}>
-      <Title title={data.title!} type="headline" />
+      <Title title={data.title!} type="h3" />
       <ContentfulRichText document={data.richText && data.richText.json} />
     </Container>
   );

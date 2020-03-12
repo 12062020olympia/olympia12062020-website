@@ -67,7 +67,7 @@ export const ExpapandableColorful: FC<Props> = ({ data }) => {
         justifyContent="space-between"
         role="button"
       >
-        <Title type="headline" title={data.title!} />
+        <Title type="h3" title={data.title!} />
         <ArrowButton
           Icon={ArrowIcon}
           onClick={() => setIsOpen(!isOpen)}
