@@ -20,23 +20,29 @@ interface Props {
 const Container = styled.div<{ backgroundColor: string | null | undefined }>`
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? colors.contentColors[backgroundColor] : 'transparent'};
-  padding: 20px ${contentMargin.sm};
-  margin: 40px auto 0 auto;
+  padding: 20px ${contentMargin.sm} 24px ${contentMargin.sm};
+  margin: 20px auto 0 auto;
   max-width: ${contentMaxWidth};
 
   ${applyMediaQueryMd(css`
-    padding: 20px ${contentMargin.md};
+    padding: 20px ${contentMargin.md} 40px ${contentMargin.md};
   `)}
 
   ${applyMediaQueryLg(css`
-    padding: 20px ${contentMargin.lg};
+    padding: 20px ${contentMargin.lg} 40px ${contentMargin.lg};
   `)}
+`;
+
+const TitleContainer = styled.div`
+  padding: 20px 0 0 0;
 `;
 
 const DefaultContentBlock: FC<Props> = ({ data }) => {
   return (
     <Container backgroundColor={data.backgroundColor}>
-      <Title title={data.title!} type="h3" />
+      <TitleContainer>
+        <Title title={data.title!} type="h3" />
+      </TitleContainer>
       <ContentfulRichText document={data.richText && data.richText.json} />
     </Container>
   );

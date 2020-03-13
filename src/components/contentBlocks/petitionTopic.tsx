@@ -18,11 +18,13 @@ const Container = styled.div`
 
   &:last-of-type {
     padding-bottom: 80px;
-
-    ${applyMediaQueryMd(css`
-      padding-bottom: 120px;
-    `)}
   }
+
+  ${applyMediaQueryMd(css`
+    &:last-of-type {
+      padding-bottom: 120px;
+    }
+  `)}
 `;
 
 const ContentContainer = styled.div`
