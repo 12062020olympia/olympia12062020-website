@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
 import * as colors from '../../style/colors';
@@ -17,6 +17,7 @@ const HeroContainer = styled.div`
   height: ${5 * fontSizes['heroTitle'] * 0.75}px;
   overflow: hidden;
   position: absolute;
+  width: 100vw;
 
   ::before, ::after {
     background-color: ${colors.Grey200};
@@ -27,6 +28,7 @@ const HeroContainer = styled.div`
     position: absolute;
     top: 0;
     width: calc(50vw - ${largeContentMaxWidth} / 2);
+    z-index: 1;
   }
 
   ::before {
@@ -42,22 +44,36 @@ const HeroContainer = styled.div`
   `)}
 `;
 
-const HeroTitle = styled.h4`
+const HeroTitleLine = styled.span<{ offset: number }>`
   ${fontStyles.heroTitle}
-  margin 0 -400px;
-  padding: 5px 0 0 0;
+  display: block;
+  height: ${fontSizes['heroTitle'] * 0.75}px;
+  margin ${({ offset }) => `0 0 0 -${offset}px`};
+  transform: translateY(5px);
+  white-space: nowrap;
 
   ${applyMediaQueryMd(css`
-    padding: 11px 0 0 0;
+    height: ${fontSizesDesktop['heroTitle'] * 0.75}px;
+    transform: translateY(11px);
   `)}
 `;
 
 const PetitionTopic: FC<PetitionTopicProps> = ({ title }) => {
-  const repeatedTitle = _.repeat(`${title} `, 20);
+  const HEADER_MAX_LINES = 5;
+  const repeatedTitle = _.repeat(`${title} `, 10);
+  const titleLineOffsets = useMemo(() => _.range(HEADER_MAX_LINES).map(() => _.random(0, 500)), []);
   return (
     <Container>
       <HeroContainer>
-        <HeroTitle>{repeatedTitle}</HeroTitle>
+        {_.range(HEADER_MAX_LINES).map((i:number) => (
+          <HeroTitleLine
+            aria-hidden
+            offset={titleLineOffsets[i]}
+            key={i}
+          >
+            {repeatedTitle}
+          </HeroTitleLine>
+        ))}
       </HeroContainer>
     </Container>
   );
