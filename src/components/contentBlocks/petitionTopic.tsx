@@ -9,6 +9,7 @@ import { fontSizes, fontSizesDesktop, fontStyles } from '../../style/fonts';
 interface PetitionTopicProps {
   contentComponent: ReactNode;
   title: string;
+  titleBackgroundColor?: string;
 }
 
 const Container = styled.div`
@@ -51,8 +52,8 @@ const Content = styled.div`
   `)}
 `;
 
-const HeroContainer = styled.div`
-  background-color: ${colors.GreenDark};
+const HeroContainer = styled.div<{ backgroundColor: string }>`
+  background-color: ${({ backgroundColor }) => backgroundColor};
   height: ${5 * fontSizes['heroTitle'] * 0.75}px;
   overflow: hidden;
   position: absolute;
@@ -97,13 +98,13 @@ const HeroTitleLine = styled.span<{ lineOffset: number }>`
   `)}
 `;
 
-const PetitionTopic: FC<PetitionTopicProps> = ({ contentComponent, title }) => {
+const PetitionTopic: FC<PetitionTopicProps> = ({ contentComponent, title, titleBackgroundColor = colors.Grey400 }) => {
   const HEADER_MAX_LINES = 5;
   const repeatedTitle = _.repeat(`${title} `, 10);
   const titleLineOffsets = useMemo(() => _.range(HEADER_MAX_LINES).map(() => _.random(0, 500)), []);
   return (
     <Container>
-      <HeroContainer>
+      <HeroContainer backgroundColor={titleBackgroundColor}>
         {_.range(HEADER_MAX_LINES).map((i:number) => (
           <HeroTitleLine
             aria-hidden

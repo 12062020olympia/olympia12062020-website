@@ -78,4 +78,8 @@ export const contentColors: Record<string, string> = {
   canneryPark: CanneryPark,
   grey: Grey350,
   lightGrey: Grey200,
+  green: GreenDark,
+  pink: Pink,
+  blue: Blue,
+  orange: Orange,
 };
