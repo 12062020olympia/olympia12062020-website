@@ -19,7 +19,7 @@ interface Props {
 
 const Container = styled.div<{ backgroundColor: string | null | undefined }>`
   background-color: ${({ backgroundColor }) =>
-    backgroundColor ? colors.contentColors[backgroundColor] : colors.White};
+    backgroundColor ? colors.contentColors[backgroundColor] : 'transparent'};
   padding: 20px ${contentMargin.sm};
   margin: 40px auto 0 auto;
   max-width: ${contentMaxWidth};
