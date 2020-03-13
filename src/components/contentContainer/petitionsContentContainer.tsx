@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import { getOngoingContentBlocks } from '../contentBlocks/contentBlockHelpers';
@@ -23,9 +23,7 @@ const Headline = styled.h4`
 
 const ModulesContainer = styled.div``;
 
-const PetitionsContentContainer = ({
-  data,
-}: PetitionsContentContainerProps) => {
+const PetitionsContentContainer: FC<PetitionsContentContainerProps> = ({ data }) => {
   const ongoingContentBlocks = getOngoingContentBlocks(
     data.contentModules || []
   );
