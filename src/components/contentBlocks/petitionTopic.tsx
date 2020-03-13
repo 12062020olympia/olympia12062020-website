@@ -19,7 +19,7 @@ const Container = styled.div`
     padding-bottom: 80px;
 
     ${applyMediaQueryMd(css`
-      padding-bottom: 180px;
+      padding-bottom: 120px;
     `)}
   }
 `;
