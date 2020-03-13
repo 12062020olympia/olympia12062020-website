@@ -3,14 +3,47 @@ import React, { FC, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
 import * as colors from '../../style/colors';
-import { applyMediaQueryMd, largeContentMaxWidth } from '../../style/dimensions';
+import { applyMediaQueryMd, contentMaxWidth, largeContentMaxWidth } from '../../style/dimensions';
 import { fontSizes, fontSizesDesktop, fontStyles } from '../../style/fonts';
 
 interface PetitionTopicProps {
   title: string;
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  background-color: ${colors.Grey200};
+  padding-bottom: 24px;
+
+  &:last-of-type {
+    padding-bottom: 80px;
+
+    ${applyMediaQueryMd(css`
+      padding-bottom: 180px;
+    `)}
+  }
+`;
+
+const ContentContainer = styled.div`
+  margin: 0 auto;
+  max-width: ${largeContentMaxWidth};
+  padding-top: ${5 * fontSizes['heroTitle'] * 0.75}px;
+
+  ${applyMediaQueryMd(css`
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: ${3 * fontSizesDesktop['heroTitle'] * 0.75}px;
+  `)}
+`;
+
+const ContentBackgroundContainer = styled.div`
+  background-color: ${colors.White};
+`;
+
+const Content = styled.div`
+  margin: 0 auto;
+  max-width: ${contentMaxWidth};
+  padding: 0 20px;
+`;
 
 const HeroContainer = styled.div`
   background-color: ${colors.GreenDark};
@@ -44,11 +77,11 @@ const HeroContainer = styled.div`
   `)}
 `;
 
-const HeroTitleLine = styled.span<{ offset: number }>`
+const HeroTitleLine = styled.span<{ lineOffset: number }>`
   ${fontStyles.heroTitle}
   display: block;
   height: ${fontSizes['heroTitle'] * 0.75}px;
-  margin ${({ offset }) => `0 0 0 -${offset}px`};
+  margin ${({ lineOffset }) => `0 0 0 -${lineOffset}px`};
   transform: translateY(5px);
   white-space: nowrap;
 
@@ -68,13 +101,20 @@ const PetitionTopic: FC<PetitionTopicProps> = ({ title }) => {
         {_.range(HEADER_MAX_LINES).map((i:number) => (
           <HeroTitleLine
             aria-hidden
-            offset={titleLineOffsets[i]}
+            lineOffset={titleLineOffsets[i]}
             key={i}
           >
             {repeatedTitle}
           </HeroTitleLine>
         ))}
       </HeroContainer>
+      <ContentContainer>
+        <ContentBackgroundContainer>
+          <Content>
+            Content
+          </Content>
+        </ContentBackgroundContainer>
+      </ContentContainer>
     </Container>
   );
 };
