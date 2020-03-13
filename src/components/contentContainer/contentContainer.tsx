@@ -2,11 +2,11 @@ import { graphql } from 'gatsby';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { ContentContainerInformationFragment } from '../../types/graphql-types';
-import Title from './elements/title';
-import ContentBlock from './contentBlocks/contentBlock';
-import Carousel from './contentContainer/carousel';
-import PetitionsContentContainer from './contentContainer/petitionsContentContainer';
+import { ContentContainerInformationFragment } from '../../../types/graphql-types';
+import Title from '../elements/title';
+import ContentBlock from '../contentBlocks/contentBlock';
+import Carousel from './carousel';
+import PetitionsContentContainer from './petitionsContentContainer';
 
 export enum ContentContainerAppearance {
   Petitions = 'petitions',
@@ -20,12 +20,11 @@ interface Props {
 const Container = styled.div``;
 
 const ContentContainer: FC<Props> = ({ data }) => {
-  if (data.appearance === ContentContainerAppearance.Petitions) {
-    return <PetitionsContentContainer data={data} />;
-  }
-
   if (data.appearance === ContentContainerAppearance.Carousel) {
     return <Carousel data={data} />;
+  }
+  if (data.appearance === ContentContainerAppearance.Petitions) {
+    return <PetitionsContentContainer data={data} />;
   }
 
   return (

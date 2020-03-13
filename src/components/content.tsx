@@ -7,8 +7,8 @@ import {
   SpecialContentInformationFragment,
 } from '../../types/graphql-types';
 import ContentBlock from './contentBlocks/contentBlock';
-import ContentContainer from './contentContainer';
 import SpecialContent from './contentBlocks/specialContent';
+import ContentContainer from './contentContainer/contentContainer';
 
 interface Props {
   data:
