@@ -56,6 +56,7 @@ const GlobalStyle = createGlobalStyle`
 
   p { 
     ${fontStyles.normal}
+    word-break: break-word;
   }
 `;
 

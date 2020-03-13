@@ -70,7 +70,6 @@ export const PageTitleBackground = Dandelion;
 
 export const contentColors: Record<string, string> = {
   apricot: Apricot,
-  pastelYellow: Dandelion,
   mediumBeige: PigSkin,
   lightBeige: FreshDough,
   canneryPark: CanneryPark,

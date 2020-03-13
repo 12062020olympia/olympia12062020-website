@@ -1,6 +1,5 @@
 import { css } from 'styled-components';
 
-import * as colors from './colors';
 import HansonBoldWoff from './fonts/Hanson-Bold.woff';
 import HansonBoldWoff2 from './fonts/Hanson-Bold.woff2';
 import RobotoRegularWoff from './fonts/Roboto-Regular.woff';

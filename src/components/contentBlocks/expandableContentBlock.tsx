@@ -1,25 +1,78 @@
-import React, { FC, useState } from 'react';
-import styled from 'styled-components';
-import { ExpandableContentBlockInformationFragment } from '../../../types/graphql-types';
-import ContentfulRichText from '../contentfulRichText';
 import { graphql } from 'gatsby';
+import React, { FC, useState } from 'react';
+import styled, { css } from 'styled-components';
+
+import { ExpandableContentBlockInformationFragment } from '../../../types/graphql-types';
+import ExpandIcon from '../../icons/icon-expand.svg';
+import * as colors from '../../style/colors';
+import {
+  applyMediaQueryMd,
+  applyMediaQueryLg,
+  contentMargin,
+  contentMaxWidth,
+} from '../../style/dimensions';
+import ContentfulRichText from '../contentfulRichText';
+import IconButton from '../elements/iconButton';
+import Flex from '../elements/flex';
 
 interface Props {
   data: ExpandableContentBlockInformationFragment;
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  border-bottom: 1px solid ${colors.Grey300};
+  max-width: ${contentMaxWidth};
+  padding: 24px 0;
+
+  & > * {
+    margin: 0 ${contentMargin.sm};
+  }
+
+  ${applyMediaQueryMd(css`
+    & > * {
+      margin: 0 ${contentMargin.md};
+    }
+  `)}
+
+  ${applyMediaQueryLg(css`
+    & > * {
+      margin: 0 ${contentMargin.lg};
+    }
+  `)}
+`;
+
+const ExpandButton = styled(IconButton)<{ isExpanded: boolean }>`
+  & svg {
+    transform: rotate(${({ isExpanded }) => (isExpanded ? '-180deg' : '0deg')});
+    transition: transform 0.2s ease-out;
+    will-change: transform;
+  }
+`;
 
 export const ExpandableContentBlock: FC<Props> = ({ data }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <Container>
-      <div onClick={() => setIsOpen(!isOpen)} role="button">
+      <Flex
+        onClick={() => setIsExpanded(!isExpanded)}
+        alignItems="center"
+        justifyContent="space-between"
+      >
         {data.title}
-      </div>
-      {isOpen && (
-        <ContentfulRichText document={data.content && data.content.json} />
+
+        <ExpandButton
+          Icon={ExpandIcon}
+          isExpanded={isExpanded}
+          onClick={() => {
+            setIsExpanded(!isExpanded);
+          }}
+        />
+      </Flex>
+      {isExpanded && (
+        <div>
+          <ContentfulRichText document={data.content && data.content.json} />
+        </div>
       )}
     </Container>
   );
