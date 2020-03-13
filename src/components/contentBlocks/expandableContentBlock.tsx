@@ -28,15 +28,9 @@ const Container = styled.div`
     margin: 0 ${contentMargin.sm};
   }
 
-  ${applyMediaQueryMd(css`
-    & > * {
-      margin: 0 ${contentMargin.md};
-    }
-  `)}
-
   ${applyMediaQueryLg(css`
     & > * {
-      margin: 0 ${contentMargin.lg};
+      margin: 0 0;
     }
   `)}
 `;
