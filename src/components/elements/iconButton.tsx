@@ -28,7 +28,7 @@ const StyledButton = styled.button`
     outline: none;
   }
 
-  :focus {
+  :focus:not(:active) {
     border: 1px solid ${colors.IconButtonFocusBorderColor};
   }
 `;

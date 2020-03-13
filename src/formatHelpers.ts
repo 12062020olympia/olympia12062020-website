@@ -1,5 +1,4 @@
 import { IntlShape } from 'gatsby-plugin-intl';
-import _ from 'lodash';
 
 export function formatDateRange(
   intl: IntlShape,
@@ -8,5 +7,19 @@ export function formatDateRange(
 ): string {
   const startDateStr = startDate ? intl.formatDate(startDate) : '';
   const endDateStr = endDate ? intl.formatDate(endDate) : '';
-  return _.compact([startDateStr, endDateStr]).join(' - ');
+
+  if (!startDateStr && !endDateStr) {
+    return '';
+  }
+  if (startDateStr === endDateStr) {
+    return startDateStr;
+  }
+  if (!startDateStr) {
+    return intl.formatMessage({ id: 'date.beforeDate' }, { date: endDateStr });
+  }
+  if (!endDateStr) {
+    return intl.formatMessage({ id: 'date.afterDate' }, { date: startDateStr });
+  }
+
+  return `${startDateStr} - ${endDateStr}`;
 }

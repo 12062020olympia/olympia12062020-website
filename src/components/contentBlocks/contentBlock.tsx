@@ -34,6 +34,7 @@ export const query = graphql`
     appearance
     cfaButtonLink
     cfaButtonText
+    cfaButtonType
   }
 `;
 
