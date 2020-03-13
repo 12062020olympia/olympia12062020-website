@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import { ContentBlockInformationFragment } from '../../../types/graphql-types';
+import PetitionTopic from './petitionTopic';
 
 interface PetitionTopicContentBlockProps {
   data: ContentBlockInformationFragment;
@@ -8,7 +9,7 @@ interface PetitionTopicContentBlockProps {
 
 const PetitionTopicContentBlock: FC<PetitionTopicContentBlockProps> = ({ data }) => {
   return (
-    <p>{data.title}</p>
+    <PetitionTopic title={data.title || ''} />
   );
 };
 
