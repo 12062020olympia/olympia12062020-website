@@ -6,11 +6,13 @@ import { ContentContainerInformationFragment } from '../../../types/graphql-type
 import Title from '../elements/title';
 import ContentBlock from '../contentBlocks/contentBlock';
 import Carousel from './carousel';
+import FaqContainer from './faqContainer';
 import PetitionsContentContainer from './petitionsContentContainer';
 
 export enum ContentContainerAppearance {
   Petitions = 'petitions',
   Carousel = 'carousel',
+  FAQContainer = 'faqContainer',
 }
 
 interface Props {
@@ -23,6 +25,11 @@ const ContentContainer: FC<Props> = ({ data }) => {
   if (data.appearance === ContentContainerAppearance.Carousel) {
     return <Carousel data={data} />;
   }
+
+  if (data.appearance === ContentContainerAppearance.FAQContainer) {
+    return <FaqContainer data={data} />;
+  }
+
   if (data.appearance === ContentContainerAppearance.Petitions) {
     return <PetitionsContentContainer data={data} />;
   }
