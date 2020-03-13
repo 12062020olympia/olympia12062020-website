@@ -79,6 +79,15 @@ module.exports = {
         redirect: true,
       },
     },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        custom: {
+          families: ['Roboto, Hanson'],
+          urls: ['/fonts/fonts.css'],
+        },
+      },
+    },
     /* eslint-enable @typescript-eslint/camelcase */
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

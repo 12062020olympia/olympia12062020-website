@@ -1,15 +1,14 @@
 import { graphql } from 'gatsby';
 import { useIntl } from 'gatsby-plugin-intl';
 import React from 'react';
-import styled, { createGlobalStyle, css } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
-import { families, fontFaces, fontStyles } from '../style/fonts';
+import { families, fontStyles } from '../style/fonts';
 import Layout from '../components/layout/layout';
 import SEO from '../components/seo';
 import PageContent from '../components/pageContent';
 
 const GlobalStyle = createGlobalStyle`
-  ${fontFaces}
 
   body {
     margin: 0;
