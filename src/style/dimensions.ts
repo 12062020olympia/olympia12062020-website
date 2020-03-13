@@ -3,6 +3,7 @@ import { config } from 'react-awesome-styled-grid';
 import { css, FlattenSimpleInterpolation } from 'styled-components';
 
 export const contentMaxWidth = '660px';
+export const largeContentMaxWidth = '1080px';
 
 export type ScreenSize = 'sm' | 'md' | 'lg';
 

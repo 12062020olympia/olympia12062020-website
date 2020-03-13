@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { getOngoingContentBlocks } from '../contentBlocks/contentBlockHelpers';
 import PetitionsContentBlock from '../contentBlocks/petitionsContentBlock';
 import { ContentContainerInformationFragment } from '../../../types/graphql-types';
+import { largeContentMaxWidth } from '../../style/dimensions';
 import { fontStyles } from '../../style/fonts';
 
 export interface PetitionsContentContainerProps {
@@ -13,7 +14,7 @@ export interface PetitionsContentContainerProps {
 
 const Container = styled.div`
   margin: 0 auto;
-  max-width: 1080px;
+  max-width: ${largeContentMaxWidth};
   padding: 0 20px;
 `;
 

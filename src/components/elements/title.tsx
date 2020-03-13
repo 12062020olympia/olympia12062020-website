@@ -13,6 +13,7 @@ const tag: Record<TitleType, keyof JSX.IntrinsicElements> = {
   navTitle: 'span',
   pageTitle: 'h2',
   footerTitle: 'span',
+  heroTitle: 'h4',
   h1: 'h1',
   h2: 'h2',
   h3: 'h3',

@@ -38,6 +38,8 @@ export const Primary = BrandPrimary500;
 export const Secondary = Dandelion; // todo: remove;
 export const FocusColor = '#007AFF';
 
+export const GreenDark = '#BCCE16';
+
 // Fonts
 export const DefaultFontColor = Grey900;
 
