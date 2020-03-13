@@ -13,6 +13,12 @@ export enum ContentBlockAppearance {
   PetitionTopic = 'petitionTopic',
 }
 
+export enum ContentBlockLayout {
+  Left = 'left',
+  Center = 'center',
+  Hidden = 'hidden',
+}
+
 interface Props {
   data: ContentBlockInformationFragment;
 }

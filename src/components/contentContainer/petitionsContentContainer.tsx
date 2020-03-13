@@ -22,7 +22,7 @@ const TitleContainer = styled.div`
   padding: 0 0 24px 0;
 
   ${applyMediaQueryMd(css`
-    padding: 0 0 40px 0;
+    padding: 0 0 60px 0;
   `)}
 `;
 

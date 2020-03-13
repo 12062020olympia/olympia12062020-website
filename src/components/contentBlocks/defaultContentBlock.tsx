@@ -9,9 +9,11 @@ import Title from '../elements/title';
 import {
   contentMargin,
   contentMaxWidth,
+  largeContentMaxWidth,
   applyMediaQueryMd,
   applyMediaQueryLg,
 } from '../../style/dimensions';
+import { ContentBlockLayout } from './contentBlock';
 
 interface Props {
   data: DefaultContentBlockInformationFragment;
@@ -22,7 +24,7 @@ const Container = styled.div<{ backgroundColor: string | null | undefined }>`
     backgroundColor ? colors.contentColors[backgroundColor] : 'transparent'};
   padding: 20px ${contentMargin.sm} 24px ${contentMargin.sm};
   margin: 20px auto 0 auto;
-  max-width: ${contentMaxWidth};
+  max-width: ${largeContentMaxWidth};
 
   ${applyMediaQueryMd(css`
     padding: 20px ${contentMargin.md} 40px ${contentMargin.md};
@@ -33,17 +35,32 @@ const Container = styled.div<{ backgroundColor: string | null | undefined }>`
   `)}
 `;
 
-const TitleContainer = styled.div`
-  padding: 20px 0 0 0;
+const TitleContainer = styled.div<{ layout: ContentBlockLayout }>`
+  display: ${({ layout }) => (layout === ContentBlockLayout.Hidden ? 'none' : 'flex')};
+  justify-content: ${({ layout }) => (layout === ContentBlockLayout.Left ? 'left' : 'center')};
+  & > * {
+    max-width: ${({ layout }) => (layout === ContentBlockLayout.Center ? contentMaxWidth : 'none')};
+  }
+`;
+
+const ContentContainer = styled.div<{ layout: ContentBlockLayout }>`
+  display: ${({ layout }) => (layout === ContentBlockLayout.Hidden ? 'none' : 'flex')};
+  justify-content: ${({ layout }) => (layout === ContentBlockLayout.Left ? 'left' : 'center')};
+
+  & > * {
+    max-width: ${({ layout }) => (layout === ContentBlockLayout.Center ? contentMaxWidth : 'none')};
+  }
 `;
 
 const DefaultContentBlock: FC<Props> = ({ data }) => {
   return (
     <Container backgroundColor={data.backgroundColor}>
-      <TitleContainer>
+      <TitleContainer layout={(data.titleLayout as ContentBlockLayout) || ContentBlockLayout.Center}>
         <Title title={data.title!} type="h3" />
       </TitleContainer>
-      <ContentfulRichText document={data.richText && data.richText.json} />
+      <ContentContainer layout={(data.contentLayout as ContentBlockLayout) || ContentBlockLayout.Center}>
+        <ContentfulRichText document={data.richText && data.richText.json} />
+      </ContentContainer>
     </Container>
   );
 };
@@ -59,6 +76,8 @@ export const query = graphql`
     slug
     startDate
     title
+    titleLayout
+    contentLayout
   }
 `;
 
