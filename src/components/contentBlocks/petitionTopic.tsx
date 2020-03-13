@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React, { FC, useMemo } from 'react';
+import React, { FC, ReactNode, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
 import * as colors from '../../style/colors';
@@ -7,6 +7,7 @@ import { applyMediaQueryMd, contentMaxWidth, largeContentMaxWidth } from '../../
 import { fontSizes, fontSizesDesktop, fontStyles } from '../../style/fonts';
 
 interface PetitionTopicProps {
+  contentComponent: ReactNode;
   title: string;
 }
 
@@ -40,9 +41,14 @@ const ContentBackgroundContainer = styled.div`
 `;
 
 const Content = styled.div`
+  display: flex;
   margin: 0 auto;
   max-width: ${contentMaxWidth};
-  padding: 0 20px;
+  padding: 0 20px 16px 20px;
+
+  ${applyMediaQueryMd(css`
+    padding: 0 20px 32px 20px;
+  `)}
 `;
 
 const HeroContainer = styled.div`
@@ -91,7 +97,7 @@ const HeroTitleLine = styled.span<{ lineOffset: number }>`
   `)}
 `;
 
-const PetitionTopic: FC<PetitionTopicProps> = ({ title }) => {
+const PetitionTopic: FC<PetitionTopicProps> = ({ contentComponent, title }) => {
   const HEADER_MAX_LINES = 5;
   const repeatedTitle = _.repeat(`${title} `, 10);
   const titleLineOffsets = useMemo(() => _.range(HEADER_MAX_LINES).map(() => _.random(0, 500)), []);
@@ -111,7 +117,7 @@ const PetitionTopic: FC<PetitionTopicProps> = ({ title }) => {
       <ContentContainer>
         <ContentBackgroundContainer>
           <Content>
-            Content
+            {contentComponent}
           </Content>
         </ContentBackgroundContainer>
       </ContentContainer>

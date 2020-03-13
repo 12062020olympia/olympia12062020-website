@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import { ContentBlockInformationFragment } from '../../../types/graphql-types';
+import ContentfulRichText from '../contentfulRichText';
 import PetitionTopic from './petitionTopic';
 
 interface PetitionTopicContentBlockProps {
@@ -9,7 +10,12 @@ interface PetitionTopicContentBlockProps {
 
 const PetitionTopicContentBlock: FC<PetitionTopicContentBlockProps> = ({ data }) => {
   return (
-    <PetitionTopic title={data.title || ''} />
+    <PetitionTopic
+      contentComponent={
+        <ContentfulRichText document={data.richText && data.richText.json} />
+      }
+      title={data.title || ''}
+    />
   );
 };
 
