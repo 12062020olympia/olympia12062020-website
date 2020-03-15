@@ -4,8 +4,8 @@ export const Grey700 = '#595959';
 export const Grey600 = '#8C8C8C';
 export const Grey500 = '#BFBFBF';
 export const Grey400 = '#D9D9D9';
+export const Grey350 = '#E3E3E3';
 export const Grey300 = '#F0F0F0';
-export const Grey350 = '##E3E3E3';
 export const Grey200 = '#F5F5F5';
 export const Grey100 = '#FAFAFA';
 
