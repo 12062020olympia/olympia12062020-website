@@ -1,4 +1,4 @@
-import React, { FC, useState, Fragment, useMemo } from 'react';
+import React, { FC, useState, useMemo } from 'react';
 import { useInterval } from 'react-use';
 import styled, { css } from 'styled-components';
 
@@ -6,44 +6,63 @@ import { ContentContainerInformationFragment } from '../../../types/graphql-type
 import ContentfulRichText from '../contentfulRichText';
 import ButtonLink from '../elements/buttonLink';
 import Title from '../elements/title';
-import ArrowLeft from '../../icons/icon-arrow-left.svg';
-import ArrowRight from '../../icons/icon-arrow-right.svg';
 import * as colors from '../../style/colors';
 import {
   ScreenSize,
   applyMediaQueryMd,
   applyMediaQueryLg,
   contentMargin,
-  contentMaxWidth,
 } from '../../style/dimensions';
 
 interface Props {
   data: ContentContainerInformationFragment;
 }
 
-const carouselHeight: Record<ScreenSize, string> = {
-  sm: '335px',
-  md: '380px',
-  lg: '380px',
+const slideHeight: Record<ScreenSize, string> = {
+  sm: '346px',
+  md: '367px',
+  lg: '336px',
 };
 
-const paddingSides: Record<ScreenSize, string> = {
-  sm: contentMargin.sm,
-  md: '150px',
-  lg: '180px',
+const slideWidth: Record<ScreenSize, number> = {
+  sm: 310,
+  md: 608,
+  lg: 860,
 };
 
-const CarouselWrapper = styled.div`
-  display: flex;
-  height: calc(${carouselHeight.sm} + 90px);
-  overflow: hidden;
+const slideMarginRight: Record<ScreenSize, number> = {
+  sm: 10,
+  md: 24,
+  lg: 24,
+};
+
+const Container = styled.div`
+  margin: 70px 0;
+`;
+
+const CarouselTitle = styled(Title)`
+  padding: 0 ${contentMargin.sm} 15px;
 
   ${applyMediaQueryMd(css`
-    height: calc(${carouselHeight.md} + 50px);
+    padding: 0 ${contentMargin.md} 34px;
   `)}
 
   ${applyMediaQueryLg(css`
-    height: calc(${carouselHeight.lg} + 50px);
+    padding: 0 ${contentMargin.lg} 34px;
+  `)}
+`;
+
+const CarouselWrapper = styled.div`
+  display: flex;
+  overflow: hidden;
+  padding: 0 ${contentMargin.sm};
+
+  ${applyMediaQueryMd(css`
+    padding: 0 ${contentMargin.md};
+  `)}
+
+  ${applyMediaQueryLg(css`
+    padding: 0 ${contentMargin.lg};
   `)}
 `;
 
@@ -54,30 +73,35 @@ const CarouselSlide = styled.div<{
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? colors.contentColors[backgroundColor] : colors.White};
   flex: 0 0 auto;
-  height: 100%;
-  padding-top: 90px;
-  padding-left: ${paddingSides.sm};
-  padding-right: ${paddingSides.sm};
-  opacity: ${({ active }) => (active ? 1 : 0)};
+  height: ${slideHeight.sm};
   transition: all 0.5s ease;
-  width: calc(100vw - 2 * ${paddingSides.sm});
+  width: ${slideWidth.sm}px;
 
-  > * {
-    max-width: ${contentMaxWidth};
+  :not(:last-child) {
+    margin-right: ${slideMarginRight.sm}px;
   }
 
   ${applyMediaQueryMd(css`
-    padding-top: 50px;
-    padding-left: ${paddingSides.md};
-    padding-right: ${paddingSides.md};
-    width: calc(100vw - 2 * ${paddingSides.md});
+    height: ${slideHeight.md};
+    width: ${slideWidth.md}px;
+
+    :not(:last-child) {
+      margin-right: ${slideMarginRight.md}px;
+    }
   `)}
 
   ${applyMediaQueryLg(css`
-    padding-left: ${paddingSides.lg};
-    padding-right: ${paddingSides.lg};
-    width: calc(100vw - 2 * ${paddingSides.lg});
+    height: ${slideHeight.lg};
+    width: ${slideWidth.lg}px;
+
+    :not(:last-child) {
+      margin-right: ${slideMarginRight.lg}px;
+    }
   `)}
+`;
+
+const SlideInner = styled.div`
+  margin: 20px;
 `;
 
 const SlidesContainer = styled.div<{ currentSlide: number }>`
@@ -85,31 +109,31 @@ const SlidesContainer = styled.div<{ currentSlide: number }>`
   ${({ currentSlide }) =>
     currentSlide &&
     css`
-      transform: translateX(-${currentSlide * 100}vw);
+      transform: translateX(
+        calc(-${currentSlide * (slideWidth.sm + slideMarginRight.sm)}px)
+      );
     `};
   position: relative;
   transition: all 0.5s ease;
-`;
 
-const ArrowButton = styled.button<{ isLeft?: boolean }>`
-  background-color: transparent;
-  border: none;
-  position: absolute;
-  left: ${({ isLeft }) => (isLeft ? contentMargin.sm : 'unset')};
-  margin-top: 10px;
-  z-index: 1;
-  right: ${({ isLeft }) => (!isLeft ? contentMargin.sm : 'unset')};
-
-  :focus {
-    outline: none;
-  }
-
-  ${applyMediaQueryMd(css`
-    margin-top: calc(${carouselHeight.md} / 2 - 35px);
+  ${applyMediaQueryMd(css<{ currentSlide: number }>`
+    ${({ currentSlide }) =>
+      currentSlide &&
+      css`
+        transform: translateX(
+          calc(-${currentSlide * (slideWidth.md + slideMarginRight.md)}px)
+        );
+      `};
   `)}
 
-  ${applyMediaQueryLg(css`
-    margin-top: calc(${carouselHeight.lg} / 2 - 35px);
+  ${applyMediaQueryLg(css<{ currentSlide: number }>`
+    ${({ currentSlide }) =>
+      currentSlide &&
+      css`
+        transform: translateX(
+          calc(-${currentSlide * (slideWidth.lg + slideMarginRight.lg)}px)
+        );
+      `};
   `)}
 `;
 
@@ -124,12 +148,13 @@ const Carousel: FC<Props> = ({ data }) => {
           key={index}
           backgroundColor={c?.backgroundColor}
         >
-          <Title type="pageTitle" title={data.title!} />
-          <Title type="h3" title={c?.title!} />
-          <ContentfulRichText document={c?.richText && c.richText.json} />
-          {c?.cfaButtonText && c.cfaButtonLink && (
-            <ButtonLink href={c.cfaButtonLink} label={c.cfaButtonText} />
-          )}
+          <SlideInner>
+            <Title type="h3" title={c?.title!} />
+            <ContentfulRichText document={c?.richText && c.richText.json} />
+            {c?.cfaButtonText && c.cfaButtonLink && (
+              <ButtonLink href={c.cfaButtonLink} label={c.cfaButtonText} />
+            )}
+          </SlideInner>
         </CarouselSlide>
       )) ?? [],
     [currentSlide, data]
@@ -140,26 +165,12 @@ const Carousel: FC<Props> = ({ data }) => {
   }, 5000);
 
   return (
-    <Fragment>
+    <Container>
+      <CarouselTitle type="h3" title={data.title!} />
       <CarouselWrapper>
-        <ArrowButton
-          onClick={() => {
-            setCurrentSlide((currentSlide - 1 + slides.length) % slides.length);
-          }}
-          isLeft
-        >
-          <ArrowLeft />
-        </ArrowButton>
-        <ArrowButton
-          onClick={() => {
-            setCurrentSlide((currentSlide + 1) % slides.length);
-          }}
-        >
-          <ArrowRight />
-        </ArrowButton>
         <SlidesContainer currentSlide={currentSlide}>{slides}</SlidesContainer>
       </CarouselWrapper>
-    </Fragment>
+    </Container>
   );
 };
 

@@ -1,6 +1,10 @@
 // @ts-ignore
 import { config } from 'react-awesome-styled-grid';
-import { css, FlattenSimpleInterpolation } from 'styled-components';
+import {
+  css,
+  FlattenInterpolation,
+  FlattenSimpleInterpolation,
+} from 'styled-components';
 
 export const contentMaxWidth = '660px';
 
@@ -24,13 +28,17 @@ export const contentMargin: Record<ScreenSize, string> = {
   lg: '70px',
 };
 
-export function applyMediaQueryMd(styles: FlattenSimpleInterpolation) {
+export function applyMediaQueryMd(
+  styles: FlattenSimpleInterpolation | FlattenInterpolation<any>
+) {
   return css`
     ${props => config(props).media['sm']`${styles}`}
   `;
 }
 
-export function applyMediaQueryLg(styles: FlattenSimpleInterpolation) {
+export function applyMediaQueryLg(
+  styles: FlattenSimpleInterpolation | FlattenInterpolation<any>
+) {
   return css`
     ${props => config(props).media['md']`${styles}`}
   `;
