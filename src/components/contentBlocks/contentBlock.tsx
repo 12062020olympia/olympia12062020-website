@@ -1,7 +1,9 @@
 import { graphql } from 'gatsby';
 import React, { FC } from 'react';
+import { css } from 'styled-components';
 
 import { ContentBlockInformationFragment } from '../../../types/graphql-types';
+import { contentMaxWidth } from '../../style/dimensions';
 import DefaultContentBlock from './defaultContentBlock';
 import ExpandableContentBlock from './expandableContentBlock';
 import ExpapandableColorful from './expandableColorfulBlock';
@@ -54,3 +56,21 @@ export const query = graphql`
 `;
 
 export default ContentBlock;
+
+export function applyContentBlockLayout(layout: ContentBlockLayout) {
+  switch (layout) {
+    case ContentBlockLayout.Hidden:
+      return css`
+        display: none;
+      `;
+    case ContentBlockLayout.Center:
+      return css`
+        display: flex;
+        justify-content: center;
+
+        & > * {
+          max-width: ${contentMaxWidth};
+        }
+      `;
+  }
+}

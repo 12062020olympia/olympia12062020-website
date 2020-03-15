@@ -8,12 +8,11 @@ import ContentfulRichText from '../contentfulRichText';
 import Title from '../elements/title';
 import {
   contentMargin,
-  contentMaxWidth,
   largeContentMaxWidth,
   applyMediaQueryMd,
   applyMediaQueryLg,
 } from '../../style/dimensions';
-import { ContentBlockLayout } from './contentBlock';
+import { ContentBlockLayout, applyContentBlockLayout } from './contentBlock';
 
 interface Props {
   data: DefaultContentBlockInformationFragment;
@@ -36,20 +35,11 @@ const Container = styled.div<{ backgroundColor: string | null | undefined }>`
 `;
 
 const TitleContainer = styled.div<{ layout: ContentBlockLayout }>`
-  display: ${({ layout }) => (layout === ContentBlockLayout.Hidden ? 'none' : 'flex')};
-  justify-content: ${({ layout }) => (layout === ContentBlockLayout.Left ? 'left' : 'center')};
-  & > * {
-    max-width: ${({ layout }) => (layout === ContentBlockLayout.Center ? contentMaxWidth : 'none')};
-  }
+  ${({ layout }) => applyContentBlockLayout(layout)}
 `;
 
 const ContentContainer = styled.div<{ layout: ContentBlockLayout }>`
-  display: ${({ layout }) => (layout === ContentBlockLayout.Hidden ? 'none' : 'flex')};
-  justify-content: ${({ layout }) => (layout === ContentBlockLayout.Left ? 'left' : 'center')};
-
-  & > * {
-    max-width: ${({ layout }) => (layout === ContentBlockLayout.Center ? contentMaxWidth : 'none')};
-  }
+  ${({ layout }) => applyContentBlockLayout(layout)}
 `;
 
 const DefaultContentBlock: FC<Props> = ({ data }) => {
