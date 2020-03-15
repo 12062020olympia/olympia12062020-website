@@ -1,9 +1,16 @@
+import { graphql } from 'gatsby';
+import Image from 'gatsby-image';
 import React, { FC, useState, useMemo } from 'react';
 import { useInterval } from 'react-use';
 import styled, { css } from 'styled-components';
 
-import { ContentContainerInformationFragment } from '../../../types/graphql-types';
+import {
+  ContentContainerInformationFragment,
+  QuotesCarouselInformationFragment,
+} from '../../../types/graphql-types';
 import ContentfulRichText from '../contentfulRichText';
+import Flex from '../elements/flex';
+import Paragraph from '../elements/paragraph';
 import Title from '../elements/title';
 import * as colors from '../../style/colors';
 import {
@@ -12,11 +19,9 @@ import {
   applyMediaQueryLg,
   contentMargin,
 } from '../../style/dimensions';
-import { graphql } from 'gatsby';
-import Paragraph from '../elements/paragraph';
 
 interface Props {
-  data: ContentContainerInformationFragment;
+  data: ContentContainerInformationFragment & QuotesCarouselInformationFragment;
 }
 
 const slideWidth: Record<ScreenSize, number> = {
@@ -141,6 +146,21 @@ const SlidesContainer = styled.div<{ currentSlide: number }>`
   `)}
 `;
 
+const AuthorImage = styled(Image)`
+  height: 64px;
+  margin-right: 13px;
+  min-width: 64px;
+  width: 64px;
+
+  ${applyMediaQueryMd(css`
+    flex-basis: 71px;
+    height: 71px;
+    margin-right: 20px;
+    min-width: 71px;
+    width: 71px;
+  `)}
+`;
+
 const QuotesCarousel: FC<Props> = ({ data }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = useMemo(
@@ -149,7 +169,10 @@ const QuotesCarousel: FC<Props> = ({ data }) => {
         <CarouselSlide key={index} backgroundColor={c?.backgroundColor}>
           <SlideInner>
             <ContentfulRichText document={c?.richText && c.richText.json} />
-            <Paragraph type="small">{c?.title!} </Paragraph>
+            <Flex flexDirection="row" alignItems="center">
+              <AuthorImage fluid={(c as any).picture.fluid} />
+              <Paragraph type="small">{c?.title!} </Paragraph>
+            </Flex>
           </SlideInner>
         </CarouselSlide>
       )) ?? [],
@@ -175,6 +198,11 @@ export const query = graphql`
     backgroundColor
     contentModules {
       ...ContentBlockInformation
+      picture {
+        fluid(maxWidth: 71) {
+          ...GatsbyContentfulFluid
+        }
+      }
     }
   }
 `;
