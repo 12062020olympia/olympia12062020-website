@@ -10,13 +10,14 @@ import {
 import styled from 'styled-components';
 import * as colors from '../style/colors';
 
-type Props = {
+interface Props {
+  className?: string;
   document: {
     nodeType: BLOCKS.DOCUMENT;
     content: any[];
     data: any;
   };
-};
+}
 
 const RichTextContainer = styled.div`
   hr {
@@ -29,7 +30,10 @@ function getObjectKeyArray(obj: any): string[] {
   return Object.keys(obj);
 }
 
-const ContentfulRichText: React.FC<Props> = ({ document }: Props) => {
+const ContentfulRichText: React.FC<Props> = ({
+  className,
+  document,
+}: Props) => {
   const options: Options = {
     renderText: text =>
       text.split('\n').map((text, i) => [i > 0 && <br />, text]),
@@ -63,7 +67,7 @@ const ContentfulRichText: React.FC<Props> = ({ document }: Props) => {
     },
   };
   return (
-    <RichTextContainer>
+    <RichTextContainer className={className}>
       {documentToReactComponents(document, options)}
     </RichTextContainer>
   );

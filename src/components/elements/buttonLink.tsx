@@ -6,6 +6,7 @@ export type ButtonType = 'primary' | 'secondary' | 'complementary';
 
 interface Props {
   buttonType?: ButtonType;
+  className?: string;
   href: string;
   label: string;
 }
@@ -55,8 +56,13 @@ const StyledLink = styled.a<{ buttonType: ButtonType }>`
     `}
 `;
 
-const ButtonLink: FC<Props> = ({ buttonType = 'primary', href, label }) => (
-  <StyledLink buttonType={buttonType} href={href}>
+const ButtonLink: FC<Props> = ({
+  buttonType = 'primary',
+  className,
+  href,
+  label,
+}) => (
+  <StyledLink buttonType={buttonType} className={className} href={href}>
     {label}
   </StyledLink>
 );
