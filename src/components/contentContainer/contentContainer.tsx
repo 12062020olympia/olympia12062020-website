@@ -8,11 +8,13 @@ import ContentBlock from '../contentBlocks/contentBlock';
 import Carousel from './carousel';
 import FaqContainer from './faqContainer';
 import PetitionsContentContainer from './petitionsContentContainer';
+import QuotesCarousel from './quotesCarousel';
 
 export enum ContentContainerAppearance {
-  Petitions = 'petitions',
   Carousel = 'carousel',
   FAQContainer = 'faqContainer',
+  Petitions = 'petitions',
+  QuotesCarousel = 'quotesCarousel',
 }
 
 interface Props {
@@ -32,6 +34,10 @@ const ContentContainer: FC<Props> = ({ data }) => {
 
   if (data.appearance === ContentContainerAppearance.Petitions) {
     return <PetitionsContentContainer data={data} />;
+  }
+
+  if (data.appearance === ContentContainerAppearance.QuotesCarousel) {
+    return <QuotesCarousel data={data} />;
   }
 
   return (
@@ -56,6 +62,7 @@ export const query = graphql`
     contentModules {
       ...ContentBlockInformation
     }
+    ...QuotesCarouselInformation
   }
 `;
 

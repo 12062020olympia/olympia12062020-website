@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components';
 
 import { ContentContainerInformationFragment } from '../../../types/graphql-types';
 import ContentfulRichText from '../contentfulRichText';
-import ButtonLink from '../elements/buttonLink';
 import Title from '../elements/title';
 import * as colors from '../../style/colors';
 import {
@@ -13,24 +12,17 @@ import {
   applyMediaQueryLg,
   contentMargin,
 } from '../../style/dimensions';
+import { graphql } from 'gatsby';
 import Paragraph from '../elements/paragraph';
-import { formatDateRange } from '../../formatHelpers';
-import { useIntl } from 'gatsby-plugin-intl';
 
 interface Props {
   data: ContentContainerInformationFragment;
 }
 
-const slideHeight: Record<ScreenSize, string> = {
-  sm: '346px',
-  md: '367px',
-  lg: '336px',
-};
-
 const slideWidth: Record<ScreenSize, number> = {
   sm: 310,
-  md: 608,
-  lg: 860,
+  md: 530,
+  lg: 530,
 };
 
 const slideMarginRight: Record<ScreenSize, number> = {
@@ -39,11 +31,15 @@ const slideMarginRight: Record<ScreenSize, number> = {
   lg: 24,
 };
 
-const Container = styled.div`
-  margin: 70px 0;
+const Container = styled.div<{
+  backgroundColor?: string | null;
+}>`
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor ? colors.contentColors[backgroundColor] : colors.White};
+  padding: 76px 0 40px;
 
   ${applyMediaQueryMd(css`
-    margin: 170px 0;
+    padding: 76px 0 102px;
   `)}
 `;
 
@@ -79,8 +75,8 @@ const CarouselSlide = styled.div<{
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? colors.contentColors[backgroundColor] : colors.White};
   flex: 0 0 auto;
-  height: ${slideHeight.sm};
   transition: all 0.5s ease;
+  height: fit-content;
   width: ${slideWidth.sm}px;
 
   :not(:last-child) {
@@ -88,7 +84,6 @@ const CarouselSlide = styled.div<{
   }
 
   ${applyMediaQueryMd(css`
-    height: ${slideHeight.md};
     width: ${slideWidth.md}px;
 
     :not(:last-child) {
@@ -97,7 +92,6 @@ const CarouselSlide = styled.div<{
   `)}
 
   ${applyMediaQueryLg(css`
-    height: ${slideHeight.lg};
     width: ${slideWidth.lg}px;
 
     :not(:last-child) {
@@ -108,6 +102,10 @@ const CarouselSlide = styled.div<{
 
 const SlideInner = styled.div`
   margin: 20px;
+
+  ${applyMediaQueryMd(css`
+    margin: 30px;
+  `)}
 `;
 
 const SlidesContainer = styled.div<{ currentSlide: number }>`
@@ -143,39 +141,19 @@ const SlidesContainer = styled.div<{ currentSlide: number }>`
   `)}
 `;
 
-const SlideDate = styled(Paragraph)`
-  text-transform: uppercase;
-  margin: 0;
-`;
-
-const StyledButtonLink = styled(ButtonLink)`
-  display: inline-block;
-  margin-top: 20px;
-`;
-
-const Carousel: FC<Props> = ({ data }) => {
-  const intl = useIntl();
+const QuotesCarousel: FC<Props> = ({ data }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = useMemo(
     () =>
       data?.contentModules?.map((c, index) => (
         <CarouselSlide key={index} backgroundColor={c?.backgroundColor}>
           <SlideInner>
-            <SlideDate type="small">
-              {formatDateRange(intl, c?.startDate, c?.endDate)}
-            </SlideDate>
-            <Title type="h3" title={c?.title!} />
             <ContentfulRichText document={c?.richText && c.richText.json} />
-            {c?.cfaButtonText && c.cfaButtonLink && (
-              <StyledButtonLink
-                href={c.cfaButtonLink}
-                label={c.cfaButtonText}
-              />
-            )}
+            <Paragraph type="small">{c?.title!} </Paragraph>
           </SlideInner>
         </CarouselSlide>
       )) ?? [],
-    [data, intl]
+    [data]
   );
 
   useInterval(() => {
@@ -183,7 +161,7 @@ const Carousel: FC<Props> = ({ data }) => {
   }, 5000);
 
   return (
-    <Container>
+    <Container backgroundColor={data.backgroundColor}>
       <CarouselTitle type="h3" title={data.title!} />
       <CarouselWrapper>
         <SlidesContainer currentSlide={currentSlide}>{slides}</SlidesContainer>
@@ -192,4 +170,13 @@ const Carousel: FC<Props> = ({ data }) => {
   );
 };
 
-export default Carousel;
+export const query = graphql`
+  fragment QuotesCarouselInformation on ContentfulContentContainer {
+    backgroundColor
+    contentModules {
+      ...ContentBlockInformation
+    }
+  }
+`;
+
+export default QuotesCarousel;
