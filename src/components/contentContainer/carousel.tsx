@@ -13,6 +13,9 @@ import {
   applyMediaQueryLg,
   contentMargin,
 } from '../../style/dimensions';
+import Paragraph from '../elements/paragraph';
+import { formatDateRange } from '../../formatHelpers';
+import { useIntl } from 'gatsby-plugin-intl';
 
 interface Props {
   data: ContentContainerInformationFragment;
@@ -38,6 +41,10 @@ const slideMarginRight: Record<ScreenSize, number> = {
 
 const Container = styled.div`
   margin: 70px 0;
+
+  ${applyMediaQueryMd(css`
+    margin: 170px 0;
+  `)}
 `;
 
 const CarouselTitle = styled(Title)`
@@ -137,9 +144,19 @@ const SlidesContainer = styled.div<{ currentSlide: number }>`
   `)}
 `;
 
-const Carousel: FC<Props> = ({ data }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+const SlideDate = styled(Paragraph)`
+  text-transform: uppercase;
+  margin: 0;
+`;
 
+const StyledButtonLink = styled(ButtonLink)`
+  display: inline-block;
+  margin-top: 20px;
+`;
+
+const Carousel: FC<Props> = ({ data }) => {
+  const intl = useIntl();
+  const [currentSlide, setCurrentSlide] = useState(0);
   const slides = useMemo(
     () =>
       data?.contentModules?.map((c, index) => (
@@ -149,15 +166,21 @@ const Carousel: FC<Props> = ({ data }) => {
           backgroundColor={c?.backgroundColor}
         >
           <SlideInner>
+            <SlideDate type="small">
+              {formatDateRange(intl, c?.startDate, c?.endDate)}
+            </SlideDate>
             <Title type="h3" title={c?.title!} />
             <ContentfulRichText document={c?.richText && c.richText.json} />
             {c?.cfaButtonText && c.cfaButtonLink && (
-              <ButtonLink href={c.cfaButtonLink} label={c.cfaButtonText} />
+              <StyledButtonLink
+                href={c.cfaButtonLink}
+                label={c.cfaButtonText}
+              />
             )}
           </SlideInner>
         </CarouselSlide>
       )) ?? [],
-    [currentSlide, data]
+    [currentSlide, data, intl]
   );
 
   useInterval(() => {
