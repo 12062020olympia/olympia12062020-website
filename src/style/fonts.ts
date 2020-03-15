@@ -1,43 +1,6 @@
 import { css } from 'styled-components';
 
-import HansonBoldWoff from './fonts/Hanson-Bold.woff';
-import HansonBoldWoff2 from './fonts/Hanson-Bold.woff2';
-import RobotoRegularWoff from './fonts/Roboto-Regular.woff';
-import RobotoRegularWoff2 from './fonts/Roboto-Regular.woff2';
-import RobotoBoldWoff from './fonts/Roboto-Bold.woff';
-import RobotoBoldWoff2 from './fonts/Roboto-Bold.woff2';
 import { applyMediaQueryMd } from './dimensions';
-
-export const fontFaces = css`
-  @font-face {
-    font-display: swap;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    src: local('Roboto Regular') local('Roboto-Regular')
-        url(${RobotoRegularWoff2}) format('woff2'),
-      url(${RobotoRegularWoff}) format('woff');
-  }
-
-  @font-face {
-    font-display: swap;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: bold;
-    src: local('Roboto Bold') local('Roboto-Bold') url(${RobotoBoldWoff2})
-        format('woff2'),
-      url(${RobotoBoldWoff}) format('woff');
-  }
-
-  @font-face {
-    font-display: swap;
-    font-family: Hanson;
-    font-style: normal;
-    font-weight: bold;
-    src: url(${HansonBoldWoff2}) format('woff2'),
-      url(${HansonBoldWoff}) format('woff');
-  }
-`;
 
 export const families = {
   default: 'Roboto',
