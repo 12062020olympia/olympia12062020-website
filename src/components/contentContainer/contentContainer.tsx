@@ -6,12 +6,14 @@ import DefaultContentContainer from './defaultContentContainer';
 import Carousel from './carousel';
 import FaqContainer from './faqContainer';
 import PetitionsContentContainer from './petitionsContentContainer';
+import PicturesContentContainer from './picturesContentContainer';
 import QuotesCarousel from './quotesCarousel';
 
 export enum ContentContainerAppearance {
   Carousel = 'carousel',
   FAQContainer = 'faqContainer',
   Petitions = 'petitions',
+  Pictures = 'pictures',
   QuotesCarousel = 'quotesCarousel',
 }
 
@@ -28,6 +30,9 @@ const ContentContainer: FC<Props> = ({ data }) => {
   }
   if (data.appearance === ContentContainerAppearance.Petitions) {
     return <PetitionsContentContainer data={data} />;
+  }
+  if (data.appearance === ContentContainerAppearance.Pictures) {
+    return <PicturesContentContainer data={data} />
   }
   if (data.appearance === ContentContainerAppearance.QuotesCarousel) {
     return <QuotesCarousel data={data} />;
