@@ -6,51 +6,45 @@ import { DefaultContentBlockInformationFragment } from '../../../types/graphql-t
 import * as colors from '../../style/colors';
 import ContentfulRichText from '../contentfulRichText';
 import Title from '../elements/title';
-import {
-  contentMargin,
-  largeContentMaxWidth,
-  applyMediaQueryMd,
-  applyMediaQueryLg,
-} from '../../style/dimensions';
-import { ContentBlockLayout, applyContentBlockLayout } from './contentBlock';
+import { applyMediaQueryMd } from '../../style/dimensions';
+import { ContentBlockLayout } from './contentBlock';
+import LayoutRow from './layoutRow';
 
 interface Props {
   data: DefaultContentBlockInformationFragment;
 }
 
-const Container = styled.div<{ backgroundColor: string | null | undefined }>`
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor ? colors.contentColors[backgroundColor] : 'transparent'};
-  padding: 20px ${contentMargin.sm} 24px ${contentMargin.sm};
-  margin: 20px auto 0 auto;
-  max-width: ${largeContentMaxWidth};
+const Container = styled.div<{ backgroundColor: string }>`
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  padding: 20px 0;
 
   ${applyMediaQueryMd(css`
-    padding: 20px ${contentMargin.md} 40px ${contentMargin.md};
-  `)}
-
-  ${applyMediaQueryLg(css`
-    padding: 20px ${contentMargin.lg} 40px ${contentMargin.lg};
+    padding: 40px 0;
   `)}
 `;
 
-const TitleContainer = styled.div<{ layout: ContentBlockLayout }>`
-  ${({ layout }) => applyContentBlockLayout(layout)}
-`;
+const TitleContainer = styled.div`
+  padding: 8px 0 0 0;
 
-const ContentContainer = styled.div<{ layout: ContentBlockLayout }>`
-  ${({ layout }) => applyContentBlockLayout(layout)}
+  ${applyMediaQueryMd(css`
+    padding: 20px 0 8px 0;
+  `)}
 `;
 
 const DefaultContentBlock: FC<Props> = ({ data }) => {
+  const backgroundColor = data.backgroundColor
+    ? colors.contentColors[data.backgroundColor]
+    : 'transparent';
   return (
-    <Container backgroundColor={data.backgroundColor}>
-      <TitleContainer layout={(data.titleLayout as ContentBlockLayout) || ContentBlockLayout.Center}>
-        <Title title={data.title!} type="h3" />
-      </TitleContainer>
-      <ContentContainer layout={(data.contentLayout as ContentBlockLayout) || ContentBlockLayout.Center}>
+    <Container backgroundColor={backgroundColor}>
+      <LayoutRow layout={(data.titleLayout as ContentBlockLayout) || ContentBlockLayout.Center}>
+        <TitleContainer>
+          <Title title={data.title!} type="h3" />
+        </TitleContainer>
+      </LayoutRow>
+      <LayoutRow layout={(data.contentLayout as ContentBlockLayout) || ContentBlockLayout.Center}>
         <ContentfulRichText document={data.richText && data.richText.json} />
-      </ContentContainer>
+      </LayoutRow>
     </Container>
   );
 };
