@@ -13,7 +13,7 @@ interface Props {
 const ContentContainer = styled.div``;
 
 const PageContent: FC<Props> = ({
-  data: { title, header, contentModules, backgroundPicture },
+  data: { title, header, contentModules, backgroundPicture, backgroundColor },
 }) => {
   return (
     <>
@@ -21,6 +21,7 @@ const PageContent: FC<Props> = ({
         title={title}
         header={header}
         backgroundPicture={backgroundPicture!}
+        backgroundColor={backgroundColor}
       />
       <ContentContainer>
         {contentModules &&
@@ -45,6 +46,7 @@ export const query = graphql`
         ...GatsbyContentfulFluid
       }
     }
+    backgroundColor
     ...ContentInformation
   }
   fragment GatsbyContentfulFluid on ContentfulFluid {

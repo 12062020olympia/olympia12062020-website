@@ -19,6 +19,7 @@ interface Props {
   title?: string | null;
   header?: string | null;
   backgroundPicture?: { fluid: Maybe<GatsbyContentfulFluidFragment> };
+  backgroundColor?: string | null;
 }
 
 const titleHeigh: Record<ScreenSize, string> = {
@@ -57,18 +58,23 @@ const Container = styled(BackgroundImage)`
   `)}
 `;
 
-const TitleContainer = styled.div`
-  background-color: ${colors.PageTitleBackground};
+const TitleContainer = styled.div<{
+  backgroundColor: string | null | undefined;
+}>`
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor ? colors.contentColors[backgroundColor] : colors.White};
   margin: ${top.sm} ${contentMargin.sm} ${bottom.sm} ${contentMargin.sm};
   width: calc(100% - 2 * ${contentMargin.sm});
 
   ${applyMediaQueryMd(css`
     margin: ${top.md} ${contentMargin.md} ${bottom.md} ${contentMargin.md};
-    width: min-content;
+    max-width: calc(100% - 2 * ${contentMargin.md});
+    width: max-content;
   `)}
 
   ${applyMediaQueryLg(css`
     margin: ${top.lg} ${contentMargin.lg} ${bottom.lg} ${contentMargin.lg};
+    max-width: 60vw;
   `)}
 `;
 
@@ -92,10 +98,15 @@ const InnerContainer = styled.div`
   `)}
 `;
 
-const PageTitle: FC<Props> = ({ backgroundPicture, title, header }) => (
+const PageTitle: FC<Props> = ({
+  backgroundColor,
+  backgroundPicture,
+  title,
+  header,
+}) => (
   // @ts-ignore
   <Container fluid={backgroundPicture?.fluid ?? undefined}>
-    <TitleContainer>
+    <TitleContainer backgroundColor={backgroundColor}>
       <InnerContainer>
         <Title type="pageTitle" title={title!} />
         <Title type="h1" title={header!} />
