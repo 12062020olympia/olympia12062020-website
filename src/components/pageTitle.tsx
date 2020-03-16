@@ -81,20 +81,10 @@ const TitleContainer = styled.div<{
 const InnerContainer = styled.div`
   flex-direction: column;
   justify-content: flex-end;
-  padding-top: 20px;
-  padding-bottom: 15px;
-
-  > * {
-    padding: 0 10px;
-  }
+  padding: 20px 10px 15px;
 
   ${applyMediaQueryMd(css`
-    padding-top: 25px;
-    padding-bottom: 25px;
-
-    > * {
-      padding: 0 30px;
-    }
+    padding: 25px 30px;
   `)}
 `;
 
