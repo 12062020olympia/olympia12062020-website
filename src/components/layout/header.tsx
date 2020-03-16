@@ -1,5 +1,9 @@
+import _ from 'lodash';
+import { graphql, useStaticQuery } from 'gatsby';
 import { Link } from 'gatsby-plugin-intl';
 import React from 'react';
+// @ts-ignore typescript definition of library faulty
+import { ScreenClass } from 'react-awesome-styled-grid';
 import styled, { css } from 'styled-components';
 
 import * as colors from '../../style/colors';
@@ -10,6 +14,7 @@ import {
   headerHeight,
 } from '../../style/dimensions';
 import Burger from './burger';
+import Flex from '../elements/flex';
 import Title from '../elements/title';
 
 interface Props {
@@ -17,8 +22,15 @@ interface Props {
   setIsMenuOpen: (isOpen: boolean) => void;
 }
 
+interface MenuQuery {
+  pages: Array<{
+    slug: string;
+    title: string;
+  }>;
+}
+
 const StyledHeader = styled.header`
-  background-color: ${colors.White};
+  background-color: ${colors.FreshDough};
   height: ${headerHeight.sm};
   left: 0;
   position: fixed;
@@ -62,15 +74,60 @@ const HeaderContent = styled.div`
   `)}
 `;
 
-const Header: React.FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => (
-  <StyledHeader>
-    <HeaderContent>
-      <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
-        <Title type="navTitle" title="12062020" />
-      </Link>
-      <Burger isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-    </HeaderContent>
-  </StyledHeader>
-);
+const RightMenu = styled(Flex)`
+  > *:not(:last-child) {
+    margin-right: 25px;
+  }
+`;
+
+const HeaderMenuLink = styled(Link)`
+  color: ${colors.DefaultFontColor};
+  text-decoration: none;
+`;
+
+const Header: React.FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => {
+  const { menu } = useStaticQuery<{
+    menu: MenuQuery;
+  }>(query);
+
+  return (
+    <StyledHeader>
+      <HeaderContent>
+        <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+          <Title type="navTitle" title="12062020" />
+        </Link>
+        <RightMenu flexDirection="row">
+          <ScreenClass
+            render={(screen: string) => (
+              <>
+                {_.includes(['md', 'lg', 'xl'], screen) &&
+                  menu.pages.map(page => (
+                    <HeaderMenuLink key={page.slug} to={`/${page.slug}`}>
+                      {page.title}
+                    </HeaderMenuLink>
+                  ))}
+              </>
+            )}
+          />
+          <Burger isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+        </RightMenu>
+      </HeaderContent>
+    </StyledHeader>
+  );
+};
+
+const query = graphql`
+  query HeaderMenu($locale: String) {
+    menu: contentfulMenu(
+      slug: { eq: "header-short" }
+      node_locale: { eq: $locale }
+    ) {
+      pages {
+        slug
+        title
+      }
+    }
+  }
+`;
 
 export default Header;
