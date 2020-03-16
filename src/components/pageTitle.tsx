@@ -19,6 +19,7 @@ interface Props {
   title?: string | null;
   header?: string | null;
   backgroundPicture?: { fluid: Maybe<GatsbyContentfulFluidFragment> };
+  backgroundColor?: string | null;
 }
 
 const titleHeigh: Record<ScreenSize, string> = {
@@ -57,42 +58,49 @@ const Container = styled(BackgroundImage)`
   `)}
 `;
 
-const TitleContainer = styled.div`
-  background-color: ${colors.PageTitleBackground};
-  flex-direction: column;
-  justify-content: flex-end;
+const TitleContainer = styled.div<{
+  backgroundColor: string | null | undefined;
+}>`
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor ? colors.contentColors[backgroundColor] : colors.White};
   margin: ${top.sm} ${contentMargin.sm} ${bottom.sm} ${contentMargin.sm};
-  padding-top: 20px;
-  padding-bottom: 15px;
   width: calc(100% - 2 * ${contentMargin.sm});
-
-  > * {
-    padding: 0 10px;
-  }
 
   ${applyMediaQueryMd(css`
     margin: ${top.md} ${contentMargin.md} ${bottom.md} ${contentMargin.md};
-    padding-top: 25px;
-    padding-bottom: 25px;
-    width: min-content;
-
-    > * {
-      padding: 0 30px;
-    }
+    max-width: calc(100% - 2 * ${contentMargin.md});
+    width: max-content;
   `)}
 
   ${applyMediaQueryLg(css`
     margin: ${top.lg} ${contentMargin.lg} ${bottom.lg} ${contentMargin.lg};
-    width: min-content;
+    max-width: 60vw;
   `)}
 `;
 
-const PageTitle: FC<Props> = ({ backgroundPicture, title, header }) => (
+const InnerContainer = styled.div`
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px 10px 15px;
+
+  ${applyMediaQueryMd(css`
+    padding: 25px 30px;
+  `)}
+`;
+
+const PageTitle: FC<Props> = ({
+  backgroundColor,
+  backgroundPicture,
+  title,
+  header,
+}) => (
   // @ts-ignore
   <Container fluid={backgroundPicture?.fluid ?? undefined}>
-    <TitleContainer>
-      <Title type="pageTitle" title={title!} />
-      <Title type="h1" title={header!} />
+    <TitleContainer backgroundColor={backgroundColor}>
+      <InnerContainer>
+        <Title type="pageTitle" title={title!} />
+        <Title type="h1" title={header!} />
+      </InnerContainer>
     </TitleContainer>
   </Container>
 );
