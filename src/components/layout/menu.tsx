@@ -1,8 +1,9 @@
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql } from 'gatsby';
 import { Link, useIntl } from 'gatsby-plugin-intl';
 import styled, { css } from 'styled-components';
 import React, { FC } from 'react';
 
+import { MenuInformationFragment } from '../../../types/graphql-types';
 import CloseIcon from '../../icons/icon-close.svg';
 import * as colors from '../../style/colors';
 import { applyMediaQueryMd } from '../../style/dimensions';
@@ -11,17 +12,9 @@ import SocialMediaIcon from '../elements/socialMediaIcon';
 import IconButton from '../elements/iconButton';
 
 interface Props {
+  menu?: MenuInformationFragment;
   isMenuOpen: boolean;
   setIsMenuOpen: (isOpen: boolean) => void;
-}
-
-interface MenuQuery {
-  contentfulMenu: {
-    pages: Array<{
-      slug: string;
-      title: string;
-    }>;
-  };
 }
 
 const Container = styled.nav<{ open: boolean }>`
@@ -77,9 +70,8 @@ const SocialMediaIconContainer = styled(Flex)`
   `)}
 `;
 
-const Menu: FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => {
+const Menu: FC<Props> = ({ isMenuOpen, setIsMenuOpen, menu }) => {
   const intl = useIntl();
-  const { contentfulMenu: menu } = useStaticQuery<MenuQuery>(query);
   return (
     <Container open={isMenuOpen} aria-hidden={!isMenuOpen}>
       <CloseButton
@@ -88,12 +80,12 @@ const Menu: FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => {
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       />
       <Flex flexDirection="column">
-        {menu.pages.map(page => (
+        {menu?.pages?.map((page, index) => (
           <MenuLink
-            key={page.slug}
-            to={`/${page.slug !== 'home' ? page.slug : ''}`}
+            key={page?.slug ?? index}
+            to={`/${page?.slug !== 'home' ? page?.slug : ''}`}
           >
-            {page.title}
+            {page?.title}
           </MenuLink>
         ))}
       </Flex>
@@ -106,13 +98,11 @@ const Menu: FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => {
   );
 };
 
-const query = graphql`
-  query Menu($locale: String) {
-    contentfulMenu(slug: { eq: "main" }, node_locale: { eq: $locale }) {
-      pages {
-        slug
-        title
-      }
+export const query = graphql`
+  fragment MenuInformation on ContentfulMenu {
+    pages {
+      slug
+      title
     }
   }
 `;

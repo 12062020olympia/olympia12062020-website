@@ -1,4 +1,3 @@
-import { graphql, useStaticQuery } from 'gatsby';
 import {
   IntlContextConsumer,
   changeLocale,
@@ -9,6 +8,7 @@ import React, { FC } from 'react';
 import { Container, Row, Col } from 'react-awesome-styled-grid';
 import styled, { css } from 'styled-components';
 
+import { MenuInformationFragment } from '../../../types/graphql-types';
 import * as colors from '../../style/colors';
 import Title from '../elements/title';
 import Flex from '../elements/flex';
@@ -20,14 +20,9 @@ import {
 } from '../../style/dimensions';
 
 interface Props {
+  footerMenu?: MenuInformationFragment;
   setDisplayCookieBanner: (display: boolean) => void;
-}
-
-interface MenuQuery {
-  pages: Array<{
-    slug: string;
-    title: string;
-  }>;
+  siteMap?: MenuInformationFragment;
 }
 
 const FooterContainer = styled.div`
@@ -118,14 +113,10 @@ const FooterButton = styled.button`
   }
 `;
 
-const Footer: FC<Props> = ({ setDisplayCookieBanner }) => {
+const Footer: FC<Props> = ({ footerMenu, siteMap, setDisplayCookieBanner }) => {
   const intl = useIntl();
-  const { footerMenu, siteMap } = useStaticQuery<{
-    siteMap: MenuQuery;
-    footerMenu: MenuQuery;
-  }>(query);
 
-  const siteMapPages = siteMap.pages;
+  const siteMapPages = siteMap?.pages ?? [];
   const siteMapHalfLength = Math.ceil(siteMapPages.length / 2);
   const [leftSiteMapPages, rightSiteMapPages] = [
     siteMapPages.slice(0, siteMapHalfLength),
@@ -145,19 +136,19 @@ const Footer: FC<Props> = ({ setDisplayCookieBanner }) => {
             <FooterTitle type="footerTitle" title="12062020" />
           </Col>
           <Col noGutter xs={12} sm={3} md={2}>
-            {leftSiteMapPages.map(page => (
+            {leftSiteMapPages.map((page, index) => (
               <SiteMapLink
-                key={page.slug}
-                to={`/${page.slug !== 'home' ? page.slug : '/'}`}
+                key={page?.slug ?? index}
+                to={`/${page?.slug !== 'home' ? page?.slug : '/'}`}
               >
-                {page.title}
+                {page?.title}
               </SiteMapLink>
             ))}
           </Col>
           <Col noGutter xs={12} sm={4} md={5}>
-            {rightSiteMapPages.map(page => (
-              <SiteMapLink key={page.slug} to={`/${page.slug}`}>
-                {page.title}
+            {rightSiteMapPages.map((page, index) => (
+              <SiteMapLink key={page?.slug ?? index} to={`/${page?.slug}`}>
+                {page?.title}
               </SiteMapLink>
             ))}
           </Col>
@@ -199,9 +190,9 @@ const Footer: FC<Props> = ({ setDisplayCookieBanner }) => {
               <FooterButton onClick={() => setDisplayCookieBanner(true)}>
                 {intl.formatMessage({ id: 'footer.cookieSettings' })}
               </FooterButton>
-              {footerMenu.pages.map(page => (
-                <FooterLink key={page.slug} to={`/${page.slug}`}>
-                  {page.title}
+              {footerMenu?.pages?.map((page, index) => (
+                <FooterLink key={page?.slug ?? index} to={`/${page?.slug}`}>
+                  {page?.title}
                 </FooterLink>
               ))}
             </Flex>
@@ -211,28 +202,5 @@ const Footer: FC<Props> = ({ setDisplayCookieBanner }) => {
     </FooterContainer>
   );
 };
-
-const query = graphql`
-  query SiteMap($locale: String) {
-    siteMap: contentfulMenu(
-      slug: { eq: "main" }
-      node_locale: { eq: $locale }
-    ) {
-      pages {
-        slug
-        title
-      }
-    }
-    footerMenu: contentfulMenu(
-      slug: { eq: "footer" }
-      node_locale: { eq: $locale }
-    ) {
-      pages {
-        slug
-        title
-      }
-    }
-  }
-`;
 
 export default Footer;

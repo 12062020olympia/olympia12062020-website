@@ -1,9 +1,8 @@
 import React, { PropsWithChildren, useState } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 
-import Footer from './footer';
-import Header from './header';
-import Menu from './menu';
+import { MenuInformationFragment } from '../../../types/graphql-types';
+import { hasSeenCookieNotice } from '../../cookie';
 import {
   applyMediaQueryLg,
   applyMediaQueryMd,
@@ -11,7 +10,15 @@ import {
   headerHeight,
 } from '../../style/dimensions';
 import CookieBanner from '../cookies/cookieBanner';
-import { hasSeenCookieNotice } from '../../cookie';
+import Footer from './footer';
+import Header from './header';
+import Menu from './menu';
+
+interface Props {
+  mainMenu?: MenuInformationFragment;
+  footerMenu?: MenuInformationFragment;
+  headerMenu?: MenuInformationFragment;
+}
 
 const Content = styled.main`
   margin: 0 auto;
@@ -39,7 +46,12 @@ const awesomegridConf = {
   },
 };
 
-const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
+const Layout: React.FC<PropsWithChildren<Props>> = ({
+  children,
+  footerMenu,
+  headerMenu,
+  mainMenu,
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [displayCookieBanner, setDisplayCookieBanner] = useState(
     !hasSeenCookieNotice()
@@ -47,10 +59,22 @@ const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   return (
     <ThemeProvider theme={{ awesomegrid: awesomegridConf }}>
       <>
-        <Header isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-        <Menu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+        <Header
+          headerMenu={headerMenu}
+          isMenuOpen={isMenuOpen}
+          setIsMenuOpen={setIsMenuOpen}
+        />
+        <Menu
+          menu={mainMenu}
+          isMenuOpen={isMenuOpen}
+          setIsMenuOpen={setIsMenuOpen}
+        />
         <Content>{children}</Content>
-        <Footer setDisplayCookieBanner={setDisplayCookieBanner} />
+        <Footer
+          footerMenu={footerMenu}
+          siteMap={mainMenu}
+          setDisplayCookieBanner={setDisplayCookieBanner}
+        />
         <CookieBanner
           displayCookieBanner={displayCookieBanner}
           setDisplayCookieBanner={setDisplayCookieBanner}
