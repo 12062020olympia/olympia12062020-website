@@ -31,6 +31,13 @@ const TitleContainer = styled.div`
   `)}
 `;
 
+const ContentContainer = styled.div`
+  & a {
+    color: ${colors.Black};
+    font-weight: bold;
+  }
+`;
+
 const DefaultContentBlock: FC<Props> = ({ data }) => {
   const backgroundColor = data.backgroundColor
     ? colors.contentColors[data.backgroundColor]
@@ -43,7 +50,9 @@ const DefaultContentBlock: FC<Props> = ({ data }) => {
         </TitleContainer>
       </LayoutRow>
       <LayoutRow layout={(data.contentLayout as ContentBlockLayout) || ContentBlockLayout.Center}>
-        <ContentfulRichText document={data.richText && data.richText.json} />
+        <ContentContainer>
+          <ContentfulRichText document={data.richText && data.richText.json} />
+        </ContentContainer>
       </LayoutRow>
     </Container>
   );
