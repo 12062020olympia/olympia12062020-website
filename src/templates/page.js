@@ -55,7 +55,11 @@ const Page = ({ data }) => {
     <>
       <GlobalStyle />
 
-      <Layout>
+      <Layout
+        mainMenu={data.mainMenu}
+        footerMenu={data.footerMenu}
+        headerMenu={data.headerMenu}
+      >
         <SEO
           title={data.contentfulPage.title}
           description={data.contentfulPage?.seoDescription ?? undefined}
@@ -74,6 +78,24 @@ export const query = graphql`
       title
       seoDescription
       node_locale
+    }
+    mainMenu: contentfulMenu(
+      slug: { eq: "main" }
+      node_locale: { eq: $locale }
+    ) {
+      ...MenuInformation
+    }
+    footerMenu: contentfulMenu(
+      slug: { eq: "footer" }
+      node_locale: { eq: $locale }
+    ) {
+      ...MenuInformation
+    }
+    headerMenu: contentfulMenu(
+      slug: { eq: "header-short" }
+      node_locale: { eq: $locale }
+    ) {
+      ...MenuInformation
     }
   }
 `;

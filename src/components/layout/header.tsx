@@ -1,11 +1,11 @@
 import _ from 'lodash';
-import { graphql, useStaticQuery } from 'gatsby';
 import { Link } from 'gatsby-plugin-intl';
 import React from 'react';
 // @ts-ignore typescript definition of library faulty
 import { ScreenClass } from 'react-awesome-styled-grid';
 import styled, { css } from 'styled-components';
 
+import { MenuInformationFragment } from '../../../types/graphql-types';
 import * as colors from '../../style/colors';
 import {
   applyMediaQueryMd,
@@ -18,15 +18,9 @@ import Flex from '../elements/flex';
 import Title from '../elements/title';
 
 interface Props {
+  headerMenu?: MenuInformationFragment;
   isMenuOpen: boolean;
   setIsMenuOpen: (isOpen: boolean) => void;
-}
-
-interface MenuQuery {
-  pages: Array<{
-    slug: string;
-    title: string;
-  }>;
 }
 
 const StyledHeader = styled.header`
@@ -85,11 +79,7 @@ const HeaderMenuLink = styled(Link)`
   text-decoration: none;
 `;
 
-const Header: React.FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => {
-  const { menu } = useStaticQuery<{
-    menu: MenuQuery;
-  }>(query);
-
+const Header: React.FC<Props> = ({ headerMenu, isMenuOpen, setIsMenuOpen }) => {
   return (
     <StyledHeader>
       <HeaderContent>
@@ -101,9 +91,12 @@ const Header: React.FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => {
             render={(screen: string) => (
               <>
                 {_.includes(['md', 'lg', 'xl'], screen) &&
-                  menu.pages.map(page => (
-                    <HeaderMenuLink key={page.slug} to={`/${page.slug}`}>
-                      {page.title}
+                  headerMenu?.pages?.map((page, index) => (
+                    <HeaderMenuLink
+                      key={page?.slug ?? index}
+                      to={`/${page?.slug}`}
+                    >
+                      {page?.title}
                     </HeaderMenuLink>
                   ))}
               </>
@@ -115,19 +108,5 @@ const Header: React.FC<Props> = ({ isMenuOpen, setIsMenuOpen }) => {
     </StyledHeader>
   );
 };
-
-const query = graphql`
-  query HeaderMenu($locale: String) {
-    menu: contentfulMenu(
-      slug: { eq: "header-short" }
-      node_locale: { eq: $locale }
-    ) {
-      pages {
-        slug
-        title
-      }
-    }
-  }
-`;
 
 export default Header;
