@@ -13,6 +13,7 @@ export type TitleType =
   | 'pageTitle'
   | 'navTitle'
   | 'footerTitle'
+  | 'heroTitle'
   | 'h1'
   | 'h2'
   | 'h3'
@@ -23,11 +24,12 @@ export type ParagraphType = 'large' | 'normal' | 'small' | 'tiny';
 
 export type FontType = TitleType | ParagraphType;
 
-const fontSizes: Record<FontType, number> = {
+export const fontSizes: Record<FontType, number> = {
   cardSubtitle: 16,
   navTitle: 32,
   footerTitle: 22,
   pageTitle: 16,
+  heroTitle: 48,
   h1: 42,
   h2: 36,
   h3: 28,
@@ -40,11 +42,12 @@ const fontSizes: Record<FontType, number> = {
   tiny: 12,
 };
 
-const fontSizesDesktop: Record<FontType, number> = {
+export const fontSizesDesktop: Record<FontType, number> = {
   cardSubtitle: 28,
   navTitle: 58,
   footerTitle: 28,
   pageTitle: 16,
+  heroTitle: 96,
   h1: 84,
   h2: 48,
   h3: 36,
@@ -97,6 +100,14 @@ export const fontStyles: Record<FontType | string, any> = {
     font-style: normal;
     font-weight: normal;
     line-height: 150%;
+    text-transform: uppercase;
+  `,
+  heroTitle: css`
+    ${applyFontSize('heroTitle')}
+    font-family: ${families.brand}, ${families.fallback};
+    font-style: normal;
+    font-weight: bold;
+    line-height: 75%;
     text-transform: uppercase;
   `,
   h1: css`

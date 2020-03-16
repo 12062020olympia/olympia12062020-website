@@ -6,47 +6,54 @@ import { DefaultContentBlockInformationFragment } from '../../../types/graphql-t
 import * as colors from '../../style/colors';
 import ContentfulRichText from '../contentfulRichText';
 import Title from '../elements/title';
-import {
-  contentMargin,
-  contentMaxWidth,
-  applyMediaQueryMd,
-  applyMediaQueryLg,
-} from '../../style/dimensions';
+import { applyMediaQueryMd } from '../../style/dimensions';
+import { ContentBlockLayout } from './contentBlock';
+import LayoutRow from './layoutRow';
 
 interface Props {
   data: DefaultContentBlockInformationFragment;
 }
 
-const Container = styled.div<{ backgroundColor: string | null | undefined }>`
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor ? colors.contentColors[backgroundColor] : colors.White};
-  padding: 20px ${contentMargin.sm};
+const Container = styled.div<{ backgroundColor: string }>`
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  padding: 20px 0;
 
   ${applyMediaQueryMd(css`
-    padding: 20px ${contentMargin.md};
-  `)}
-
-  ${applyMediaQueryLg(css`
-    padding: 20px ${contentMargin.lg};
+    padding: 40px 0;
   `)}
 `;
 
-const InnerContainer = styled.div`
-  margin: 0 auto 20px 0;
-  max-width: ${contentMaxWidth};
+const TitleContainer = styled.div`
+  padding: 8px 0 0 0;
 
   ${applyMediaQueryMd(css`
-    margin: 48px auto 70px auto;
+    padding: 20px 0 8px 0;
   `)}
+`;
+
+const ContentContainer = styled.div`
+  & a {
+    color: ${colors.Black};
+    font-weight: bold;
+  }
 `;
 
 const DefaultContentBlock: FC<Props> = ({ data }) => {
+  const backgroundColor = data.backgroundColor
+    ? colors.contentColors[data.backgroundColor]
+    : 'transparent';
   return (
-    <Container backgroundColor={data.backgroundColor}>
-      <InnerContainer>
-        <Title title={data.title!} type="h3" />
-        <ContentfulRichText document={data.richText && data.richText.json} />
-      </InnerContainer>
+    <Container backgroundColor={backgroundColor}>
+      <LayoutRow layout={(data.titleLayout as ContentBlockLayout) || ContentBlockLayout.Center}>
+        <TitleContainer>
+          <Title title={data.title!} type="h3" />
+        </TitleContainer>
+      </LayoutRow>
+      <LayoutRow layout={(data.contentLayout as ContentBlockLayout) || ContentBlockLayout.Center}>
+        <ContentContainer>
+          <ContentfulRichText document={data.richText && data.richText.json} />
+        </ContentContainer>
+      </LayoutRow>
     </Container>
   );
 };
@@ -62,6 +69,8 @@ export const query = graphql`
     slug
     startDate
     title
+    titleLayout
+    contentLayout
   }
 `;
 

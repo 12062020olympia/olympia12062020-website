@@ -7,6 +7,7 @@ import {
 } from 'styled-components';
 
 export const contentMaxWidth = '660px';
+export const largeContentMaxWidth = '1080px';
 
 export type ScreenSize = 'sm' | 'md' | 'lg';
 

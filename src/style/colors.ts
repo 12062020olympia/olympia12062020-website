@@ -38,6 +38,8 @@ export const Primary = BrandPrimary500;
 export const Secondary = Dandelion; // todo: remove;
 export const FocusColor = '#007AFF';
 
+export const GreenDark = '#BCCE16';
+
 // Fonts
 export const DefaultFontColor = Grey900;
 
@@ -75,4 +77,8 @@ export const contentColors: Record<string, string> = {
   canneryPark: CanneryPark,
   grey: Grey350,
   lightGrey: Grey200,
+  green: GreenDark,
+  pink: Pink,
+  blue: Blue,
+  orange: Orange,
 };

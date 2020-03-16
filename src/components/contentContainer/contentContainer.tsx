@@ -1,10 +1,8 @@
 import { graphql } from 'gatsby';
 import React, { FC } from 'react';
-import styled from 'styled-components';
 
 import { ContentContainerInformationFragment } from '../../../types/graphql-types';
-import Title from '../elements/title';
-import ContentBlock from '../contentBlocks/contentBlock';
+import DefaultContentContainer from './defaultContentContainer';
 import Carousel from './carousel';
 import FaqContainer from './faqContainer';
 import PetitionsContentContainer from './petitionsContentContainer';
@@ -21,35 +19,21 @@ interface Props {
   data: ContentContainerInformationFragment;
 }
 
-const Container = styled.div``;
-
 const ContentContainer: FC<Props> = ({ data }) => {
   if (data.appearance === ContentContainerAppearance.Carousel) {
     return <Carousel data={data} />;
   }
-
   if (data.appearance === ContentContainerAppearance.FAQContainer) {
     return <FaqContainer data={data} />;
   }
-
   if (data.appearance === ContentContainerAppearance.Petitions) {
     return <PetitionsContentContainer data={data} />;
   }
-
   if (data.appearance === ContentContainerAppearance.QuotesCarousel) {
     return <QuotesCarousel data={data} />;
   }
 
-  return (
-    <>
-      <Container>
-        <Title type="h4" title={data.title!} />
-      </Container>
-      {data.contentModules?.map(c => (
-        <ContentBlock data={c!} />
-      ))}
-    </>
-  );
+  return <DefaultContentContainer data={data} />
 };
 
 export const query = graphql`
@@ -59,6 +43,7 @@ export const query = graphql`
       type
     }
     appearance
+    backgroundColor
     contentModules {
       ...ContentBlockInformation
     }
