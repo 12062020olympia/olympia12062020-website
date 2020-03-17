@@ -17,6 +17,8 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     ${fontStyles.normal}
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   button {
