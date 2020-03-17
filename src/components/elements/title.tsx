@@ -14,6 +14,8 @@ const tag: Record<TitleType, keyof JSX.IntrinsicElements> = {
   pageTitle: 'h2',
   footerTitle: 'span',
   heroTitle: 'h4',
+  pictureTitle: 'p',
+  pictureDescription: 'p',
   h1: 'h1',
   h2: 'h2',
   h3: 'h3',
