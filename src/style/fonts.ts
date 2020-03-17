@@ -14,6 +14,8 @@ export type TitleType =
   | 'navTitle'
   | 'footerTitle'
   | 'heroTitle'
+  | 'pictureTitle'
+  | 'pictureDescription'
   | 'h1'
   | 'h2'
   | 'h3'
@@ -30,6 +32,8 @@ export const fontSizes: Record<FontType, number> = {
   footerTitle: 22,
   pageTitle: 16,
   heroTitle: 48,
+  pictureTitle: 18,
+  pictureDescription: 16,
   h1: 42,
   h2: 36,
   h3: 28,
@@ -48,6 +52,8 @@ export const fontSizesDesktop: Record<FontType, number> = {
   footerTitle: 28,
   pageTitle: 16,
   heroTitle: 96,
+  pictureTitle: 18,
+  pictureDescription: 16,
   h1: 84,
   h2: 48,
   h3: 36,
@@ -109,6 +115,20 @@ export const fontStyles: Record<FontType | string, any> = {
     font-weight: bold;
     line-height: 75%;
     text-transform: uppercase;
+  `,
+  pictureTitle: css`
+    ${applyFontSize('pictureTitle')}
+    font-family: ${families.default}, ${families.fallback};
+    font-style: normal;
+    font-weight: bold;
+    line-height: 120%;
+  `,
+  pictureDescription: css`
+    ${applyFontSize('pictureDescription')}
+    font-family: ${families.default}, ${families.fallback};
+    font-style: normal;
+    font-weight: normal;
+    line-height: 150%;
   `,
   h1: css`
     ${applyFontSize('h1')}
