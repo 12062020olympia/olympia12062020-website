@@ -5,7 +5,7 @@ import ExpandIcon from '../../icons/icon-expand.svg';
 import * as colors from '../../style/colors';
 import { applyMediaQueryMd } from '../../style/dimensions';
 import { fontStyles } from '../../style/fonts';
-import ButtonLink, { ButtonType } from '../elements/buttonLink';
+import Button, { ButtonType } from '../elements/button';
 import IconButton from '../elements/iconButton';
 import Title from '../elements/title';
 
@@ -176,7 +176,7 @@ const PetitionStep = ({
             </TitleContainer>
             {buttonLabel && buttonLink && (
               <ActionsContainer>
-                <ButtonLink
+                <Button
                   buttonType={buttonType}
                   label={buttonLabel}
                   href={buttonLink}

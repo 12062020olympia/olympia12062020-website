@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 
 import { ContentContainerInformationFragment } from '../../../types/graphql-types';
 import ContentfulRichText from '../contentfulRichText';
-import ButtonLink from '../elements/buttonLink';
+import Button from '../elements/button';
 import Title from '../elements/title';
 import * as colors from '../../style/colors';
 import {
@@ -148,7 +148,7 @@ const SlideDate = styled(Paragraph)`
   margin: 0;
 `;
 
-const StyledButtonLink = styled(ButtonLink)`
+const StyledButtonLink = styled(Button)`
   display: inline-block;
   margin-top: 20px;
 `;
