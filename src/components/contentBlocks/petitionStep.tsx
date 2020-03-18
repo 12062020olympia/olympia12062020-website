@@ -62,7 +62,9 @@ const Card = styled.div`
   margin-left: 5px;
 `;
 
-const CardHeader = styled.div`
+const CardHeader = styled.div<{ isHighlighted: boolean }>`
+  background-color: ${({ isHighlighted }) =>
+    isHighlighted ? colors.Apricot : colors.White};
   box-sizing: border-box;
   display: flex;
   min-height: 112px;
@@ -162,7 +164,7 @@ const PetitionStep = ({
       <CardLine />
       <CardDot />
       <Card>
-        <CardHeader>
+        <CardHeader isHighlighted={isHighlighted}>
           <TitleWithActionsContainer>
             <TitleContainer>
               <Subtitle isHighlighted={isHighlighted}>{subtitle}</Subtitle>
