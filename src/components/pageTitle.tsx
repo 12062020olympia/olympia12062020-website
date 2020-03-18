@@ -80,6 +80,7 @@ const TitleContainer = styled.div<{
 
 const InnerContainer = styled.div`
   flex-direction: column;
+  hyphens: auto;
   justify-content: flex-end;
   padding: 20px 10px 15px;
 
