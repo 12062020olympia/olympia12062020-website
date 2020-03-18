@@ -32,10 +32,28 @@ export const handler = (event, context, callback) => {
     });
   }
 
+  let receiverMail = process.env.CONTACT_EMAIL;
+
+  if (body.category === 'tickets' && process.env.CONTACT_EMAIL_TICKETS) {
+    receiverMail = process.env.CONTACT_EMAIL_TICKETS;
+  }
+
+  if (body.category === 'petitions' && process.env.CONTACT_EMAIL_PETITIONS) {
+    receiverMail = process.env.CONTACT_EMAIL_PETITIONS;
+  }
+
+  if (body.category === 'volunteer' && process.env.CONTACT_EMAIL_VOLUNTEER) {
+    receiverMail = process.env.CONTACT_EMAIL_VOLUNTEER;
+  }
+
+  if (body.category === 'press' && process.env.CONTACT_EMAIL_PRESS) {
+    receiverMail = process.env.CONTACT_EMAIL_PRESS;
+  }
+
   const data = {
     from: process.env.SENDER_EMAIL,
     replyTo: body.email,
-    to: process.env.CONTACT_EMAIL,
+    to: receiverMail,
     subject: `[KONTAKTFORMULAR] ${body.name}: ${body.subject}`,
     text: body.message,
   };
