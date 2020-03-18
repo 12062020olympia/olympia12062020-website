@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useIntl } from 'gatsby-plugin-intl';
 import React, { FC, useCallback, useState, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -11,8 +12,10 @@ import {
   applyMediaQueryLg,
 } from '../../style/dimensions';
 import Button from '../elements/button';
+import Checkbox from '../elements/checkbox';
 import Select from '../elements/select';
-import { useIntl } from 'gatsby-plugin-intl';
+import Flex from '../elements/flex';
+import Paragraph from '../elements/paragraph';
 
 interface Props {}
 
@@ -43,6 +46,10 @@ const Form = styled.form`
   `)}
 `;
 
+const SubmitButton = styled(Button)`
+  margin-right: 16px;
+`;
+
 const ContactForm: FC<Props> = () => {
   const intl = useIntl();
   const [name, setName] = useState('');
@@ -50,23 +57,38 @@ const ContactForm: FC<Props> = () => {
   const [category, setCategory] = useState('general');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
-
+  const [agreedTerms, setAgreedTerms] = useState(false);
   const [botField, setBotField] = useState('');
+  const [statusLabel, setStatusLabel] = useState('');
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit = useCallback(
     event => {
       event.preventDefault();
-
-      axios.post('/.netlify/functions/contact-form', {
-        botField,
-        name,
-        email,
-        category,
-        subject,
-        message,
-      });
+      setIsSubmitting(true);
+      axios
+        .post('/.netlify/functions/contact-form', {
+          botField,
+          name,
+          email,
+          category,
+          subject,
+          message,
+          agreedTerms,
+        })
+        .then(() => {
+          setMessage('');
+          setSubject('');
+          setAgreedTerms(false);
+          setStatusLabel(intl.formatMessage({ id: `contact.success` }));
+        })
+        .catch(() =>
+          setStatusLabel(intl.formatMessage({ id: `contact.failure` }))
+        )
+        .finally(() => setIsSubmitting(false));
     },
-    [botField, category, email, message, name, subject]
+    [agreedTerms, botField, category, email, intl, message, name, subject]
   );
 
   const options = useMemo(
@@ -130,11 +152,24 @@ const ContactForm: FC<Props> = () => {
         mandatory
         onValueChange={setMessage}
       />
-
-      <Button
-        type="submit"
-        label={intl.formatMessage({ id: `contact.send` })}
+      <Checkbox
+        label={intl.formatMessage({ id: `contact.terms` })}
+        mandatory
+        name="agreedTerms"
+        onValueChange={setAgreedTerms}
+        value={agreedTerms}
       />
+
+      <Flex alignItems="center">
+        <SubmitButton
+          disabled={isSubmitting}
+          type="submit"
+          label={intl.formatMessage({ id: `contact.send` })}
+        />
+        <Paragraph style={{ marginBottom: 0, marginTop: 0 }} type="small">
+          {statusLabel}
+        </Paragraph>
+      </Flex>
     </Form>
   );
 };

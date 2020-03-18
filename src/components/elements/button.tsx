@@ -5,6 +5,7 @@ import * as colors from '../../style/colors';
 interface Props {
   buttonType?: ButtonType;
   className?: string;
+  disabled?: boolean;
   href?: string;
   onClick?: () => void;
   label: string;
@@ -14,6 +15,7 @@ interface Props {
 export type ButtonType = 'primary' | 'secondary' | 'complementary';
 
 const StyledButton = styled.button<{
+  disabled?: boolean;
   buttonType: ButtonType;
 }>`
   background-color: ${colors.ButtonColor};
@@ -22,6 +24,7 @@ const StyledButton = styled.button<{
   font-weight: bold;
   color: ${colors.DefaultFontColor};
   padding: 9px 13px;
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   text-decoration: none;
 
   :hover {
@@ -65,6 +68,7 @@ const StyledLink = StyledButton.withComponent('a');
 const Button: FC<Props> = ({
   buttonType = 'primary',
   className,
+  disabled,
   href,
   label,
   onClick,
@@ -75,6 +79,7 @@ const Button: FC<Props> = ({
       <StyledLink
         buttonType={buttonType}
         className={className}
+        disabled={disabled}
         href={href}
         type={type}
       >
@@ -86,6 +91,7 @@ const Button: FC<Props> = ({
     <StyledButton
       buttonType={buttonType}
       className={className}
+      disabled={disabled}
       onClick={onClick}
       type={type}
     >

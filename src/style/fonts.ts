@@ -199,7 +199,7 @@ export const fontStyles: Record<FontType | string, any> = {
     font-weight: normal;
   `,
   tiny: css`
-    ${applyFontSize('normal')}
+    ${applyFontSize('tiny')}
     font-family: ${families.default}, ${families.fallback};
     font-style: normal;
     line-height: 150%;

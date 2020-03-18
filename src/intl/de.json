@@ -23,7 +23,10 @@
     "email": "E-Mail-Addresse",
     "subject": "Betreff",
     "message": "Nachricht",
-    "send": "Senden"
+    "send": "Senden",
+    "terms": "Wenn Sie die im Kontaktformular eingegebenen personenbezogenen Daten (mit * gekennzeichnete Felder sind für die Bearbeitung des Kontakts erforderlich) durch Klick auf den nachfolgenden Button übersenden, werden diese von uns ausschließlich zweckgebunden verarbeitet. Eine Weitergabe an Dritte findet grundsätzlich nicht statt es sei denn geltende Datenschutzvorschriften rechtfertigen eine Übertragung oder wir sind gesetzlich verpflichtet. Weitere Informationen zur Datenverarbeitung sowie zu Ihren Widerspruchsmöglichkeiten finden Sie auch in der Datenschutzerklärung dieser Website.",
+    "success": "Die Nachricht wurde erfolgreich übermittelt.",
+    "failure": "Die Nachricht konnte nicht übermittelt werden. Bitte versuche es erneut!"
   },
   "iconButton": {
     "openMenu": "Öffne das Menü",

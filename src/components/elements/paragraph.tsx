@@ -1,9 +1,10 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { FC, PropsWithChildren, CSSProperties } from 'react';
 import styled from 'styled-components';
 import { fontStyles, ParagraphType } from '../../style/fonts';
 
 interface Props {
   className?: string;
+  style?: CSSProperties;
   type?: ParagraphType;
 }
 
@@ -14,9 +15,10 @@ const StyledParagraph = styled.p<{ type: ParagraphType }>`
 const Paragraph: FC<PropsWithChildren<Props>> = ({
   children,
   className,
+  style,
   type = 'normal',
 }) => (
-  <StyledParagraph type={type} className={className}>
+  <StyledParagraph style={style} type={type} className={className}>
     {children}
   </StyledParagraph>
 );
