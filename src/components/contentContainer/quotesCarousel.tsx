@@ -170,7 +170,7 @@ const QuotesCarousel: FC<Props> = ({ data }) => {
           <SlideInner>
             <ContentfulRichText document={c?.richText && c.richText.json} />
             <Flex flexDirection="row" alignItems="center">
-              <AuthorImage fluid={(c as any).picture.fluid} />
+              <AuthorImage fluid={(c as any).picture?.fluid} />
               <Paragraph type="small">{c?.title!} </Paragraph>
             </Flex>
           </SlideInner>
