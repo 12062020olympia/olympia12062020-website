@@ -24,7 +24,7 @@
     "subject": "Subject",
     "message": "Message",
     "send": "Send",
-    "terms": "Wenn Sie die im Kontaktformular eingegebenen personenbezogenen Daten (mit * gekennzeichnete Felder sind für die Bearbeitung des Kontakts erforderlich) durch Klick auf den nachfolgenden Button übersenden, werden diese von uns ausschließlich zweckgebunden verarbeitet. Eine Weitergabe an Dritte findet grundsätzlich nicht statt es sei denn geltende Datenschutzvorschriften rechtfertigen eine Übertragung oder wir sind gesetzlich verpflichtet. Weitere Informationen zur Datenverarbeitung sowie zu Ihren Widerspruchsmöglichkeiten finden Sie auch in der Datenschutzerklärung dieser Website.",
+    "terms": "If you send us personal data entered into the contact form (fields marked with * are required for the processing of the contact) by clicking on the following button, we will process them exclusively for the intended purpose.  A disclosure to third parties does not take place unless applicable data protection regulations justify a transfer or we are legally obliged to do so. Further information on data processing as well as your legal possibilities to object can also be found in the privacy statement of this website.",
     "success": "Message was successfully send.",
     "failure": "Message could not be send. Please try again!"
   },
