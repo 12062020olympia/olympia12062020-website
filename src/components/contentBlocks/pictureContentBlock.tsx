@@ -42,7 +42,7 @@ const ContentContainer = styled.div`
 `;
 
 const PictureContentBlock: FC<Props> = ({ data }) => {
-  const fluid = (data as any).picture?.fluid;
+  const fluid = (data as any).pictureW260?.fluid;
   return (
     <Container>
       <Image fluid={fluid} />
@@ -64,7 +64,7 @@ export const query = graphql`
     slug
     title
     pictureW260: picture {
-      fluid(maxWidth: 260) {
+      fluid(maxWidth: 280) {
         ...GatsbyContentfulFluid
       }
     }
