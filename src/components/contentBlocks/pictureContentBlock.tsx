@@ -42,7 +42,7 @@ const ContentContainer = styled.div`
 `;
 
 const PictureContentBlock: FC<Props> = ({ data }) => {
-  const fluid = (data as any).picture.fluid;
+  const fluid = (data as any).picture?.fluid;
   return (
     <Container>
       <Image fluid={fluid} />
