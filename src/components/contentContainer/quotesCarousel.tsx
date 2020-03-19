@@ -197,10 +197,12 @@ export const query = graphql`
   fragment QuotesCarouselInformation on ContentfulContentContainer {
     backgroundColor
     contentModules {
-      ...ContentBlockInformation
-      picture {
-        fluid(maxWidth: 71) {
-          ...GatsbyContentfulFluid
+      ... on ContentfulContentBlock {
+        ...ContentBlockInformation
+        picture {
+          fluid(maxWidth: 71) {
+            ...GatsbyContentfulFluid
+          }
         }
       }
     }

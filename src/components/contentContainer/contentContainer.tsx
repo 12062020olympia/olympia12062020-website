@@ -32,13 +32,13 @@ const ContentContainer: FC<Props> = ({ data }) => {
     return <PetitionsContentContainer data={data} />;
   }
   if (data.appearance === ContentContainerAppearance.Pictures) {
-    return <PicturesContentContainer data={data} />
+    return <PicturesContentContainer data={data} />;
   }
   if (data.appearance === ContentContainerAppearance.QuotesCarousel) {
     return <QuotesCarousel data={data} />;
   }
 
-  return <DefaultContentContainer data={data} />
+  return <DefaultContentContainer data={data} />;
 };
 
 export const query = graphql`
@@ -50,7 +50,9 @@ export const query = graphql`
     appearance
     backgroundColor
     contentModules {
-      ...ContentBlockInformation
+      ... on ContentfulContentBlock {
+        ...ContentBlockInformation
+      }
     }
     ...QuotesCarouselInformation
   }
