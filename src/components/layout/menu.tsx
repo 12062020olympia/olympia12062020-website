@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 import { Link, useIntl } from 'gatsby-plugin-intl';
 import styled, { css } from 'styled-components';
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 
 import { MenuInformationFragment } from '../../../types/graphql-types';
 import CloseIcon from '../../icons/icon-close.svg';
@@ -10,11 +10,10 @@ import { applyMediaQueryMd } from '../../style/dimensions';
 import Flex from '../elements/flex';
 import SocialMediaIcon from '../elements/socialMediaIcon';
 import IconButton from '../elements/iconButton';
+import PageContext from '../pageContext';
 
 interface Props {
   menu?: MenuInformationFragment;
-  isMenuOpen: boolean;
-  setIsMenuOpen: (isOpen: boolean) => void;
 }
 
 const Container = styled.nav<{ open: boolean }>`
@@ -70,8 +69,9 @@ const SocialMediaIconContainer = styled(Flex)`
   `)}
 `;
 
-const Menu: FC<Props> = ({ isMenuOpen, setIsMenuOpen, menu }) => {
+const Menu: FC<Props> = ({ menu }) => {
   const intl = useIntl();
+  const { isMenuOpen, setIsMenuOpen } = useContext(PageContext);
   return (
     <Container open={isMenuOpen} aria-hidden={!isMenuOpen}>
       <CloseButton

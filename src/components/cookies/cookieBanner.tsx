@@ -1,5 +1,5 @@
 import { useIntl } from 'gatsby-plugin-intl';
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { Col, Container, Row } from 'react-awesome-styled-grid';
 import styled, { css } from 'styled-components';
 
@@ -13,11 +13,9 @@ import {
 import Button from '../elements/button';
 import Paragraph from '../elements/paragraph';
 import Title from '../elements/title';
+import PageContext from '../pageContext';
 
-interface Props {
-  displayCookieBanner: boolean;
-  setDisplayCookieBanner: (display: boolean) => void;
-}
+interface Props {}
 
 const CookieContainer = styled.div`
   bottom: 0;
@@ -58,11 +56,11 @@ const InlineButton = styled.button`
   }
 `;
 
-const CookieBanner: FC<Props> = ({
-  displayCookieBanner,
-  setDisplayCookieBanner,
-}) => {
+const CookieBanner: FC<Props> = () => {
   const intl = useIntl();
+  const { displayCookieBanner, setDisplayCookieBanner } = useContext(
+    PageContext
+  );
   return (
     <>
       {displayCookieBanner && (

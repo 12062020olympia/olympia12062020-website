@@ -13,6 +13,7 @@ import CookieBanner from '../cookies/cookieBanner';
 import Footer from './footer';
 import Header from './header';
 import Menu from './menu';
+import { PageProvider } from '../pageContext';
 
 interface Props {
   mainMenu?: MenuInformationFragment;
@@ -52,35 +53,18 @@ const Layout: React.FC<PropsWithChildren<Props>> = ({
   headerMenu,
   mainMenu,
 }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [displayCookieBanner, setDisplayCookieBanner] = useState(
-    !hasSeenCookieNotice()
-  );
   return (
-    <ThemeProvider theme={{ awesomegrid: awesomegridConf }}>
-      <>
-        <Header
-          headerMenu={headerMenu}
-          isMenuOpen={isMenuOpen}
-          setIsMenuOpen={setIsMenuOpen}
-        />
-        <Menu
-          menu={mainMenu}
-          isMenuOpen={isMenuOpen}
-          setIsMenuOpen={setIsMenuOpen}
-        />
-        <Content>{children}</Content>
-        <Footer
-          footerMenu={footerMenu}
-          siteMap={mainMenu}
-          setDisplayCookieBanner={setDisplayCookieBanner}
-        />
-        <CookieBanner
-          displayCookieBanner={displayCookieBanner}
-          setDisplayCookieBanner={setDisplayCookieBanner}
-        />
-      </>
-    </ThemeProvider>
+    <PageProvider>
+      <ThemeProvider theme={{ awesomegrid: awesomegridConf }}>
+        <>
+          <Header headerMenu={headerMenu} />
+          <Menu menu={mainMenu} />
+          <Content>{children}</Content>
+          <Footer footerMenu={footerMenu} siteMap={mainMenu} />
+          <CookieBanner />
+        </>
+      </ThemeProvider>
+    </PageProvider>
   );
 };
 

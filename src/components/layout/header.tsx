@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { Link } from 'gatsby-plugin-intl';
-import React from 'react';
+import React, { useContext } from 'react';
 // @ts-ignore typescript definition of library faulty
 import { ScreenClass } from 'react-awesome-styled-grid';
 import styled, { css } from 'styled-components';
@@ -13,14 +13,12 @@ import {
   contentMargin,
   headerHeight,
 } from '../../style/dimensions';
-import Burger from './burger';
 import Flex from '../elements/flex';
 import Title from '../elements/title';
+import Burger from './burger';
 
 interface Props {
   headerMenu?: MenuInformationFragment;
-  isMenuOpen: boolean;
-  setIsMenuOpen: (isOpen: boolean) => void;
 }
 
 const StyledHeader = styled.header`
@@ -79,7 +77,7 @@ const HeaderMenuLink = styled(Link)`
   text-decoration: none;
 `;
 
-const Header: React.FC<Props> = ({ headerMenu, isMenuOpen, setIsMenuOpen }) => {
+const Header: React.FC<Props> = ({ headerMenu }) => {
   return (
     <StyledHeader>
       <HeaderContent>
@@ -102,7 +100,7 @@ const Header: React.FC<Props> = ({ headerMenu, isMenuOpen, setIsMenuOpen }) => {
               </>
             )}
           />
-          <Burger isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+          <Burger />
         </RightMenu>
       </HeaderContent>
     </StyledHeader>

@@ -4,24 +4,24 @@ import {
   useIntl,
   Link,
 } from 'gatsby-plugin-intl';
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { Container, Row, Col } from 'react-awesome-styled-grid';
 import styled, { css } from 'styled-components';
 
 import { MenuInformationFragment } from '../../../types/graphql-types';
 import * as colors from '../../style/colors';
-import Title from '../elements/title';
-import Flex from '../elements/flex';
-import SocialMediaIcon from '../elements/socialMediaIcon';
 import {
   contentMargin,
   applyMediaQueryMd,
   applyMediaQueryLg,
 } from '../../style/dimensions';
+import Title from '../elements/title';
+import Flex from '../elements/flex';
+import SocialMediaIcon from '../elements/socialMediaIcon';
+import PageContext from '../pageContext';
 
 interface Props {
   footerMenu?: MenuInformationFragment;
-  setDisplayCookieBanner: (display: boolean) => void;
   siteMap?: MenuInformationFragment;
 }
 
@@ -113,8 +113,9 @@ const FooterButton = styled.button`
   }
 `;
 
-const Footer: FC<Props> = ({ footerMenu, siteMap, setDisplayCookieBanner }) => {
+const Footer: FC<Props> = ({ footerMenu, siteMap }) => {
   const intl = useIntl();
+  const { setDisplayCookieBanner } = useContext(PageContext);
 
   const siteMapPages = siteMap?.pages ?? [];
   const siteMapHalfLength = Math.ceil(siteMapPages.length / 2);
