@@ -3,7 +3,11 @@ import React, { FC, ReactNode, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
 import * as colors from '../../style/colors';
-import { applyMediaQueryMd, contentMaxWidth, largeContentMaxWidth } from '../../style/dimensions';
+import {
+  applyMediaQueryMd,
+  contentMaxWidth,
+  largeContentMaxWidth,
+} from '../../style/dimensions';
 import { fontSizes, fontSizesDesktop, fontStyles } from '../../style/fonts';
 
 interface PetitionTopicProps {
@@ -61,7 +65,8 @@ const HeroContainer = styled.div<{ backgroundColor: string }>`
   position: absolute;
   width: 100vw;
 
-  ::before, ::after {
+  ::before,
+  ::after {
     background-color: ${colors.Grey200};
     bottom: 0;
     content: ' ';
@@ -100,28 +105,29 @@ const HeroTitleLine = styled.span<{ lineOffset: number }>`
   `)}
 `;
 
-const PetitionTopic: FC<PetitionTopicProps> = ({ contentComponent, title, titleBackgroundColor = colors.Grey400 }) => {
+const PetitionTopic: FC<PetitionTopicProps> = ({
+  contentComponent,
+  title,
+  titleBackgroundColor = colors.Grey400,
+}) => {
   const HEADER_MAX_LINES = 5;
   const repeatedTitle = _.repeat(`${title} `, 10);
-  const titleLineOffsets = useMemo(() => _.range(HEADER_MAX_LINES).map(() => _.random(0, 500)), []);
+  const titleLineOffsets = useMemo(
+    () => _.range(HEADER_MAX_LINES).map(() => _.random(0, 500)),
+    []
+  );
   return (
     <Container>
       <HeroContainer backgroundColor={titleBackgroundColor}>
-        {_.range(HEADER_MAX_LINES).map((i:number) => (
-          <HeroTitleLine
-            aria-hidden
-            lineOffset={titleLineOffsets[i]}
-            key={i}
-          >
+        {_.range(HEADER_MAX_LINES).map((i: number) => (
+          <HeroTitleLine aria-hidden lineOffset={titleLineOffsets[i]} key={i}>
             {repeatedTitle}
           </HeroTitleLine>
         ))}
       </HeroContainer>
       <ContentContainer>
         <ContentBackgroundContainer>
-          <Content>
-            {contentComponent}
-          </Content>
+          <Content>{contentComponent}</Content>
         </ContentBackgroundContainer>
       </ContentContainer>
     </Container>

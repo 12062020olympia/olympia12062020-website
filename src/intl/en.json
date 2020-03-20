@@ -5,6 +5,12 @@
     "accept": "Accept",
     "reject": "Later (do not accept)"
   },
+  "cookieAlternative": {
+    "notice": "Notice",
+    "acceptAndShow": "Accept and show content",
+    "watchExternally": "Show content at external provider",
+    "text": "You have not yet given permission to place the necessary cookies to view this content. Read our {privacyPolicy} for more information, and accept cookies to view this element or watch it externaly."
+  },
   "footer": {
     "cookieSettings": "Cookie Settings",
     "language": "Language:"

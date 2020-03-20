@@ -7,7 +7,7 @@ export function hasSeenCookieNotice(): boolean {
 }
 
 export function hasAcceptedCookies(): boolean {
-  return Boolean(Cookies.get(cookieNoticeAccepted));
+  return Cookies.get(cookieNoticeAccepted) === 'true';
 }
 
 export function setHasAcceptedCookies(value: boolean) {

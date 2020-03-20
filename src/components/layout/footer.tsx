@@ -187,7 +187,10 @@ const Footer: FC<Props> = ({ footerMenu, siteMap }) => {
         </Row>
         <Row>
           <Col noGutter>
-            <Flex flexDirection="row" style={{ marginBottom: '40px' }}>
+            <Flex
+              flexDirection="row"
+              style={{ marginBottom: '40px', flexWrap: 'wrap' }}
+            >
               <FooterButton onClick={() => setDisplayCookieBanner(true)}>
                 {intl.formatMessage({ id: 'footer.cookieSettings' })}
               </FooterButton>

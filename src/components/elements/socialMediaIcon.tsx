@@ -27,8 +27,9 @@ const iconLink: Record<Network, string> = {
 };
 
 const IconContainer = styled.a<{ type: IconDisplay }>`
+  ${({ type }) => type === 'menu' && 'filter: invert(100%);'}
   color: ${({ type }) => (type === 'menu' ? colors.Grey900 : colors.Grey500)};
-
+    
   :not(:last-child) {
     margin-right: 30px;
   }

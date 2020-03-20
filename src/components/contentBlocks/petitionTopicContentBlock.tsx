@@ -9,7 +9,9 @@ interface PetitionTopicContentBlockProps {
   data: ContentBlockInformationFragment;
 }
 
-const PetitionTopicContentBlock: FC<PetitionTopicContentBlockProps> = ({ data }) => {
+const PetitionTopicContentBlock: FC<PetitionTopicContentBlockProps> = ({
+  data,
+}) => {
   const titleBackgroundColor = data.backgroundColor
     ? colors.contentColors[data.backgroundColor]
     : undefined;

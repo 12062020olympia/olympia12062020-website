@@ -88,9 +88,11 @@ const InlineButton = styled.button`
 
 const CookieBanner: FC<Props> = () => {
   const intl = useIntl();
-  const { displayCookieBanner, setDisplayCookieBanner } = useContext(
-    PageContext
-  );
+  const {
+    displayCookieBanner,
+    setDisplayCookieBanner,
+    setShowCookieContent,
+  } = useContext(PageContext);
   return (
     <>
       {displayCookieBanner && (
@@ -113,6 +115,7 @@ const CookieBanner: FC<Props> = () => {
                   onClick={() => {
                     setHasAcceptedCookies(true);
                     setDisplayCookieBanner(false);
+                    setShowCookieContent(true);
                   }}
                 />
               </AcceptCol>
@@ -121,6 +124,7 @@ const CookieBanner: FC<Props> = () => {
                   onClick={() => {
                     setHasAcceptedCookies(false);
                     setDisplayCookieBanner(false);
+                    setShowCookieContent(false);
                   }}
                 >
                   {intl.formatMessage({ id: 'cookie.reject' })}

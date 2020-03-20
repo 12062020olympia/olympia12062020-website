@@ -6,7 +6,6 @@ import { ExpandableContentBlockInformationFragment } from '../../../types/graphq
 import ExpandIcon from '../../icons/icon-expand.svg';
 import * as colors from '../../style/colors';
 import {
-  applyMediaQueryMd,
   applyMediaQueryLg,
   contentMargin,
   contentMaxWidth,
@@ -52,6 +51,7 @@ export const ExpandableContentBlock: FC<Props> = ({ data }) => {
         onClick={() => setIsExpanded(!isExpanded)}
         alignItems="center"
         justifyContent="space-between"
+        style={{ cursor: 'pointer' }}
       >
         {data.title}
 

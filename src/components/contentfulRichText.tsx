@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   BLOCKS,
   // , MARKS, Document, Block
@@ -8,7 +8,10 @@ import {
   Options,
 } from '@contentful/rich-text-react-renderer';
 import styled from 'styled-components';
+
 import * as colors from '../style/colors';
+import CookieAlternative from './cookies/cookieAlternative';
+import PageContext from './pageContext';
 
 interface Props {
   className?: string;
@@ -34,6 +37,7 @@ const ContentfulRichText: React.FC<Props> = ({
   className,
   document,
 }: Props) => {
+  const { showCookieContent } = useContext(PageContext);
   const options: Options = {
     renderText: text =>
       text.split('\n').map((text, i) => [i > 0 && <br />, text]),
@@ -54,7 +58,19 @@ const ContentfulRichText: React.FC<Props> = ({
       },
       [BLOCKS.EMBEDDED_ENTRY]: node => {
         if (node.data.target.sys.contentType.sys.id === 'embeddedHtml') {
-          const { code } = node.data.target.fields;
+          const {
+            code,
+            requiresCookieConsent,
+            consentAlternativeLink,
+          } = node.data.target.fields;
+
+          if (requiresCookieConsent.de && !showCookieContent) {
+            return (
+              <CookieAlternative
+                consentAlternativeLink={consentAlternativeLink.de}
+              />
+            );
+          }
           return (
             <div
               style={{ display: 'flex' }}

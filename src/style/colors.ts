@@ -65,7 +65,7 @@ export const InputFocusBorderColor = Grey900;
 export const CheckboxSelectedColor = Black;
 
 // Menu
-export const MenuBackground = Apricot;
+export const MenuBackground = Grey900;
 
 // Page Background
 export const PageTitleBackground = Dandelion;

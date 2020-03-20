@@ -5,6 +5,12 @@
     "accept": "Akzeptieren",
     "reject": "Später (nicht akzeptieren)"
   },
+  "cookieAlternative": {
+    "notice": "Hinweis",
+    "acceptAndShow": "Akzeptieren und Inhalte anzeigen",
+    "watchExternally": "Inhalt bei externem Anbieter anzeigen",
+    "text": "Dieser Inhalt wird von einem Drittanbieter eingebunden und verwendet Cookies dieses Anbieters. Damit wir dir diesen Inhalt hier anzeigen können, benötigen wir deine Einwilligung zu unserer ${privacyPolicy}."
+  },
   "footer": {
     "cookieSettings": "Cookies widerrufen",
     "language": "Sprache:"

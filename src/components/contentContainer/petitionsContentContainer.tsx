@@ -5,7 +5,10 @@ import styled, { css } from 'styled-components';
 import { getOngoingContentBlocks } from '../contentBlocks/contentBlockHelpers';
 import PetitionsContentBlock from '../contentBlocks/petitionsContentBlock';
 import { ContentContainerInformationFragment } from '../../../types/graphql-types';
-import { applyMediaQueryMd, largeContentMaxWidth } from '../../style/dimensions';
+import {
+  applyMediaQueryMd,
+  largeContentMaxWidth,
+} from '../../style/dimensions';
 import Title from '../elements/title';
 
 export interface PetitionsContentContainerProps {
@@ -34,7 +37,9 @@ const ModulesContainer = styled.div`
   `)}
 `;
 
-const PetitionsContentContainer: FC<PetitionsContentContainerProps> = ({ data }) => {
+const PetitionsContentContainer: FC<PetitionsContentContainerProps> = ({
+  data,
+}) => {
   const ongoingContentBlocks = getOngoingContentBlocks(
     data.contentModules || []
   );

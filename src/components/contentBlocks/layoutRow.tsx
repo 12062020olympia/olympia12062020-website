@@ -31,20 +31,16 @@ const InnerContainer = styled.div<{ maxWidth: string }>`
   max-width: ${({ maxWidth }) => maxWidth};
 `;
 
-const LayoutRow: FC<PropsWithChildren<Props>> = ({
-  children,
-  layout,
-}) => {
+const LayoutRow: FC<PropsWithChildren<Props>> = ({ children, layout }) => {
   if (layout === ContentBlockLayout.Hidden) {
     return null;
   }
-  const maxWidth = layout === ContentBlockLayout.Left ? largeContentMaxWidth : contentMaxWidth;
+  const maxWidth =
+    layout === ContentBlockLayout.Left ? largeContentMaxWidth : contentMaxWidth;
 
   return (
     <Container>
-      <InnerContainer maxWidth={maxWidth}>
-        {children}
-      </InnerContainer>
+      <InnerContainer maxWidth={maxWidth}>{children}</InnerContainer>
     </Container>
   );
 };

@@ -3,7 +3,10 @@ import styled, { css } from 'styled-components';
 
 import { ContentContainerInformationFragment } from '../../../types/graphql-types';
 import * as colors from '../../style/colors';
-import { applyMediaQueryMd, largeContentMaxWidth } from '../../style/dimensions';
+import {
+  applyMediaQueryMd,
+  largeContentMaxWidth,
+} from '../../style/dimensions';
 import Title from '../elements/title';
 import ContentBlock from '../contentBlocks/contentBlock';
 
@@ -25,7 +28,9 @@ const TitleContainer = styled.div`
   `)}
 `;
 
-const DefaultContentContainer: FC<DefaultContentContainerProps> = ({ data }) => {
+const DefaultContentContainer: FC<DefaultContentContainerProps> = ({
+  data,
+}) => {
   const backgroundColor = data.backgroundColor
     ? colors.contentColors[data.backgroundColor]
     : 'transparent';

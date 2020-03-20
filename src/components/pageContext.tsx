@@ -1,11 +1,13 @@
 import React, { FC, useState, PropsWithChildren } from 'react';
-import { hasSeenCookieNotice } from '../cookie';
+import { hasSeenCookieNotice, hasAcceptedCookies } from '../cookie';
 
 export interface PageContextProps {
   isMenuOpen: boolean;
   setIsMenuOpen: (isMenuOpen: boolean) => void;
   displayCookieBanner: boolean;
   setDisplayCookieBanner: (displayCookieBanner: boolean) => void;
+  showCookieContent: boolean;
+  setShowCookieContent: (showCookieContent: boolean) => void;
 }
 
 const PageContext = React.createContext<PageContextProps>({
@@ -13,12 +15,17 @@ const PageContext = React.createContext<PageContextProps>({
   setIsMenuOpen: () => {},
   displayCookieBanner: false,
   setDisplayCookieBanner: () => {},
+  showCookieContent: false,
+  setShowCookieContent: () => {},
 });
 
 export const PageProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [displayCookieBanner, setDisplayCookieBanner] = useState(
     !hasSeenCookieNotice()
+  );
+  const [showCookieContent, setShowCookieContent] = useState(
+    hasAcceptedCookies()
   );
 
   return (
@@ -28,6 +35,8 @@ export const PageProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
         setIsMenuOpen,
         displayCookieBanner,
         setDisplayCookieBanner,
+        showCookieContent,
+        setShowCookieContent,
       }}
     >
       {children}

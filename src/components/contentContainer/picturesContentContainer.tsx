@@ -22,8 +22,7 @@ const TitleContainer = styled.div`
   `)}
 `;
 
-const ModulesContainer = styled.div`
-`;
+const ModulesContainer = styled.div``;
 
 const ModulesInnerContainer = styled.div`
   display: flex;
@@ -49,10 +48,7 @@ const PicturesContentContainer: FC<Props> = ({ data }) => {
         <ModulesContainer>
           <ModulesInnerContainer>
             {data.contentModules?.map(cm => (
-              <PictureContentBlock
-                data={cm!}
-                key={cm?.id}
-              />
+              <PictureContentBlock data={cm!} key={cm?.id} />
             ))}
           </ModulesInnerContainer>
         </ModulesContainer>

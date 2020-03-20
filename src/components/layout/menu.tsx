@@ -41,7 +41,7 @@ const Container = styled.nav<{ open: boolean }>`
 `;
 
 const MenuLink = styled(Link)`
-  color: ${colors.Grey900};
+  color: ${colors.White};
   font-size: 28px;
   text-decoration: none;
 
@@ -50,11 +50,12 @@ const MenuLink = styled(Link)`
   }
 
   :hover {
-    color: ${colors.Grey800};
+    color: ${colors.Grey500};
   }
 `;
 
 const CloseButton = styled(IconButton)`
+  color: ${colors.White};
   position: absolute;
   top: 30px;
   right: 30px;
