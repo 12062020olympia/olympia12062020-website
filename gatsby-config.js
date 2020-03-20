@@ -4,8 +4,8 @@ const proxy = require('http-proxy-middleware').createProxyMiddleware;
 module.exports = {
   siteMetadata: {
     title: `12062020 Olympia`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    description: `Olympia - die unglaubliche Geschichte. Mit +70.000 Menschen wollen wir Euch bei diesem einzigartigen Demokratiefestival eine Bühne geben. Bringt Eure Petitionsvorschläge ein und macht sie zu unglaublichen Geschichten.`,
+    author: `@12062020olympia`,
   },
   developMiddleware: app => {
     app.use(
@@ -35,13 +35,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Olympia 1206202 Website`,
+        short_name: `12062020`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#F9D2B0`,
+        theme_color: `#F9D2B0`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/olympia-icon.png`, // This path is relative to the root of the site.
       },
     },
     {
