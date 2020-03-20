@@ -4,9 +4,10 @@ import styled, { css } from 'styled-components';
 
 import { DefaultContentBlockInformationFragment } from '../../../types/graphql-types';
 import * as colors from '../../style/colors';
-import ContentfulRichText from '../contentfulRichText';
-import Title from '../elements/title';
 import { applyMediaQueryMd } from '../../style/dimensions';
+import ContentfulRichText from '../contentfulRichText';
+import Button, { ButtonType } from '../elements/button';
+import Title from '../elements/title';
 import { ContentBlockLayout } from './contentBlock';
 import LayoutRow from './layoutRow';
 
@@ -44,14 +45,30 @@ const DefaultContentBlock: FC<Props> = ({ data }) => {
     : 'transparent';
   return (
     <Container backgroundColor={backgroundColor}>
-      <LayoutRow layout={(data.titleLayout as ContentBlockLayout) || ContentBlockLayout.Center}>
+      <LayoutRow
+        layout={
+          (data.titleLayout as ContentBlockLayout) || ContentBlockLayout.Center
+        }
+      >
         <TitleContainer>
           <Title title={data.title!} type="h3" />
         </TitleContainer>
       </LayoutRow>
-      <LayoutRow layout={(data.contentLayout as ContentBlockLayout) || ContentBlockLayout.Center}>
+      <LayoutRow
+        layout={
+          (data.contentLayout as ContentBlockLayout) ||
+          ContentBlockLayout.Center
+        }
+      >
         <ContentContainer>
           <ContentfulRichText document={data.richText && data.richText.json} />
+          {data?.cfaButtonText && data.cfaButtonLink && (
+            <Button
+              href={data.cfaButtonLink}
+              label={data.cfaButtonText}
+              buttonType={data.cfaButtonType as ButtonType | undefined}
+            />
+          )}
         </ContentContainer>
       </LayoutRow>
     </Container>
@@ -62,6 +79,9 @@ export const query = graphql`
   fragment DefaultContentBlockInformation on ContentfulContentBlock {
     appearance
     backgroundColor
+    cfaButtonLink
+    cfaButtonText
+    cfaButtonType
     endDate
     richText: content {
       json
