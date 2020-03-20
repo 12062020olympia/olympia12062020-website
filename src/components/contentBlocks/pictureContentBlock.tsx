@@ -45,7 +45,7 @@ const PictureContentBlock: FC<Props> = ({ data }) => {
   const fluid = (data as any).pictureW260?.fluid;
   return (
     <Container>
-      <Image fluid={fluid} />
+      {fluid && <Image fluid={fluid} />}
       <TitleContainer>
         <Title title={data.title!} type="pictureTitle" />
       </TitleContainer>
