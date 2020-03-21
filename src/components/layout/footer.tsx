@@ -9,13 +9,13 @@ import { Container, Row, Col } from 'react-awesome-styled-grid';
 import styled, { css } from 'styled-components';
 
 import { MenuInformationFragment } from '../../../types/graphql-types';
+import IconOlympia from '../../icons/icon-olympia.svg';
 import * as colors from '../../style/colors';
 import {
   contentMargin,
   applyMediaQueryMd,
   applyMediaQueryLg,
 } from '../../style/dimensions';
-import Title from '../elements/title';
 import Flex from '../elements/flex';
 import SocialMediaIcon from '../elements/socialMediaIcon';
 import PageContext from '../pageContext';
@@ -45,8 +45,15 @@ const Divider = styled.hr`
   margin: 60px 0;
 `;
 
-const FooterTitle = styled(Title)`
+const FooterIcon = styled(IconOlympia)`
+  height: 75px;
   margin-bottom: 40px;
+  width: 75px;
+
+  ${applyMediaQueryMd(css`
+    height: 94px;
+    width: 94px;
+  `)}
 `;
 
 const SiteMapLink = styled(Link)`
@@ -134,7 +141,7 @@ const Footer: FC<Props> = ({ footerMenu, siteMap }) => {
         </Row>
         <Row>
           <Col noGutter xs={12} sm={5} md={5}>
-            <FooterTitle type="footerTitle" title="12062020" />
+            <FooterIcon />
           </Col>
           <Col noGutter xs={12} sm={3} md={2}>
             {leftSiteMapPages.map((page, index) => (
