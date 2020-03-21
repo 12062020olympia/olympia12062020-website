@@ -3,7 +3,8 @@ import React, { FC, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { ExpapandableColorfulInformationFragment } from '../../../types/graphql-types';
-import ArrowIcon from '../../icons/icon-arrow.svg';
+import MinusIcon from '../../icons/icon-minus.svg';
+import PlusIcon from '../../icons/icon-plus.svg';
 import * as colors from '../../style/colors';
 import {
   contentMaxWidth,
@@ -26,6 +27,7 @@ const Container = styled.div``;
 const TitleRow = styled(Flex)<{ backgroundColor: string | null | undefined }>`
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? colors.contentColors[backgroundColor] : colors.White};
+  cursor: pointer;
   padding: 20px ${contentMargin.sm};
 
   ${applyMediaQueryMd(css`
@@ -37,9 +39,13 @@ const TitleRow = styled(Flex)<{ backgroundColor: string | null | undefined }>`
   `)}
 `;
 
-const ArrowButton = styled(IconButton)<{ isOpen: boolean }>`
-  transform: rotate(${({ isOpen }) => (isOpen ? '90deg' : '0deg')});
+const ExpandButton = styled(IconButton)<{ isOpen: boolean }>`
   transition: transform 0.1s ease-in-out;
+
+  svg {
+    height: 20px;
+    width: 20px;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -62,14 +68,15 @@ export const ExpapandableColorful: FC<Props> = ({ data }) => {
   return (
     <Container>
       <TitleRow
+        alignItems="center"
         backgroundColor={data.backgroundColor}
         onClick={() => setIsOpen(!isOpen)}
         justifyContent="space-between"
         role="button"
       >
         <Title type="h3" title={data.title!} />
-        <ArrowButton
-          Icon={ArrowIcon}
+        <ExpandButton
+          Icon={isOpen ? MinusIcon : PlusIcon}
           onClick={() => setIsOpen(!isOpen)}
           isOpen={isOpen}
           ariaLabel={intl.formatMessage({ id: 'iconButton.expandContent' })}
