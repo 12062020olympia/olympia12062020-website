@@ -1,7 +1,6 @@
 import { graphql } from 'gatsby';
 import Image from 'gatsby-image';
-import React, { FC, useState, useMemo } from 'react';
-import { useInterval } from 'react-use';
+import React, { FC, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
 import {
@@ -19,6 +18,7 @@ import {
   applyMediaQueryLg,
   contentMargin,
 } from '../../style/dimensions';
+import Carousel from '../elements/carousel';
 
 interface Props {
   data: ContentContainerInformationFragment & QuotesCarouselInformationFragment;
@@ -57,20 +57,6 @@ const CarouselTitle = styled(Title)`
 
   ${applyMediaQueryLg(css`
     padding: 0 ${contentMargin.lg} 34px;
-  `)}
-`;
-
-const CarouselWrapper = styled.div`
-  display: flex;
-  overflow: hidden;
-  padding: 0 ${contentMargin.sm};
-
-  ${applyMediaQueryMd(css`
-    padding: 0 ${contentMargin.md};
-  `)}
-
-  ${applyMediaQueryLg(css`
-    padding: 0 ${contentMargin.lg};
   `)}
 `;
 
@@ -113,39 +99,6 @@ const SlideInner = styled.div`
   `)}
 `;
 
-const SlidesContainer = styled.div<{ currentSlide: number }>`
-  display: flex;
-  ${({ currentSlide }) =>
-    currentSlide &&
-    css`
-      transform: translateX(
-        calc(-${currentSlide * (slideWidth.sm + slideMarginRight.sm)}px)
-      );
-    `};
-  position: relative;
-  transition: all 0.5s ease;
-
-  ${applyMediaQueryMd(css<{ currentSlide: number }>`
-    ${({ currentSlide }) =>
-      currentSlide &&
-      css`
-        transform: translateX(
-          calc(-${currentSlide * (slideWidth.md + slideMarginRight.md)}px)
-        );
-      `};
-  `)}
-
-  ${applyMediaQueryLg(css<{ currentSlide: number }>`
-    ${({ currentSlide }) =>
-      currentSlide &&
-      css`
-        transform: translateX(
-          calc(-${currentSlide * (slideWidth.lg + slideMarginRight.lg)}px)
-        );
-      `};
-  `)}
-`;
-
 const AuthorImage = styled(Image)`
   height: 64px;
   margin-right: 13px;
@@ -162,7 +115,6 @@ const AuthorImage = styled(Image)`
 `;
 
 const QuotesCarousel: FC<Props> = ({ data }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const slides = useMemo(
     () =>
       data?.contentModules?.map((c, index) => (
@@ -179,16 +131,14 @@ const QuotesCarousel: FC<Props> = ({ data }) => {
     [data]
   );
 
-  useInterval(() => {
-    setCurrentSlide((currentSlide + 1) % slides.length);
-  }, 5000);
-
   return (
     <Container backgroundColor={data.backgroundColor}>
       <CarouselTitle type="h3" title={data.title!} />
-      <CarouselWrapper>
-        <SlidesContainer currentSlide={currentSlide}>{slides}</SlidesContainer>
-      </CarouselWrapper>
+      <Carousel
+        slides={slides}
+        slideMarginRight={slideMarginRight}
+        slideWidth={slideWidth}
+      />
     </Container>
   );
 };

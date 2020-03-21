@@ -1,10 +1,10 @@
-import React, { FC, useState, useMemo } from 'react';
-import { useInterval } from 'react-use';
+import React, { FC, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
 import { ContentContainerInformationFragment } from '../../../types/graphql-types';
 import ContentfulRichText from '../contentfulRichText';
 import Button from '../elements/button';
+import Carousel from '../elements/carousel';
 import Title from '../elements/title';
 import * as colors from '../../style/colors';
 import {
@@ -59,27 +59,13 @@ const CarouselTitle = styled(Title)`
   `)}
 `;
 
-const CarouselWrapper = styled.div`
-  display: flex;
-  overflow: hidden;
-  padding: 0 ${contentMargin.sm};
-
-  ${applyMediaQueryMd(css`
-    padding: 0 ${contentMargin.md};
-  `)}
-
-  ${applyMediaQueryLg(css`
-    padding: 0 ${contentMargin.lg};
-  `)}
-`;
-
 const CarouselSlide = styled.div<{
   backgroundColor?: string | null;
 }>`
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? colors.contentColors[backgroundColor] : colors.White};
   flex: 0 0 auto;
-  height: ${slideHeight.sm};
+  min-height: ${slideHeight.sm};
   transition: all 0.5s ease;
   width: ${slideWidth.sm}px;
 
@@ -88,7 +74,7 @@ const CarouselSlide = styled.div<{
   }
 
   ${applyMediaQueryMd(css`
-    height: ${slideHeight.md};
+    min-height: ${slideHeight.md};
     width: ${slideWidth.md}px;
 
     :not(:last-child) {
@@ -97,7 +83,7 @@ const CarouselSlide = styled.div<{
   `)}
 
   ${applyMediaQueryLg(css`
-    height: ${slideHeight.lg};
+    min-height: ${slideHeight.lg};
     width: ${slideWidth.lg}px;
 
     :not(:last-child) {
@@ -110,39 +96,6 @@ const SlideInner = styled.div`
   margin: 20px;
 `;
 
-const SlidesContainer = styled.div<{ currentSlide: number }>`
-  display: flex;
-  ${({ currentSlide }) =>
-    currentSlide &&
-    css`
-      transform: translateX(
-        calc(-${currentSlide * (slideWidth.sm + slideMarginRight.sm)}px)
-      );
-    `};
-  position: relative;
-  transition: all 0.5s ease;
-
-  ${applyMediaQueryMd(css<{ currentSlide: number }>`
-    ${({ currentSlide }) =>
-      currentSlide &&
-      css`
-        transform: translateX(
-          calc(-${currentSlide * (slideWidth.md + slideMarginRight.md)}px)
-        );
-      `};
-  `)}
-
-  ${applyMediaQueryLg(css<{ currentSlide: number }>`
-    ${({ currentSlide }) =>
-      currentSlide &&
-      css`
-        transform: translateX(
-          calc(-${currentSlide * (slideWidth.lg + slideMarginRight.lg)}px)
-        );
-      `};
-  `)}
-`;
-
 const SlideDate = styled(Paragraph)`
   text-transform: uppercase;
   margin: 0;
@@ -153,9 +106,8 @@ const StyledButtonLink = styled(Button)`
   margin-top: 20px;
 `;
 
-const Carousel: FC<Props> = ({ data }) => {
+const NewsCarousel: FC<Props> = ({ data }) => {
   const intl = useIntl();
-  const [currentSlide, setCurrentSlide] = useState(0);
   const slides = useMemo(
     () =>
       data?.contentModules?.map((c, index) => (
@@ -178,18 +130,16 @@ const Carousel: FC<Props> = ({ data }) => {
     [data, intl]
   );
 
-  useInterval(() => {
-    setCurrentSlide((currentSlide + 1) % slides.length);
-  }, 5000);
-
   return (
     <Container>
       <CarouselTitle type="h3" title={data.title!} />
-      <CarouselWrapper>
-        <SlidesContainer currentSlide={currentSlide}>{slides}</SlidesContainer>
-      </CarouselWrapper>
+      <Carousel
+        slides={slides}
+        slideMarginRight={slideMarginRight}
+        slideWidth={slideWidth}
+      />
     </Container>
   );
 };
 
-export default Carousel;
+export default NewsCarousel;
