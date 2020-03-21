@@ -46,7 +46,10 @@ const CookieAlternative: FC<Props> = ({ consentAlternativeLink }) => {
   return (
     <Container>
       <div>
-        <Title type="h4" title={intl.formatMessage({ id: 'cookie.notice' })} />
+        <Title
+          type="h4"
+          title={intl.formatMessage({ id: 'cookieAlternative.notice' })}
+        />
         {intl.formatMessage(
           { id: 'cookieAlternative.text' },
           {
@@ -60,14 +63,16 @@ const CookieAlternative: FC<Props> = ({ consentAlternativeLink }) => {
         <ButtonContainer flexDirection="column" alignItems="center">
           <Button
             buttonType="complementary"
-            label={intl.formatMessage({ id: 'cookie.acceptAndShow' })}
+            label={intl.formatMessage({
+              id: 'cookieAlternative.acceptAndShow',
+            })}
             onClick={() => {
               setHasAcceptedCookies(true);
               setShowCookieContent(true);
             }}
           ></Button>
           <StyledLink href={consentAlternativeLink} target="_blank">
-            {intl.formatMessage({ id: 'cookie.watchExternally' })}
+            {intl.formatMessage({ id: 'cookieAlternative.watchExternally' })}
           </StyledLink>
         </ButtonContainer>
       </div>

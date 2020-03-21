@@ -9,7 +9,7 @@
     "notice": "Hinweis",
     "acceptAndShow": "Akzeptieren und Inhalte anzeigen",
     "watchExternally": "Inhalt bei externem Anbieter anzeigen",
-    "text": "Dieser Inhalt wird von einem Drittanbieter eingebunden und verwendet Cookies dieses Anbieters. Damit wir dir diesen Inhalt hier anzeigen können, benötigen wir deine Einwilligung zu unserer ${privacyPolicy}."
+    "text": "Sie haben uns noch nicht die Erlaubnis erteilt, die notwendigen Cookies zu verwenden, um diesen Inhalt zu sehen. Wenden Sie sich an unsere {privacyPolicy} für weitere Informationen und akzeptieren Sie die Cookies, um dieses Element anzuzeigen oder es extern anzuschauen."
   },
   "footer": {
     "cookieSettings": "Cookies widerrufen",
