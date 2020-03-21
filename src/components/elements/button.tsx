@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEvent } from 'react';
 import styled, { css } from 'styled-components';
 import * as colors from '../../style/colors';
 
@@ -7,7 +7,7 @@ interface Props {
   className?: string;
   disabled?: boolean;
   href?: string;
-  onClick?: () => void;
+  onClick?: (event: MouseEvent) => void;
   label: string;
   type?: 'submit' | 'button';
 }
@@ -81,6 +81,7 @@ const Button: FC<Props> = ({
         className={className}
         disabled={disabled}
         href={href}
+        onClick={onClick}
         type={type}
       >
         {label}

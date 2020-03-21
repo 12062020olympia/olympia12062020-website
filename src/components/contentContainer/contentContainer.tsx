@@ -43,6 +43,7 @@ const ContentContainer: FC<Props> = ({ data }) => {
 
 export const query = graphql`
   fragment ContentContainerInformation on ContentfulContentContainer {
+    slug
     title
     internal {
       type

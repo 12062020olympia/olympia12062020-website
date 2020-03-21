@@ -37,7 +37,7 @@ const DefaultContentContainer: FC<DefaultContentContainerProps> = ({
   return (
     <Container backgroundColor={backgroundColor}>
       <TitleContainer>
-        <Title title={data.title || ''} type="h3" />
+        <Title id={data.slug ?? undefined} title={data.title || ''} type="h3" />
       </TitleContainer>
       {data.contentModules?.map((c, i) => (
         <ContentBlock key={c?.id ?? i} data={c!} />

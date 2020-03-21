@@ -51,7 +51,7 @@ const DefaultContentBlock: FC<Props> = ({ data }) => {
         }
       >
         <TitleContainer>
-          <Title title={data.title!} type="h3" />
+          <Title id={data.slug ?? undefined} title={data.title!} type="h3" />
         </TitleContainer>
       </LayoutRow>
       <LayoutRow

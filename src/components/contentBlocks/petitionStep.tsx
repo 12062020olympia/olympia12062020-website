@@ -187,6 +187,7 @@ const PetitionStep = ({
                   buttonType={buttonType}
                   label={buttonLabel}
                   href={buttonLink}
+                  onClick={e => e.stopPropagation()}
                 />
               </ActionsContainer>
             )}
