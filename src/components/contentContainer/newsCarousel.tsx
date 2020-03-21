@@ -1,43 +1,23 @@
+import { graphql } from 'gatsby';
 import React, { FC, useMemo } from 'react';
 import styled, { css } from 'styled-components';
 
-import { ContentContainerInformationFragment } from '../../../types/graphql-types';
-import ContentfulRichText from '../contentfulRichText';
-import Button from '../elements/button';
+import { NewsCarouselInformationFragment } from '../../../types/graphql-types';
 import Carousel from '../elements/carousel';
 import Title from '../elements/title';
-import * as colors from '../../style/colors';
 import {
-  ScreenSize,
   applyMediaQueryMd,
   applyMediaQueryLg,
   contentMargin,
 } from '../../style/dimensions';
-import Paragraph from '../elements/paragraph';
-import { formatDateRange } from '../../formatHelpers';
-import { useIntl } from 'gatsby-plugin-intl';
+import NewsSlide, {
+  slideMarginRight,
+  slideWidth,
+} from '../contentBlocks/newsSlide';
 
 interface Props {
-  data: ContentContainerInformationFragment;
+  data: NewsCarouselInformationFragment;
 }
-
-const slideHeight: Record<ScreenSize, string> = {
-  sm: '346px',
-  md: '367px',
-  lg: '336px',
-};
-
-const slideWidth: Record<ScreenSize, number> = {
-  sm: 310,
-  md: 608,
-  lg: 860,
-};
-
-const slideMarginRight: Record<ScreenSize, number> = {
-  sm: 10,
-  md: 24,
-  lg: 24,
-};
 
 const Container = styled.div`
   margin: 70px 0;
@@ -59,75 +39,13 @@ const CarouselTitle = styled(Title)`
   `)}
 `;
 
-const CarouselSlide = styled.div<{
-  backgroundColor?: string | null;
-}>`
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor ? colors.contentColors[backgroundColor] : colors.White};
-  flex: 0 0 auto;
-  min-height: ${slideHeight.sm};
-  transition: all 0.5s ease;
-  width: ${slideWidth.sm}px;
-
-  :not(:last-child) {
-    margin-right: ${slideMarginRight.sm}px;
-  }
-
-  ${applyMediaQueryMd(css`
-    min-height: ${slideHeight.md};
-    width: ${slideWidth.md}px;
-
-    :not(:last-child) {
-      margin-right: ${slideMarginRight.md}px;
-    }
-  `)}
-
-  ${applyMediaQueryLg(css`
-    min-height: ${slideHeight.lg};
-    width: ${slideWidth.lg}px;
-
-    :not(:last-child) {
-      margin-right: ${slideMarginRight.lg}px;
-    }
-  `)}
-`;
-
-const SlideInner = styled.div`
-  margin: 20px;
-`;
-
-const SlideDate = styled(Paragraph)`
-  text-transform: uppercase;
-  margin: 0;
-`;
-
-const StyledButtonLink = styled(Button)`
-  display: inline-block;
-  margin-top: 20px;
-`;
-
 const NewsCarousel: FC<Props> = ({ data }) => {
-  const intl = useIntl();
   const slides = useMemo(
     () =>
       data?.contentModules?.map((c, index) => (
-        <CarouselSlide key={index} backgroundColor={c?.backgroundColor}>
-          <SlideInner>
-            <SlideDate type="small">
-              {formatDateRange(intl, c?.startDate, c?.endDate)}
-            </SlideDate>
-            <Title type="h3" title={c?.title!} />
-            <ContentfulRichText document={c?.richText && c.richText.json} />
-            {c?.cfaButtonText && c.cfaButtonLink && (
-              <StyledButtonLink
-                href={c.cfaButtonLink}
-                label={c.cfaButtonText}
-              />
-            )}
-          </SlideInner>
-        </CarouselSlide>
+        <NewsSlide key={c?.id ?? index} data={c} />
       )) ?? [],
-    [data, intl]
+    [data]
   );
 
   return (
@@ -141,5 +59,17 @@ const NewsCarousel: FC<Props> = ({ data }) => {
     </Container>
   );
 };
+
+export const query = graphql`
+  fragment NewsCarouselInformation on ContentfulContentContainer {
+    backgroundColor
+    contentModules {
+      ... on ContentfulContentBlock {
+        ...NewsSlideInformation
+      }
+    }
+    title
+  }
+`;
 
 export default NewsCarousel;

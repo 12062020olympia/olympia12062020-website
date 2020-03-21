@@ -54,6 +54,7 @@ export const query = graphql`
         ...ContentBlockInformation
       }
     }
+    ...NewsCarouselInformation
     ...QuotesCarouselInformation
   }
 `;
