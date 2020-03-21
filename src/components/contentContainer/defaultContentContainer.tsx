@@ -39,8 +39,8 @@ const DefaultContentContainer: FC<DefaultContentContainerProps> = ({
       <TitleContainer>
         <Title title={data.title || ''} type="h3" />
       </TitleContainer>
-      {data.contentModules?.map(c => (
-        <ContentBlock key={c?.id} data={c!} />
+      {data.contentModules?.map((c, i) => (
+        <ContentBlock key={c?.id ?? i} data={c!} />
       ))}
     </Container>
   );

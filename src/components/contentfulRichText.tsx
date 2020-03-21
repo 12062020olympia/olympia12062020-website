@@ -40,7 +40,7 @@ const ContentfulRichText: React.FC<Props> = ({
   const { showCookieContent } = useContext(PageContext);
   const options: Options = {
     renderText: text =>
-      text.split('\n').map((text, i) => [i > 0 && <br />, text]),
+      text.split('\n').map((text, i) => [i > 0 && <br key={i} />, text]),
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: node => {
         if (!node.data.target.fields) return;
