@@ -152,7 +152,7 @@ const Carousel: FC<Props> = ({
   }, [currentSlide, slides.length]);
 
   const moveToPreviousSlide = useCallback(() => {
-    setCurrentSlide((currentSlide - 1) % slides.length);
+    setCurrentSlide((currentSlide - 1 + slides.length) % slides.length);
   }, [currentSlide, slides.length]);
 
   const handleButtonClick = useCallback(
