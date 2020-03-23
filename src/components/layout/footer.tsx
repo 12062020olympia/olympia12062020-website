@@ -10,6 +10,7 @@ import styled, { css } from 'styled-components';
 
 import { MenuInformationFragment } from '../../../types/graphql-types';
 import IconOlympia from '../../icons/icon-olympia.svg';
+import IconChilicorn from '../../icons/icon-chilicorn.svg';
 import * as colors from '../../style/colors';
 import {
   contentMargin,
@@ -120,6 +121,15 @@ const FooterButton = styled.button`
   }
 `;
 
+const FuturiceLink = styled.a`
+  align-items: center;
+  color: ${colors.Grey700};
+  display: flex;
+  font-size: 14px;
+  margin-bottom: 30px;
+  text-decoration: none;
+`;
+
 const Footer: FC<Props> = ({ footerMenu, siteMap }) => {
   const intl = useIntl();
   const { setDisplayCookieBanner } = useContext(PageContext);
@@ -207,6 +217,14 @@ const Footer: FC<Props> = ({ footerMenu, siteMap }) => {
                 </FooterLink>
               ))}
             </Flex>
+          </Col>
+        </Row>
+        <Row>
+          <Col noGutter>
+            <FuturiceLink href="https://spiceprogram.org/" target="_blank">
+              <IconChilicorn style={{ marginRight: '8px' }} />
+              Built with love by Futurice
+            </FuturiceLink>
           </Col>
         </Row>
       </Container>
