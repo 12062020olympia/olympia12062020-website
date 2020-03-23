@@ -27,9 +27,7 @@ interface Props {
 }
 
 const FooterContainer = styled.div`
-  margin: 0 auto;
-  max-width: 1300px;
-  padding: 20px ${contentMargin.md};
+  padding: 20px ${contentMargin.sm};
 
   ${applyMediaQueryMd(css`
     padding: 0 ${contentMargin.md};
@@ -143,7 +141,7 @@ const Footer: FC<Props> = ({ footerMenu, siteMap }) => {
 
   return (
     <FooterContainer>
-      <Container>
+      <Container fluid>
         <Row>
           <Col noGutter xs={12}>
             <Divider />
