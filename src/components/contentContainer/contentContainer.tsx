@@ -3,10 +3,10 @@ import React, { FC } from 'react';
 
 import { ContentContainerInformationFragment } from '../../../types/graphql-types';
 import DefaultContentContainer from './defaultContentContainer';
-import Carousel from './carousel';
 import FaqContainer from './faqContainer';
 import PetitionsContentContainer from './petitionsContentContainer';
 import PicturesContentContainer from './picturesContentContainer';
+import NewsCarousel from './newsCarousel';
 import QuotesCarousel from './quotesCarousel';
 
 export enum ContentContainerAppearance {
@@ -23,7 +23,7 @@ interface Props {
 
 const ContentContainer: FC<Props> = ({ data }) => {
   if (data.appearance === ContentContainerAppearance.Carousel) {
-    return <Carousel data={data} />;
+    return <NewsCarousel data={data} />;
   }
   if (data.appearance === ContentContainerAppearance.FAQContainer) {
     return <FaqContainer data={data} />;
@@ -55,6 +55,7 @@ export const query = graphql`
         ...ContentBlockInformation
       }
     }
+    ...NewsCarouselInformation
     ...QuotesCarouselInformation
   }
 `;
