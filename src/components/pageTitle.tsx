@@ -72,10 +72,10 @@ const TitleContainer = styled.div<{
     width: max-content;
   `)}
 
-  ${applyMediaQueryLg(css`
+  @media only screen and (min-width: 1220px) {
     margin: ${top.lg} ${contentMargin.lg} ${bottom.lg} ${contentMargin.lg};
     max-width: 60vw;
-  `)}
+  }
 `;
 
 const InnerContainer = styled.div`
