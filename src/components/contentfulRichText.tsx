@@ -39,7 +39,6 @@ const ContentfulRichText: React.FC<Props> = ({
   document,
 }: Props) => {
   const { showCookieContent } = useContext(PageContext);
-  console.log('showCookieContent', showCookieContent);
   const options: Options = {
     renderText: text =>
       text.split('\n').map((text, i) => [i > 0 && <br key={i} />, text]),
