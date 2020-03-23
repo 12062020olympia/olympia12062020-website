@@ -13,6 +13,7 @@ import * as colors from '../style/colors';
 import CookieAlternative from './cookies/cookieAlternative';
 import PageContext from './pageContext';
 import ClientOnly from './elements/clientOnly';
+import Flex from './elements/flex';
 
 interface Props {
   className?: string;
@@ -68,10 +69,7 @@ const ContentfulRichText: React.FC<Props> = ({
           return (
             <ClientOnly>
               {!requiresCookieConsent || showCookieContent ? (
-                <div
-                  style={{ display: 'flex' }}
-                  dangerouslySetInnerHTML={{ __html: code.de }}
-                />
+                <Flex dangerouslySetInnerHTML={{ __html: code.de }} />
               ) : (
                 <CookieAlternative
                   consentAlternativeLink={consentAlternativeLink.de}

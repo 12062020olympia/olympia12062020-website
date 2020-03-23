@@ -7,6 +7,7 @@ import { families, fontStyles } from '../style/fonts';
 import Layout from '../components/layout/layout';
 import SEO from '../components/seo';
 import PageContent from '../components/pageContent';
+import { contentMaxWidth, contentMargin } from '../style/dimensions';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -48,6 +49,14 @@ const GlobalStyle = createGlobalStyle`
   p { 
     ${fontStyles.normal}
     word-break: break-word;
+  }
+
+  .lightwidget-widget {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    height: calc(100vw - 2 * ${contentMargin.sm});
+    max-height: ${contentMaxWidth};
   }
 `;
 
