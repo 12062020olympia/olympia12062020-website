@@ -47,7 +47,6 @@ export const fontSizes: Record<FontType, number> = {
 export const fontSizesTablet: Record<FontType, number> = {
   cardSubtitle: 28,
   navTitle: 58,
-  footerTitle: 28,
   pageTitle: 16,
   heroTitle: 96,
   pictureTitle: 18,

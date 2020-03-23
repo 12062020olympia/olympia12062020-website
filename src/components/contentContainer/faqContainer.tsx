@@ -43,8 +43,8 @@ const FaqContainer: FC<Props> = ({ data }) => {
   return (
     <Container>
       <FaqTitle type="h5" title={data.title!} />
-      {data.contentModules?.map(c => (
-        <ContentBlock data={c!} />
+      {data.contentModules?.map((c, i) => (
+        <ContentBlock key={c?.id ?? i} data={c!} />
       ))}
     </Container>
   );
