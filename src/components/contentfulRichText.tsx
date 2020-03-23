@@ -12,6 +12,8 @@ import styled from 'styled-components';
 import * as colors from '../style/colors';
 import CookieAlternative from './cookies/cookieAlternative';
 import PageContext from './pageContext';
+import ClientOnly from './elements/clientOnly';
+import Flex from './elements/flex';
 
 interface Props {
   className?: string;
@@ -64,18 +66,16 @@ const ContentfulRichText: React.FC<Props> = ({
             consentAlternativeLink,
           } = node.data.target.fields;
 
-          if (requiresCookieConsent.de && !showCookieContent) {
-            return (
-              <CookieAlternative
-                consentAlternativeLink={consentAlternativeLink.de}
-              />
-            );
-          }
           return (
-            <div
-              style={{ display: 'flex' }}
-              dangerouslySetInnerHTML={{ __html: code.de }}
-            />
+            <ClientOnly>
+              {!requiresCookieConsent || showCookieContent ? (
+                <Flex dangerouslySetInnerHTML={{ __html: code.de }} />
+              ) : (
+                <CookieAlternative
+                  consentAlternativeLink={consentAlternativeLink.de}
+                />
+              )}
+            </ClientOnly>
           );
         }
         return null;

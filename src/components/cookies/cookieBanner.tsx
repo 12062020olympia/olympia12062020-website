@@ -14,6 +14,7 @@ import Button from '../elements/button';
 import Paragraph from '../elements/paragraph';
 import Title from '../elements/title';
 import PageContext from '../pageContext';
+import ClientOnly from '../elements/clientOnly';
 
 interface Props {}
 
@@ -94,7 +95,7 @@ const CookieBanner: FC<Props> = () => {
     setShowCookieContent,
   } = useContext(PageContext);
   return (
-    <>
+    <ClientOnly>
       {displayCookieBanner && (
         <CookieContainer>
           <Container>
@@ -134,7 +135,7 @@ const CookieBanner: FC<Props> = () => {
           </Container>
         </CookieContainer>
       )}
-    </>
+    </ClientOnly>
   );
 };
 
