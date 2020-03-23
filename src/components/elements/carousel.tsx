@@ -1,7 +1,9 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useCallback } from 'react';
 import { useInterval } from 'react-use';
 import styled, { css } from 'styled-components';
 
+import ArrowLeft from '../../icons/icon-arrow-left.svg';
+import ArrowRight from '../../icons/icon-arrow-right.svg';
 import * as colors from '../../style/colors';
 import {
   ScreenSize,
@@ -9,6 +11,8 @@ import {
   applyMediaQueryLg,
   contentMargin,
 } from '../../style/dimensions';
+import Flex from './flex';
+import IconButton from './iconButton';
 import Title from './title';
 
 interface Props {
@@ -32,15 +36,15 @@ const CarouselWrapper = styled.div`
   `)}
 `;
 
-const CarouselTitle = styled(Title)`
-  padding: 0 ${contentMargin.sm} 15px;
+const TitleContainer = styled(Flex)`
+  padding: 0 ${contentMargin.sm};
 
   ${applyMediaQueryMd(css`
-    padding: 0 ${contentMargin.md} 34px;
+    padding: 0 ${contentMargin.md};
   `)}
 
   ${applyMediaQueryLg(css`
-    padding: 0 ${contentMargin.lg} 34px;
+    padding: 0 ${contentMargin.lg};
   `)}
 `;
 
@@ -114,21 +118,72 @@ export const CarouselSlide = styled.div<CarouselSlideProps>`
   `)}
 `;
 
+const ArrowButton = styled(IconButton)`
+  height: 50px;
+  width: 50px;
+
+  svg {
+    height: 50px;
+    width: 50px;
+  }
+
+  ${applyMediaQueryMd(css`
+    height: 71px;
+    width: 78px;
+
+    svg {
+      height: 71px;
+      width: 78px;
+    }
+  `)}
+`;
+
 const Carousel: FC<Props> = ({
   slides,
   slideMarginRight,
   slideWidth,
   title,
 }) => {
+  const [moveAutomatic, setMoveAutomatic] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  useInterval(() => {
+  const moveToNextSlide = useCallback(() => {
     setCurrentSlide((currentSlide + 1) % slides.length);
+  }, [currentSlide, slides.length]);
+
+  const moveToPreviousSlide = useCallback(() => {
+    setCurrentSlide((currentSlide - 1) % slides.length);
+  }, [currentSlide, slides.length]);
+
+  const handleButtonClick = useCallback(
+    (moveToNext: boolean) => {
+      setMoveAutomatic(false);
+      moveToNext ? moveToNextSlide() : moveToPreviousSlide();
+    },
+    [moveToNextSlide, moveToPreviousSlide]
+  );
+
+  useInterval(() => {
+    if (moveAutomatic) {
+      moveToNextSlide();
+    }
   }, 5000);
 
   return (
     <>
-      {title && <CarouselTitle type="h3" title={title} />}
+      <TitleContainer alignItems="center" justifyContent="space-between">
+        {title && <Title type="h3" title={title} />}
+        <div>
+          <ArrowButton
+            Icon={ArrowLeft}
+            onClick={() => handleButtonClick(false)}
+          />
+          <ArrowButton
+            Icon={ArrowRight}
+            onClick={() => handleButtonClick(true)}
+          />
+        </div>
+      </TitleContainer>
       <CarouselWrapper>
         <SlidesContainer
           currentSlide={currentSlide}
