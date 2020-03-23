@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-import { applyMediaQueryMd } from './dimensions';
+import { applyMediaQueryMd, applyMediaQueryLg } from './dimensions';
 
 export const families = {
   default: 'Roboto',
@@ -46,6 +46,26 @@ export const fontSizes: Record<FontType, number> = {
   tiny: 12,
 };
 
+export const fontSizesTablet: Record<FontType, number> = {
+  cardSubtitle: 28,
+  navTitle: 58,
+  footerTitle: 28,
+  pageTitle: 16,
+  heroTitle: 96,
+  pictureTitle: 18,
+  pictureDescription: 16,
+  h1: 61,
+  h2: 48,
+  h3: 36,
+  h4: 28,
+  h5: 20,
+
+  large: 28,
+  normal: 20,
+  small: 16,
+  tiny: 12,
+};
+
 export const fontSizesDesktop: Record<FontType, number> = {
   cardSubtitle: 28,
   navTitle: 58,
@@ -54,7 +74,7 @@ export const fontSizesDesktop: Record<FontType, number> = {
   heroTitle: 96,
   pictureTitle: 18,
   pictureDescription: 16,
-  h1: 84,
+  h1: 76,
   h2: 48,
   h3: 36,
   h4: 28,
@@ -71,6 +91,10 @@ function applyFontSize(type: FontType) {
     font-size: ${fontSizes[type]}px;
 
     ${applyMediaQueryMd(css`
+      font-size: ${fontSizesTablet[type]}px;
+    `)}
+
+    ${applyMediaQueryLg(css`
       font-size: ${fontSizesDesktop[type]}px;
     `)}
   `;
@@ -136,10 +160,6 @@ export const fontStyles: Record<FontType | string, any> = {
     font-style: normal;
     font-weight: bold;
     line-height: 120%;
-
-    ${applyMediaQueryMd(css`
-      line-height: 125%;
-    `)}
   `,
   h2: css`
     ${applyFontSize('h2')}
