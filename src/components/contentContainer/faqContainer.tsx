@@ -34,7 +34,6 @@ const Container = styled.div`
 `;
 
 const FaqTitle = styled(Title)`
-  color: ${colors.Grey600};
   max-width: calc(${contentMaxWidth} + 160px);
   padding: 0 ${contentMargin.sm};
 `;
@@ -42,7 +41,7 @@ const FaqTitle = styled(Title)`
 const FaqContainer: FC<Props> = ({ data }) => {
   return (
     <Container>
-      <FaqTitle type="h5" title={data.title!} />
+      <FaqTitle type="h4" title={data.title!} />
       {data.contentModules?.map((c, i) => (
         <ContentBlock key={c?.id ?? i} data={c!} />
       ))}
