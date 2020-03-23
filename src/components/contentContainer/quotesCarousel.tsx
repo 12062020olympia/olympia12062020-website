@@ -4,16 +4,11 @@ import styled, { css } from 'styled-components';
 
 import { QuotesCarouselInformationFragment } from '../../../types/graphql-types';
 import * as colors from '../../style/colors';
-import {
-  applyMediaQueryMd,
-  applyMediaQueryLg,
-  contentMargin,
-} from '../../style/dimensions';
+import { applyMediaQueryMd } from '../../style/dimensions';
 import QuoteSlide, {
   slideMarginRight,
   slideWidth,
 } from '../contentBlocks/quotesSlide';
-import Title from '../elements/title';
 import Carousel from '../elements/carousel';
 
 interface Props {
@@ -32,18 +27,6 @@ const Container = styled.div<{
   `)}
 `;
 
-const CarouselTitle = styled(Title)`
-  padding: 0 ${contentMargin.sm} 15px;
-
-  ${applyMediaQueryMd(css`
-    padding: 0 ${contentMargin.md} 34px;
-  `)}
-
-  ${applyMediaQueryLg(css`
-    padding: 0 ${contentMargin.lg} 34px;
-  `)}
-`;
-
 const QuotesCarousel: FC<Props> = ({ data }) => {
   const slides = useMemo(
     () =>
@@ -55,11 +38,11 @@ const QuotesCarousel: FC<Props> = ({ data }) => {
 
   return (
     <Container backgroundColor={data.backgroundColor}>
-      <CarouselTitle type="h3" title={data.title!} />
       <Carousel
         slides={slides}
         slideMarginRight={slideMarginRight}
         slideWidth={slideWidth}
+        title={data.title}
       />
     </Container>
   );

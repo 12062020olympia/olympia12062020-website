@@ -9,11 +9,13 @@ import {
   applyMediaQueryLg,
   contentMargin,
 } from '../../style/dimensions';
+import Title from './title';
 
 interface Props {
   slides: Array<JSX.Element>;
   slideMarginRight: Record<ScreenSize, number>;
   slideWidth: Record<ScreenSize, number>;
+  title?: string | null;
 }
 
 const CarouselWrapper = styled.div`
@@ -27,6 +29,18 @@ const CarouselWrapper = styled.div`
 
   ${applyMediaQueryLg(css`
     padding: 0 ${contentMargin.lg};
+  `)}
+`;
+
+const CarouselTitle = styled(Title)`
+  padding: 0 ${contentMargin.sm} 15px;
+
+  ${applyMediaQueryMd(css`
+    padding: 0 ${contentMargin.md} 34px;
+  `)}
+
+  ${applyMediaQueryLg(css`
+    padding: 0 ${contentMargin.lg} 34px;
   `)}
 `;
 
@@ -100,7 +114,12 @@ export const CarouselSlide = styled.div<CarouselSlideProps>`
   `)}
 `;
 
-const Carousel: FC<Props> = ({ slides, slideMarginRight, slideWidth }) => {
+const Carousel: FC<Props> = ({
+  slides,
+  slideMarginRight,
+  slideWidth,
+  title,
+}) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useInterval(() => {
@@ -108,15 +127,18 @@ const Carousel: FC<Props> = ({ slides, slideMarginRight, slideWidth }) => {
   }, 5000);
 
   return (
-    <CarouselWrapper>
-      <SlidesContainer
-        currentSlide={currentSlide}
-        slideMarginRight={slideMarginRight}
-        slideWidth={slideWidth}
-      >
-        {slides}
-      </SlidesContainer>
-    </CarouselWrapper>
+    <>
+      {title && <CarouselTitle type="h3" title={title} />}
+      <CarouselWrapper>
+        <SlidesContainer
+          currentSlide={currentSlide}
+          slideMarginRight={slideMarginRight}
+          slideWidth={slideWidth}
+        >
+          {slides}
+        </SlidesContainer>
+      </CarouselWrapper>
+    </>
   );
 };
 
