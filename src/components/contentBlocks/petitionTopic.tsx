@@ -7,10 +7,11 @@ import {
   applyMediaQueryLg,
   applyMediaQueryMd,
   contentMargin,
-  contentMaxWidth,
   largeContentMaxWidth,
 } from '../../style/dimensions';
 import { fontSizes, fontSizesDesktop, fontStyles } from '../../style/fonts';
+import { ContentBlockLayout } from './contentBlock';
+import LayoutRow from './layoutRow';
 
 interface PetitionTopicProps {
   contentComponent: ReactNode;
@@ -37,8 +38,6 @@ const ContentContainer = styled.div`
   margin: 0 auto;
   max-width: ${largeContentMaxWidth};
   padding-top: ${5 * fontSizes['heroTitle'] * 0.75}px;
-  padding-left: ${contentMargin.sm};
-  padding-right: ${contentMargin.sm};
 
   ${applyMediaQueryMd(css`
     padding-left: ${contentMargin.md};
@@ -54,16 +53,10 @@ const ContentContainer = styled.div`
 
 const ContentBackgroundContainer = styled.div`
   background-color: ${colors.White};
-`;
-
-const Content = styled.div`
-  display: flex;
-  margin: 0 auto;
-  max-width: ${contentMaxWidth};
-  padding: 0 20px 16px 20px;
+  padding: 1px 0 16px 0;
 
   ${applyMediaQueryMd(css`
-    padding: 0 20px 32px 20px;
+    padding: 1px 0 32px 0;
   `)}
 `;
 
@@ -148,7 +141,9 @@ const PetitionTopic: FC<PetitionTopicProps> = ({
       </HeroContainer>
       <ContentContainer>
         <ContentBackgroundContainer>
-          <Content>{contentComponent}</Content>
+          <LayoutRow layout={ContentBlockLayout.Center}>
+            {contentComponent}
+          </LayoutRow>
         </ContentBackgroundContainer>
       </ContentContainer>
     </Container>
