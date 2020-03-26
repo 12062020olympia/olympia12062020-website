@@ -27,12 +27,10 @@ const ModulesContainer = styled.div``;
 const ModulesInnerContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 0;
 
   ${applyMediaQueryMd(css`
     display: flex;
     justify-content: flex-start;
-    margin: 0 -100px 0 0;
   `)}
 `;
 
