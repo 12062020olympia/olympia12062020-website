@@ -71,12 +71,12 @@ const HeroContainer = styled.div<{ backgroundColor: string }>`
   ::after {
     background-color: ${colors.Grey200};
     bottom: 0;
-    content: ' ';
+    content: '';
     display: block;
     min-width: ${contentMargin.sm};
     position: absolute;
     top: 0;
-    width: calc(50vw - ${largeContentMaxWidth} / 2);
+    width: calc((100% - ${largeContentMaxWidth}) / 2);
     z-index: 1;
   }
 
@@ -109,7 +109,7 @@ const HeroTitleLine = styled.span<{ lineOffset: number }>`
   ${fontStyles.heroTitle}
   display: block;
   height: ${fontSizes['heroTitle'] * 0.75}px;
-  margin ${({ lineOffset }) => `0 0 0 -${lineOffset}px`};
+  margin: ${({ lineOffset }) => `0 0 0 -${lineOffset}px`};
   transform: translateY(5px);
   white-space: nowrap;
 

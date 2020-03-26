@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 
 import { ContentContainerInformationFragment } from '../../../types/graphql-types';
-import * as colors from '../../style/colors';
 import {
   contentMaxWidth,
   contentMargin,
