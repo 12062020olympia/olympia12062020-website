@@ -4,11 +4,14 @@ import styled, { css } from 'styled-components';
 
 import * as colors from '../../style/colors';
 import {
+  applyMediaQueryLg,
   applyMediaQueryMd,
-  contentMaxWidth,
+  contentMargin,
   largeContentMaxWidth,
 } from '../../style/dimensions';
 import { fontSizes, fontSizesDesktop, fontStyles } from '../../style/fonts';
+import { ContentBlockLayout } from './contentBlock';
+import LayoutRow from './layoutRow';
 
 interface PetitionTopicProps {
   contentComponent: ReactNode;
@@ -37,24 +40,23 @@ const ContentContainer = styled.div`
   padding-top: ${5 * fontSizes['heroTitle'] * 0.75}px;
 
   ${applyMediaQueryMd(css`
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: ${contentMargin.md};
+    padding-right: ${contentMargin.md};
     padding-top: ${3 * fontSizesDesktop['heroTitle'] * 0.75}px;
+  `)}
+
+  ${applyMediaQueryLg(css`
+    padding-left: ${contentMargin.lg};
+    padding-right: ${contentMargin.lg};
   `)}
 `;
 
 const ContentBackgroundContainer = styled.div`
   background-color: ${colors.White};
-`;
-
-const Content = styled.div`
-  display: flex;
-  margin: 0 auto;
-  max-width: ${contentMaxWidth};
-  padding: 0 20px 16px 20px;
+  padding: 1px 0 16px 0;
 
   ${applyMediaQueryMd(css`
-    padding: 0 20px 32px 20px;
+    padding: 1px 0 32px 0;
   `)}
 `;
 
@@ -63,18 +65,18 @@ const HeroContainer = styled.div<{ backgroundColor: string }>`
   height: ${5 * fontSizes['heroTitle'] * 0.75}px;
   overflow: hidden;
   position: absolute;
-  width: 100vw;
+  width: 100%;
 
   ::before,
   ::after {
     background-color: ${colors.Grey200};
     bottom: 0;
-    content: ' ';
+    content: '';
     display: block;
-    min-width: 20px;
+    min-width: ${contentMargin.sm};
     position: absolute;
     top: 0;
-    width: calc(50vw - ${largeContentMaxWidth} / 2);
+    width: calc((100% - ${largeContentMaxWidth}) / 2);
     z-index: 1;
   }
 
@@ -88,6 +90,18 @@ const HeroContainer = styled.div<{ backgroundColor: string }>`
 
   ${applyMediaQueryMd(css`
     height: ${3 * fontSizesDesktop['heroTitle'] * 0.75}px;
+
+    ::before,
+    ::after {
+      min-width: ${contentMargin.md};
+    }
+  `)}
+
+  ${applyMediaQueryLg(css`
+    ::before,
+    ::after {
+      min-width: ${contentMargin.lg};
+    }
   `)}
 `;
 
@@ -95,7 +109,7 @@ const HeroTitleLine = styled.span<{ lineOffset: number }>`
   ${fontStyles.heroTitle}
   display: block;
   height: ${fontSizes['heroTitle'] * 0.75}px;
-  margin ${({ lineOffset }) => `0 0 0 -${lineOffset}px`};
+  margin: ${({ lineOffset }) => `0 0 0 -${lineOffset}px`};
   transform: translateY(5px);
   white-space: nowrap;
 
@@ -127,7 +141,9 @@ const PetitionTopic: FC<PetitionTopicProps> = ({
       </HeroContainer>
       <ContentContainer>
         <ContentBackgroundContainer>
-          <Content>{contentComponent}</Content>
+          <LayoutRow layout={ContentBlockLayout.Center}>
+            {contentComponent}
+          </LayoutRow>
         </ContentBackgroundContainer>
       </ContentContainer>
     </Container>

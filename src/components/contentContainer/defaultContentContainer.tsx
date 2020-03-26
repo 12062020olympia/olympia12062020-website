@@ -8,7 +8,8 @@ import {
   largeContentMaxWidth,
 } from '../../style/dimensions';
 import Title from '../elements/title';
-import ContentBlock from '../contentBlocks/contentBlock';
+import ContentBlock, { ContentBlockLayout } from '../contentBlocks/contentBlock';
+import LayoutRow from '../contentBlocks/layoutRow';
 
 interface DefaultContentContainerProps {
   data: ContentContainerInformationFragment;
@@ -21,10 +22,10 @@ const Container = styled.div<{ backgroundColor: string }>`
 const TitleContainer = styled.div`
   margin: 0 auto 0 auto;
   max-width: ${largeContentMaxWidth};
-  padding: 24px 20px 0 20px;
+  padding: 24px 0 0 0;
 
   ${applyMediaQueryMd(css`
-    padding: 48px 20px 0 20px;
+    padding: 48px 0 0 0;
   `)}
 `;
 
@@ -36,9 +37,11 @@ const DefaultContentContainer: FC<DefaultContentContainerProps> = ({
     : 'transparent';
   return (
     <Container backgroundColor={backgroundColor}>
-      <TitleContainer>
-        <Title id={data.slug ?? undefined} title={data.title || ''} type="h3" />
-      </TitleContainer>
+      <LayoutRow layout={ContentBlockLayout.Left}>
+        <TitleContainer>
+          <Title id={data.slug ?? undefined} title={data.title || ''} type="h3" />
+        </TitleContainer>
+      </LayoutRow>
       {data.contentModules?.map((c, i) => (
         <ContentBlock key={c?.id ?? i} data={c!} />
       ))}

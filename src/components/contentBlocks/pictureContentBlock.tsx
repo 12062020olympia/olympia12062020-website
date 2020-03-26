@@ -13,15 +13,20 @@ interface Props {
   data: PictureContentBlockInformationFragment;
 }
 
+const PICTURE_COLUMNS_GUTTER = 100;
+
 const Container = styled.div`
-  width: 260px;
+  width: 100%;
+  max-width: 340px; // Note: max-width depends on the display size break points
   margin: 0 auto 20px auto;
-  padding: 0 20px;
 
   ${applyMediaQueryMd(css`
-    width: calc((100% - 200px) / 2);
-    margin: 0 100px 28px 0;
-    padding: 0;
+    width: calc((100% - ${PICTURE_COLUMNS_GUTTER}px) / 2);
+    margin: 0 0 28px 0;
+
+    &:nth-child(2n+1) {
+      margin-right: ${PICTURE_COLUMNS_GUTTER}px;
+    }
   `)}
 `;
 

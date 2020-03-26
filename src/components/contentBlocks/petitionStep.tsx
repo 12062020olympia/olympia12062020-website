@@ -48,15 +48,14 @@ const CardDot = styled.div`
   background-color: ${colors.Grey700};
   border-radius: 50% 50%;
   height: 10px;
-  left: -1px;
+  left: 0;
   position: absolute;
   top: 50px;
   width: 10px;
 `;
 
 const Card = styled.div`
-  border: 1px solid ${colors.Grey200};
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 0px 2px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   margin-left: 5px;

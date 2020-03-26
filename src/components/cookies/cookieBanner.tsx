@@ -27,6 +27,7 @@ const CookieContainer = styled.div`
   padding: 40px ${contentMargin.sm};
   position: fixed;
   right: 0;
+  z-index: 50;
 
   ${applyMediaQueryMd(css`
     padding: 25px ${contentMargin.md};
