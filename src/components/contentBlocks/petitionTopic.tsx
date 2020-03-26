@@ -4,7 +4,9 @@ import styled, { css } from 'styled-components';
 
 import * as colors from '../../style/colors';
 import {
+  applyMediaQueryLg,
   applyMediaQueryMd,
+  contentMargin,
   contentMaxWidth,
   largeContentMaxWidth,
 } from '../../style/dimensions';
@@ -35,11 +37,18 @@ const ContentContainer = styled.div`
   margin: 0 auto;
   max-width: ${largeContentMaxWidth};
   padding-top: ${5 * fontSizes['heroTitle'] * 0.75}px;
+  padding-left: ${contentMargin.sm};
+  padding-right: ${contentMargin.sm};
 
   ${applyMediaQueryMd(css`
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: ${contentMargin.md};
+    padding-right: ${contentMargin.md};
     padding-top: ${3 * fontSizesDesktop['heroTitle'] * 0.75}px;
+  `)}
+
+  ${applyMediaQueryLg(css`
+    padding-left: ${contentMargin.lg};
+    padding-right: ${contentMargin.lg};
   `)}
 `;
 
@@ -71,7 +80,7 @@ const HeroContainer = styled.div<{ backgroundColor: string }>`
     bottom: 0;
     content: ' ';
     display: block;
-    min-width: 20px;
+    min-width: ${contentMargin.sm};
     position: absolute;
     top: 0;
     width: calc(50vw - ${largeContentMaxWidth} / 2);
@@ -88,6 +97,18 @@ const HeroContainer = styled.div<{ backgroundColor: string }>`
 
   ${applyMediaQueryMd(css`
     height: ${3 * fontSizesDesktop['heroTitle'] * 0.75}px;
+
+    ::before,
+    ::after {
+      min-width: ${contentMargin.md};
+    }
+  `)}
+
+  ${applyMediaQueryLg(css`
+    ::before,
+    ::after {
+      min-width: ${contentMargin.lg};
+    }
   `)}
 `;
 
