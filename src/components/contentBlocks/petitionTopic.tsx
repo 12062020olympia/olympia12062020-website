@@ -65,7 +65,7 @@ const HeroContainer = styled.div<{ backgroundColor: string }>`
   height: ${5 * fontSizes['heroTitle'] * 0.75}px;
   overflow: hidden;
   position: absolute;
-  width: 100vw;
+  width: 100%;
 
   ::before,
   ::after {
