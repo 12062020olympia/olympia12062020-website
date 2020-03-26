@@ -4,28 +4,21 @@ import styled, { css } from 'styled-components';
 
 import { getOngoingContentBlocks } from '../contentBlocks/contentBlockHelpers';
 import PetitionsContentBlock from '../contentBlocks/petitionsContentBlock';
+import { ContentBlockLayout } from '../contentBlocks/contentBlock';
+import LayoutRow from '../contentBlocks/layoutRow';
 import { ContentContainerInformationFragment } from '../../../types/graphql-types';
-import {
-  applyMediaQueryMd,
-  largeContentMaxWidth,
-} from '../../style/dimensions';
+import { applyMediaQueryMd } from '../../style/dimensions';
 import Title from '../elements/title';
 
 export interface PetitionsContentContainerProps {
   data: ContentContainerInformationFragment;
 }
 
-const Container = styled.div`
-  margin: 0 auto;
-  max-width: ${largeContentMaxWidth};
-  padding: 0 20px;
-`;
-
 const TitleContainer = styled.div`
-  padding: 0 0 24px 0;
+  padding: 32px 0;
 
   ${applyMediaQueryMd(css`
-    padding: 0 0 60px 0;
+    padding: 60px 0;
   `)}
 `;
 
@@ -45,7 +38,7 @@ const PetitionsContentContainer: FC<PetitionsContentContainerProps> = ({
   );
   const ongoingContentBlocksIds = ongoingContentBlocks.map(cb => cb.id);
   return (
-    <Container>
+    <LayoutRow layout={ContentBlockLayout.Left}>
       <TitleContainer>
         <Title title={data.title || ''} type="h3" />
       </TitleContainer>
@@ -58,7 +51,7 @@ const PetitionsContentContainer: FC<PetitionsContentContainerProps> = ({
           />
         ))}
       </ModulesContainer>
-    </Container>
+    </LayoutRow>
   );
 };
 
