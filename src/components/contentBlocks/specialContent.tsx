@@ -2,6 +2,7 @@ import { graphql } from 'gatsby';
 import React, { FC } from 'react';
 import { SpecialContentInformationFragment } from '../../../types/graphql-types';
 import ContactForm from './contactForm';
+import RecentNews from './recentNews';
 
 interface Props {
   data: SpecialContentInformationFragment;
@@ -10,6 +11,10 @@ interface Props {
 const SpecialContent: FC<Props> = ({ data }) => {
   if (data.slug === 'contactForm') {
     return <ContactForm />;
+  }
+
+  if (data.slug === 'recentNews') {
+    return <RecentNews />;
   }
 
   return null;

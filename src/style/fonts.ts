@@ -54,7 +54,7 @@ export const fontSizesTablet: Record<FontType, number> = {
   h1: 61,
   h2: 48,
   h3: 36,
-  h4: 28,
+  h4: 25,
   h5: 20,
 
   large: 28,
@@ -73,7 +73,7 @@ export const fontSizesDesktop: Record<FontType, number> = {
   h1: 76,
   h2: 48,
   h3: 36,
-  h4: 28,
+  h4: 25,
   h5: 20,
 
   large: 28,

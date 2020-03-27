@@ -1,7 +1,10 @@
 import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 
-import { ContentContainerInformationFragment } from '../../../types/graphql-types';
+import {
+  ContentContainerInformationFragment,
+  ContentBlockInformationFragment,
+} from '../../../types/graphql-types';
 import { applyMediaQueryMd } from '../../style/dimensions';
 import { ContentBlockLayout } from '../contentBlocks/contentBlock';
 import LayoutRow from '../contentBlocks/layoutRow';
@@ -46,7 +49,10 @@ const PicturesContentContainer: FC<Props> = ({ data }) => {
         <ModulesContainer>
           <ModulesInnerContainer>
             {data.contentModules?.map(cm => (
-              <PictureContentBlock data={cm!} key={cm?.id} />
+              <PictureContentBlock
+                data={cm! as ContentBlockInformationFragment}
+                key={cm?.id}
+              />
             ))}
           </ModulesInnerContainer>
         </ModulesContainer>

@@ -6,7 +6,10 @@ import { getOngoingContentBlocks } from '../contentBlocks/contentBlockHelpers';
 import PetitionsContentBlock from '../contentBlocks/petitionsContentBlock';
 import { ContentBlockLayout } from '../contentBlocks/contentBlock';
 import LayoutRow from '../contentBlocks/layoutRow';
-import { ContentContainerInformationFragment } from '../../../types/graphql-types';
+import {
+  ContentContainerInformationFragment,
+  ContentBlockInformationFragment,
+} from '../../../types/graphql-types';
 import { applyMediaQueryMd } from '../../style/dimensions';
 import Title from '../elements/title';
 
@@ -34,7 +37,7 @@ const PetitionsContentContainer: FC<PetitionsContentContainerProps> = ({
   data,
 }) => {
   const ongoingContentBlocks = getOngoingContentBlocks(
-    data.contentModules || []
+    (data.contentModules as Array<ContentBlockInformationFragment>) || []
   );
   const ongoingContentBlocksIds = ongoingContentBlocks.map(cb => cb.id);
   return (
@@ -45,7 +48,7 @@ const PetitionsContentContainer: FC<PetitionsContentContainerProps> = ({
       <ModulesContainer>
         {data.contentModules?.map(cm => (
           <PetitionsContentBlock
-            data={cm!}
+            data={cm! as ContentBlockInformationFragment}
             key={cm?.id}
             isOngoing={_.includes(ongoingContentBlocksIds, cm?.id)}
           />

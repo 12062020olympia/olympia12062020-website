@@ -54,6 +54,9 @@ export const query = graphql`
       ... on ContentfulContentBlock {
         ...ContentBlockInformation
       }
+      ... on ContentfulSpecialContent {
+        ...SpecialContentInformation
+      }
     }
     ...NewsCarouselInformation
     ...QuotesCarouselInformation

@@ -8,8 +8,9 @@ import {
   largeContentMaxWidth,
 } from '../../style/dimensions';
 import Title from '../elements/title';
-import ContentBlock, { ContentBlockLayout } from '../contentBlocks/contentBlock';
+import { ContentBlockLayout } from '../contentBlocks/contentBlock';
 import LayoutRow from '../contentBlocks/layoutRow';
+import Content from '../content';
 
 interface DefaultContentContainerProps {
   data: ContentContainerInformationFragment;
@@ -39,11 +40,15 @@ const DefaultContentContainer: FC<DefaultContentContainerProps> = ({
     <Container backgroundColor={backgroundColor}>
       <LayoutRow layout={ContentBlockLayout.Left}>
         <TitleContainer>
-          <Title id={data.slug ?? undefined} title={data.title || ''} type="h3" />
+          <Title
+            id={data.slug ?? undefined}
+            title={data.title || ''}
+            type="h3"
+          />
         </TitleContainer>
       </LayoutRow>
       {data.contentModules?.map((c, i) => (
-        <ContentBlock key={c?.id ?? i} data={c!} />
+        <Content key={c?.id ?? i} data={c!} />
       ))}
     </Container>
   );
