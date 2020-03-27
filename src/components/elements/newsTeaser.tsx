@@ -1,5 +1,5 @@
 import Image, { FluidObject } from 'gatsby-image';
-import { useIntl } from 'gatsby-plugin-intl';
+import { useIntl, Link } from 'gatsby-plugin-intl';
 import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -23,6 +23,11 @@ const Container = styled.div`
   `)}
 `;
 
+const TeaserLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+`;
+
 const Subtitle = styled.span`
   color: ${colors.Grey500};
 `;
@@ -37,11 +42,13 @@ const NewsTeaser: FC<Props> = ({
   const intl = useIntl();
   return (
     <Container>
-      {teaserPicture && <Image fluid={teaserPicture} />}
-      <Title type="h4" title={title || ''} />
-      <Subtitle>
-        {author} · {intl.formatDate(publishDate)}{' '}
-      </Subtitle>
+      <TeaserLink to={`/news/${id}`}>
+        {teaserPicture && <Image fluid={teaserPicture} />}
+        <Title type="h4" title={title || ''} />
+        <Subtitle>
+          {author} · {intl.formatDate(publishDate)}{' '}
+        </Subtitle>
+      </TeaserLink>
     </Container>
   );
 };
