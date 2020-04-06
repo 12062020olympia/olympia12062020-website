@@ -56,7 +56,7 @@ exports.createPages = ({ graphql, actions }) => {
               path: `news/${edge.node.id}`,
               component: newsPostTemplate,
               context: {
-                slug: edge.node.id,
+                id: edge.node.id,
               },
             });
           });
