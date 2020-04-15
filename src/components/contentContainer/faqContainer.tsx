@@ -1,7 +1,10 @@
 import React, { FC } from 'react';
 import styled, { css } from 'styled-components';
 
-import { ContentContainerInformationFragment } from '../../../types/graphql-types';
+import {
+  ContentContainerInformationFragment,
+  ContentBlockInformationFragment,
+} from '../../../types/graphql-types';
 import {
   contentMaxWidth,
   contentMargin,
@@ -42,7 +45,10 @@ const FaqContainer: FC<Props> = ({ data }) => {
     <Container>
       <FaqTitle type="h4" title={data.title!} />
       {data.contentModules?.map((c, i) => (
-        <ContentBlock key={c?.id ?? i} data={c!} />
+        <ContentBlock
+          key={c?.id ?? i}
+          data={c! as ContentBlockInformationFragment}
+        />
       ))}
     </Container>
   );

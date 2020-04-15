@@ -24,7 +24,7 @@ const Container = styled.div`
     width: calc((100% - ${PICTURE_COLUMNS_GUTTER}px) / 2);
     margin: 0 0 28px 0;
 
-    &:nth-child(2n+1) {
+    &:nth-child(2n + 1) {
       margin-right: ${PICTURE_COLUMNS_GUTTER}px;
     }
   `)}

@@ -4,7 +4,8 @@ const path = require('path');
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
   return new Promise((resolve, reject) => {
-    const pageTemple = path.resolve('src/templates/page.js');
+    const pageTemplate = path.resolve('src/templates/page.js');
+    const newsPostTemplate = path.resolve('src/templates/newsPost.js');
     resolve(
       graphql(`
         {
@@ -17,21 +18,50 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
-      `).then(result => {
-        if (result.errors) {
-          reject(result.errors);
-        }
-        result.data.allContentfulPage.edges.forEach(edge => {
-          createPage({
-            path: edge.node.slug !== 'home' ? edge.node.slug : '/',
-            component: pageTemple,
-            context: {
-              slug: edge.node.slug,
-            },
+      `)
+        .then(result => {
+          if (result.errors) {
+            reject(result.errors);
+          }
+          result.data.allContentfulPage.edges.forEach(edge => {
+            createPage({
+              path: edge.node.slug !== 'home' ? edge.node.slug : '/',
+              component: pageTemplate,
+              context: {
+                slug: edge.node.slug,
+              },
+            });
           });
-        });
-        return;
-      })
+          return;
+        })
+        .then(() =>
+          graphql(`
+            {
+              allContentfulNewsPost(limit: 999) {
+                edges {
+                  node {
+                    id
+                  }
+                }
+              }
+            }
+          `)
+        )
+        .then(result => {
+          if (result.errors) {
+            reject(result.errors);
+          }
+          result.data.allContentfulNewsPost.edges.forEach(edge => {
+            createPage({
+              path: `news/${edge.node.id}`,
+              component: newsPostTemplate,
+              context: {
+                id: edge.node.id,
+              },
+            });
+          });
+          return;
+        })
     );
   });
 };
